@@ -19,17 +19,22 @@ const variations: StyledVariations = {
       width: 2.7rem;
       border-radius: var(--radius-round);
       cursor: pointer;
+
+      &:hover {
+        border: 2px solid var(--accent);
+        transform: scale(1.12);
+      }
     }
   `,
 };
 
 export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
-  color: var(--white);
+  color: var(--tertiary);
   display: grid;
   grid-template-columns: min-content 1fr min-content;
   gap: 1.6rem;
   align-items: start;
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--tertiary);
   padding-bottom: 1.8rem;
 
   .custom-tag {
@@ -39,8 +44,8 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
   .user-img {
     height: 4.8rem;
     width: 4.8rem;
-    background-color: var(--black);
-    border: 2px solid var(--white);
+    background-color: var(--primary);
+    border: 2px solid var(--tertiary);
     border-radius: var(--radius-sm);
     transition: var(--transition-all);
     cursor: default;
@@ -49,7 +54,7 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
   .toggle-btn {
     align-self: center;
     display: flex;
-    color: var(--white);
+    color: var(--tertiary);
     height: 3.2rem;
     width: 3.2rem;
     justify-content: center;
@@ -58,8 +63,8 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
 
     &:hover,
     &:focus-visible {
-      background-color: var(--white);
-      color: var(--black);
+      background-color: var(--tertiary);
+      color: var(--primary);
     }
   }
 

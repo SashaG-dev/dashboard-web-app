@@ -1,15 +1,9 @@
-import { useCallback } from 'react';
-import { getUserGreeting } from '../features/dashboard/userGreeting';
-import { account } from '../data/account';
+import DashboardLayout from '../features/dashboard/DashboardLayout';
 
 const Home = () => {
-  const displayUserGreeting = useCallback(() => {
-    return getUserGreeting(account.details.firstName);
-  }, []);
-
   return (
     <main>
-      <h1>{displayUserGreeting()}</h1>
+      <DashboardLayout />
     </main>
   );
 };

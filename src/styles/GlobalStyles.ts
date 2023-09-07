@@ -6,20 +6,14 @@ const GlobalStyles = createGlobalStyle<{
 }>`
 :root {
   /* Colors */
- /* 
- --primary:
- --primary-dark:
- --background: 
+  --primary: #151515;
+  --secondary: #212121;
+  --tertiary: #fff;
+  --accent: #8d72e1;
 
+ /*
  --success: 
- --error:
- */
-
- /* Neutrals */
- --white: #fff;
- --light-gray: #bbb;
- --dark-gray: #555;
- --black: #000;
+ --error: */
 
   /* Borders and Radii */ 
   --radius-sm: .8rem;
@@ -50,10 +44,10 @@ html {
 }
 
 body {
-  color: var(--white);
+  color: var(--tertiary);
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
-  background-color: #222;
+  background-color: var(--primary);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -86,7 +80,8 @@ main {
     if (props.isMobile) return '--menu-mobile';
     return props.$navOpen ? '--menu-width' : '--menu-width-sm';
   }});
-  padding: 1.6rem;
+  padding: .8rem 2.4rem;
+  transition: margin-left .3s;
 }
 `;
 

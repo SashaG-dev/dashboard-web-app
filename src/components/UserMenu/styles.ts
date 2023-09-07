@@ -1,7 +1,8 @@
 import { styled } from 'styled-components';
 
 export const UserMenuStyled = styled.div`
-  background-color: var(--black);
+  background-color: var(--primary);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   width: 24rem;
   height: 100%;
   max-height: 100vh;
@@ -22,7 +23,7 @@ export const UserMenuStyled = styled.div`
     justify-content: center;
 
     button {
-      color: var(--white);
+      color: var(--tertiary);
     }
   }
 

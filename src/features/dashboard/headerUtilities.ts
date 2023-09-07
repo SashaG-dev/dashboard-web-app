@@ -16,6 +16,23 @@ export const getUserGreeting = (
     return name ? `Good afternoon, ${name}.` : `Good afternoon.`;
   }
   if (hour >= 17 || hour < 5) {
-    return name ? `Good evening, ${name}` : `Good evening.`;
+    return name ? `Good evening, ${name}.` : `Good evening.`;
   }
+};
+
+export const getDate = (): string => {
+  // TODO: update this based on user settings
+  const formattedDate = Intl.DateTimeFormat('en-US', {
+    dateStyle: 'medium',
+  }).format(getToday());
+
+  return formattedDate;
+};
+
+export const getTime = (): string => {
+  const formattedTime = Intl.DateTimeFormat('en-US', {
+    timeStyle: 'short',
+  }).format(getToday());
+
+  return formattedTime;
 };

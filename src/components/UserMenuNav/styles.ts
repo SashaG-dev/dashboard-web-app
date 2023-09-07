@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const UserMenuNavStyled = styled.nav`
-  border-bottom: 1px solid var(--light-gray);
+  border-bottom: 1px solid var(--tertiary);
   padding-bottom: 1.6rem;
 
   .links {
@@ -13,7 +13,7 @@ export const UserMenuNavStyled = styled.nav`
   a {
     &:link,
     &:visited {
-      color: var(--white);
+      color: var(--tertiary);
       font-size: 1.8rem;
       display: flex;
       align-items: center;
@@ -27,8 +27,8 @@ export const UserMenuNavStyled = styled.nav`
     &:active,
     &:focus-visible,
     &.active {
-      color: var(--black);
-      background-color: var(--white);
+      color: var(--primary);
+      background-color: var(--tertiary);
     }
   }
 `;
