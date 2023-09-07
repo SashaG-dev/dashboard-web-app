@@ -28,7 +28,7 @@ export const UserMenuNavStyled = styled.nav`
     &:focus-visible,
     &.active {
       color: var(--primary);
-      background-color: var(--tertiary);
+      background-color: var(--accent);
     }
   }
 `;

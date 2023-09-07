@@ -1,4 +1,4 @@
-import DashboardLayout from '../features/dashboard/DashboardLayout';
+import DashboardLayout from '../features/dashboard/DashboardLayout/DashboardLayout';
 
 const Home = () => {
   return (

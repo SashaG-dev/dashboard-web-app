@@ -16,10 +16,10 @@ function App() {
             <Route element={<UserMenu />}>
               <Route index element={<Home />} />
               <Route
-                path="my-plans"
+                path="my-tasks"
                 element={
                   <main>
-                    <h1>My plans</h1>
+                    <h1>My tasks</h1>
                   </main>
                 }
               />

@@ -52,8 +52,8 @@ body {
   overflow-x: hidden;
 }
 
-h1 {
-  font-weight: 500;
+h1, h2, h3 {
+  font-weight: 400;
 }
 
 ul {
@@ -62,6 +62,7 @@ ul {
 
 a {
   text-decoration: none;
+  transition: var(--transition-all);
 }
 
 button {

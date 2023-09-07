@@ -21,9 +21,9 @@ const UserMenuNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="my-plans" title="Go to my plans">
-            <BsCalendarHeart role="img" aria-label="my plans" />
-            <span>My Plans</span>
+          <NavLink to="my-tasks" title="Go to tasks">
+            <BsCalendarHeart role="img" aria-label="my tasks" />
+            <span>My Tasks</span>
           </NavLink>
         </li>
         <li>

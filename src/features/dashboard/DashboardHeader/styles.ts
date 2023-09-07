@@ -3,6 +3,9 @@ import { styled } from 'styled-components';
 export const DashboardHeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2.4rem;
+  padding-bottom: 1.6rem;
 
   .header-heading {
     font-size: 3.2rem;
