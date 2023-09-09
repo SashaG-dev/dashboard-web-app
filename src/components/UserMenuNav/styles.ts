@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const UserMenuNavStyled = styled.nav`
-  border-bottom: 1px solid var(--tertiary);
+  border-bottom: 1px solid var(--tertiary-opacity);
   padding-bottom: 1.6rem;
 
   .links {

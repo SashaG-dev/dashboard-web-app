@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
-import { getUserGreeting, getDate } from '../headerUtilities';
+import { getUserGreeting } from '../headerUtilities';
 import { DashboardHeaderStyled } from './styles';
 import DashboardTime from '../DashboardTime';
+import { getDate } from '../../../utils/helpers';
 import { account } from '../../../data/account';
 
 const DashboardHeader = () => {

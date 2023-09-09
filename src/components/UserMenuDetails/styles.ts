@@ -34,7 +34,7 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
   grid-template-columns: min-content 1fr min-content;
   gap: 1.6rem;
   align-items: start;
-  border-bottom: 1px solid var(--tertiary);
+  border-bottom: 1px solid var(--tertiary-opacity);
   padding-bottom: 1.8rem;
 
   .custom-tag {

@@ -6,10 +6,21 @@ const GlobalStyles = createGlobalStyle<{
 }>`
 :root {
   /* Colors */
+  
   --primary: #151515;
   --secondary: #212121;
   --tertiary: #fff;
+  --tertiary-opacity: rgba(255, 255, 255, .1);
+ 
+
   --accent: #8d72e1;
+
+/* 
+  --primary: #fff;
+  --secondary: #eee;
+  --tertiary: #000;
+  --tertiary-opacity: rgba(0, 0, 0, .1);
+   */
 
  /*
  --success: 
@@ -36,11 +47,13 @@ const GlobalStyles = createGlobalStyle<{
   padding: 0;
   font-family: inherit;
   box-sizing: inherit;
+  /* transition: background-color .3s; */
 }
 
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  background-color: var(--primary);
 }
 
 body {
@@ -74,6 +87,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: .8rem;
+  transition: all .3s;
 }
 
 main {

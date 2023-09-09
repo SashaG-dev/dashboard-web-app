@@ -20,15 +20,6 @@ export const getUserGreeting = (
   }
 };
 
-export const getDate = (): string => {
-  // TODO: update this based on user settings
-  const formattedDate = Intl.DateTimeFormat('en-US', {
-    dateStyle: 'medium',
-  }).format(getToday());
-
-  return formattedDate;
-};
-
 export const getTime = (): string => {
   const formattedTime = Intl.DateTimeFormat('en-US', {
     timeStyle: 'short',

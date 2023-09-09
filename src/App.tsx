@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles.ts';
 import UserMenu from './components/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
+import Tasks from './pages/Tasks.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 
 function App() {
@@ -15,14 +16,7 @@ function App() {
           <Route path="/">
             <Route element={<UserMenu />}>
               <Route index element={<Home />} />
-              <Route
-                path="my-tasks"
-                element={
-                  <main>
-                    <h1>My tasks</h1>
-                  </main>
-                }
-              />
+              <Route path="my-tasks" element={<Tasks />} />
               <Route
                 path="stats"
                 element={

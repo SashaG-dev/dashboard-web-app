@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 
 export const UserMenuStyled = styled.div`
   background-color: var(--primary);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--tertiary-opacity);
   width: 24rem;
   height: 100%;
   max-height: 100vh;

@@ -1,40 +1,41 @@
+import { formatDate } from '../utils/helpers';
 import { TaskListType } from '../types/TaskListType';
 
 export const allTasks: TaskListType[] = [
   {
-    date: new Date('September 7, 2023'),
+    date: formatDate(new Date('September 8, 2023'), 'medium'),
     title: 'Time with owner',
     complete: false,
     tasks: [
       {
-        id: 1,
+        id: 'id1',
         main: 'Take owner on a walk today',
         status: 'incomplete',
       },
       {
-        id: 2,
+        id: 'id2',
         main: 'Eat serving-size of veggies',
         status: 'complete',
       },
     ],
   },
   {
-    date: new Date('September 8, 2023'),
+    date: formatDate(new Date('September 9, 2023'), 'medium'),
     title: 'Park Day',
     complete: false,
     tasks: [
       {
-        id: 1,
+        id: 'id1',
         main: "Check out new fire hydrant beside neighbor's house",
         status: 'incomplete',
       },
       {
-        id: 2,
+        id: 'id2',
         main: 'Make sure to bring frisbee to park',
         status: 'incomplete',
       },
       {
-        id: 3,
+        id: 'id3',
         main: 'Date with Stella at park!!',
         status: 'incomplete',
       },

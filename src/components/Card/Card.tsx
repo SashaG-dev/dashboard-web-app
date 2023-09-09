@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
 import { BsArrowRightCircleFill } from 'react-icons/bs';
-import { formatDate } from '../../utils/helpers';
 import { CardStyled } from './styles';
 
 type CardTaskProps = {
-  date: Date;
+  date: string;
   title: string;
   tasks: [string, string | undefined];
   current: boolean;
@@ -16,7 +15,7 @@ const Card = ({ date, title, tasks, current }: CardTaskProps) => {
       <div className="card-main">
         <div className="tasks-details">
           <h3 className="tasks-heading">{title}</h3>
-          <p className="tasks-date">{formatDate(date)}</p>
+          <p className="tasks-date">{date}</p>
         </div>
 
         <ul className="tasks-preview">
