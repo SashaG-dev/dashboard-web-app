@@ -1,8 +1,8 @@
 import { getToday, formatDate } from '../../utils/helpers';
-import { allTasks } from '../../data/tasks';
 import { TaskListType } from '../../types/TaskListType';
+import { DocumentData } from 'firebase/firestore';
 
-export const getWeek = () => {
+export const getWeek = async (arr: DocumentData) => {
   const dayPassed = 1000 * 60 * 60 * 24;
   const today = getToday().getTime();
   const formattedToday = formatDate(getToday(), 'medium');
@@ -26,15 +26,22 @@ export const getWeek = () => {
     week[i] = newTaskList;
   }
 
-  const userDates = allTasks.slice(0, 6).map((task) => task.date);
+  try {
+    const userDates = Object.values(arr)
+      .slice(0, 6)
+      .map((task: TaskListType) => task.date);
 
-  const userWeek = week.map((day) => {
-    return userDates.includes(day.date)
-      ? allTasks.find((task) => task.date === day.date)
-      : day;
-  });
-
-  return userWeek;
+    const userWeek = week.map((day) => {
+      return userDates.includes(day.date)
+        ? Object.values(arr).find(
+            (task: TaskListType) => task.date === day.date
+          )
+        : day;
+    });
+    return userWeek;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export type WeekType = ReturnType<typeof getWeek>;

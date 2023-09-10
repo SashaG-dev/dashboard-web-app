@@ -1,30 +1,21 @@
-import { createContext, useContext, ReactElement, useReducer } from 'react';
-import { getWeek, WeekType } from '../features/tasks/taskUtilities';
-import { Task } from '../types/TaskListType';
-import cardReducer from './cardReducer';
+import { createContext, ReactElement } from 'react';
 
 export type CardStateType = {
-  week: WeekType;
+  week: any;
 };
 
 export const initialState: CardStateType = {
-  week: getWeek(),
+  week: [],
 };
 
 const useCardsContext = (initialState: CardStateType) => {
-  const [state, dispatch] = useReducer(cardReducer, initialState);
-
-  const addTask = (date: string, task: Task) =>
-    dispatch({ type: 'ADD_TASK', payload: { date: date, task } });
-
-  return { state, addTask };
+  return { state: initialState };
 };
 
 type CardsContextType = ReturnType<typeof useCardsContext>;
 
 const initialContextState: CardsContextType = {
   state: initialState,
-  addTask: () => {},
 };
 
 export const CardsContext =
@@ -44,5 +35,3 @@ export const CardsContextProvider = ({
     </CardsContext.Provider>
   );
 };
-
-export const useCardsContextHook = () => useContext(CardsContext);

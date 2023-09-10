@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BsThreeDotsVertical, BsXLg } from 'react-icons/bs';
 import AddTask from '../AddTask';
 import { ButtonStyled } from '../../../components/Button';
 import Checkbox from '../../../components/Checkbox/Checkbox';
 import { TaskListType } from '../../../types/TaskListType';
+import { TextInputStyled } from '../../../components/Input';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { completeTaskList } from '../tasksSlice';
 import { TaskListCardStyled } from './styles';
 
 type TaskCardPropsType = {
@@ -13,13 +16,36 @@ type TaskCardPropsType = {
 };
 
 const TaskListCard = (props: TaskCardPropsType) => {
+  const {
+    index,
+    date,
+    data: { title, complete, tasks },
+  } = props;
+
   const [editMode, setEditMode] = useState(false);
 
+  const dispatch = useAppDispatch();
+
+  const handleChange = () => {
+    dispatch(completeTaskList({ date: date, boolean: !complete }));
+  };
+
   const renderTasks = () => {
-    return props.data?.tasks.map((task) => {
+    return tasks.map((task) => {
+      const titleStatus =
+        task.status === 'complete' ? 'incomplete' : 'complete';
+
       return (
         <li key={task.id}>
-          <Checkbox>{task.main}</Checkbox>
+          <Checkbox
+            id={task.id}
+            checked={task.status === 'complete'}
+            title={`Mark task as ${titleStatus}`}
+            onChange={() => console.log(true)}
+            ariaLabel={`mark task as ${titleStatus}`}
+          >
+            {task.main}
+          </Checkbox>
         </li>
       );
     });
@@ -27,45 +53,50 @@ const TaskListCard = (props: TaskCardPropsType) => {
 
   return (
     <TaskListCardStyled
-      aria-current={props.index === 0}
-      $current={props.index === 0 ? 'current' : ''}
+      aria-current={index === 0}
+      $current={index === 0 ? 'current' : ''}
     >
       <div className="card-headings">
         <form>
           <div>
-            <h2>{props.data?.title || 'All Tasks'}</h2>
-            <p>{props?.date || props.data?.date}</p>
+            <h2>{title}</h2>
+            <p>{date}</p>
           </div>
         </form>
 
         <ButtonStyled
-          aria-label="edit this task list"
-          title="Edit this task list"
+          aria-label={editMode ? 'cancel' : 'edit this task list'}
+          title={editMode ? 'Cancel' : 'Edit this task list'}
+          onClick={() => setEditMode((prev) => !prev)}
           $type="icon"
         >
-          <BsThreeDotsVertical aria-hidden="true" />
+          {editMode ? (
+            <BsXLg aria-hidden="true" />
+          ) : (
+            <BsThreeDotsVertical aria-hidden="true" />
+          )}
         </ButtonStyled>
       </div>
 
       <div className="list-wrapper">
         <ul>
-          {props.data?.tasks && renderTasks()}
-          <AddTask date={props.date} />
+          {tasks && renderTasks()}
+          {editMode || <AddTask date={date} />}
         </ul>
       </div>
 
-      {props.index === 0 ? (
+      {index === 0 && (
         <div className="status-container">
           <Checkbox
-            id={props.date}
-            title="Finish today's tasks"
-            ariaLabel="finish today;s tasks"
+            id={date}
+            title={complete ? 'Undo' : "Finish today's tasks"}
+            ariaLabel={complete ? 'undo finished task' : "finish today's tasks"}
+            onChange={() => handleChange()}
+            checked={complete}
           >
             Finish Today
           </Checkbox>
         </div>
-      ) : (
-        ''
       )}
     </TaskListCardStyled>
   );

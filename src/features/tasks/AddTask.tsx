@@ -1,10 +1,11 @@
 import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
 import { BsFillPlusCircleFill, BsXLg, BsCheck2 } from 'react-icons/bs';
-import { useCardsContextHook } from '../../context/cardContext';
 import { Task } from '../../types/TaskListType';
 import { ButtonGroupStyled, ButtonStyled } from '../../components/Button';
 import { TextInputStyled } from '../../components/Input';
 import { styled } from 'styled-components';
+import { addTask } from './tasksSlice';
+import { useAppDispatch } from '../../hooks/hooks';
 
 const AddTaskStyled = styled.form`
   display: flex;
@@ -16,8 +17,6 @@ type Props = {
 };
 
 const AddTask = ({ date }: Props) => {
-  const { addTask } = useCardsContextHook();
-
   const [toggleAddTask, setToggleAddTask] = useState(false);
   const [timestamp, setTimeStamp] = useState(`${new Date().getTime()}`);
   const [task, setTask] = useState<Task>({
@@ -25,6 +24,7 @@ const AddTask = ({ date }: Props) => {
     main: '',
     status: 'incomplete',
   });
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeStamp(`${new Date().getTime()}`);
@@ -34,7 +34,7 @@ const AddTask = ({ date }: Props) => {
     e.preventDefault();
     if (task.main) {
       setToggleAddTask(false);
-      addTask(date, task);
+      dispatch(addTask({ date, task }));
       setTask((prev) => ({ ...prev, id: '', main: '' }));
     }
   };
