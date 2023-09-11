@@ -1,16 +1,12 @@
-import { useState, useEffect, ChangeEvent, MouseEvent } from 'react';
+import { useState, useEffect, useRef, ChangeEvent, MouseEvent } from 'react';
 import { BsFillPlusCircleFill, BsXLg, BsCheck2 } from 'react-icons/bs';
-import { Task } from '../../types/TaskListType';
-import { ButtonGroupStyled, ButtonStyled } from '../../components/Button';
-import { TextInputStyled } from '../../components/Input';
-import { styled } from 'styled-components';
-import { addTask } from './tasksSlice';
-import { useAppDispatch } from '../../hooks/hooks';
-
-const AddTaskStyled = styled.form`
-  display: flex;
-  gap: 1.6rem;
-`;
+import { TaskType } from '../../../types/TaskListType';
+import { ButtonGroupStyled, ButtonStyled } from '../../../components/Button';
+import { TextInputStyled } from '../../../components/Input';
+import { addTask } from '../tasksSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { MAX_TEXT_LENGTH } from '../../../utils/constants';
+import { AddTaskStyled } from './styles';
 
 type Props = {
   date: string;
@@ -19,20 +15,26 @@ type Props = {
 const AddTask = ({ date }: Props) => {
   const [toggleAddTask, setToggleAddTask] = useState(false);
   const [timestamp, setTimeStamp] = useState(`${new Date().getTime()}`);
-  const [task, setTask] = useState<Task>({
+  const [task, setTask] = useState<TaskType>({
     id: '',
-    main: '',
+    main: ''.trim(),
     status: 'incomplete',
   });
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTimeStamp(`${new Date().getTime()}`);
   }, [task.main]);
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [toggleAddTask]);
+
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (task.main) {
+    if (task.main && task.main.trim().length <= MAX_TEXT_LENGTH) {
       setToggleAddTask(false);
       dispatch(addTask({ date, task }));
       setTask((prev) => ({ ...prev, id: '', main: '' }));
@@ -63,6 +65,7 @@ const AddTask = ({ date }: Props) => {
             placeholder="Add new task"
             value={task.main}
             onChange={(e) => handleChange(e)}
+            ref={inputRef}
           />
           <ButtonGroupStyled>
             <ButtonStyled
@@ -84,6 +87,9 @@ const AddTask = ({ date }: Props) => {
               <BsXLg aria-hidden="true" />
             </ButtonStyled>
           </ButtonGroupStyled>
+          <small className={task.main.length > MAX_TEXT_LENGTH ? 'red' : ''}>
+            {MAX_TEXT_LENGTH - task.main.length}
+          </small>
         </AddTaskStyled>
       ) : (
         <ButtonStyled

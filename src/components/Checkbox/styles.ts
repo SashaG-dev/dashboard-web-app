@@ -18,6 +18,11 @@ export const CheckboxStyled = styled.div`
       &:checked ~ .checkbox-span {
         background-color: currentColor;
       }
+
+      &:disabled ~ .checkbox-text,
+      &:disabled ~ .checkbox-span {
+        opacity: 0.5;
+      }
     }
 
     span {

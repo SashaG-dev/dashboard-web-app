@@ -44,6 +44,29 @@ export const TaskListCardStyled = styled.div<{ $current?: string }>`
       flex-direction: column;
       align-items: flex-start;
       gap: 0.8rem;
+
+      li {
+        display: inline-block;
+        width: 100%;
+      }
+
+      li small {
+        color: var(--tertiary);
+        background-color: var(--primary);
+        border-radius: var(--radius-sm);
+        padding: 0.4rem 0.8rem;
+
+        &.red {
+          color: var(--error);
+        }
+      }
+
+      li .edit-span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+      }
     }
   }
 

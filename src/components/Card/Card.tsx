@@ -19,7 +19,7 @@ const Card = ({ date, title, tasks, current }: CardTaskProps) => {
         </div>
 
         <ul className="tasks-preview">
-          <li className="task task-one">{tasks[0]}</li>
+          <li className="task task-one">{tasks[0] || 'No tasks set.'}</li>
           {tasks[1] ? <li className="task task-two">{tasks[1]}</li> : ''}
           <li>Add more tasks...</li>
         </ul>

@@ -1,6 +1,6 @@
 import { doc, getDoc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './firebase';
-import { Task } from '../types/TaskListType';
+import { TaskType } from '../types/TaskListType';
 
 export const tasksRef = doc(db, 'account-1', 'tasks');
 
@@ -16,7 +16,7 @@ export const getTasks = async () => {
 
 export const updateTasks = async (
   date: string,
-  task: Task | null,
+  task: TaskType | null,
   complete: boolean = false,
   title: string = 'All tasks'
 ) => {
@@ -44,6 +44,27 @@ export const updateTasks = async (
             date: date,
             title: title,
             complete: complete,
+          },
+        },
+        { merge: true }
+      );
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateTaskList = async (
+  date: string,
+  updatedTaskItems: TaskType[] | null
+) => {
+  try {
+    if (updatedTaskItems !== null) {
+      await setDoc(
+        tasksRef,
+        {
+          [date]: {
+            tasks: updatedTaskItems,
           },
         },
         { merge: true }

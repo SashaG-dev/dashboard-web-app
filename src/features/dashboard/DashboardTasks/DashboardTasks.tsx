@@ -1,22 +1,34 @@
+import { useEffect } from 'react';
 import Card from '../../../components/Card/Card';
 import { DashboardTasksStyled } from './styles';
-import { allTasks } from '../../../data/tasks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { fetchWeek, unsubscribe } from '../../tasks/tasksSlice';
 
 const DashboardTasks = () => {
-  const displayedTasks = allTasks.slice(0, 2);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchWeek());
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const { week } = useAppSelector((state) => state.tasks);
 
   return (
     <DashboardTasksStyled>
       <h2 className="tasks-heading">Here's Your Tasks</h2>
       <div className="tasks-container">
-        {displayedTasks.map((task, i) => {
+        {week.slice(0, 2).map((task, i) => {
           return (
             <Card
               key={`${task.date}`}
               date={task.date}
               title={task.title}
               current={i === 0}
-              tasks={[task.tasks[0].main, task?.tasks[1]?.main]}
+              tasks={[task?.tasks[0]?.main, task?.tasks[1]?.main]}
             />
           );
         })}

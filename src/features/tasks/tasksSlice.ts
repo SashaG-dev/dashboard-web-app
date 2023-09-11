@@ -1,30 +1,43 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getDoc } from 'firebase/firestore';
-import { TaskListType } from '../../types/TaskListType';
-import { tasksRef, updateTasks } from '../../api/apiTasks';
+import { onSnapshot } from 'firebase/firestore';
+import { TaskListType, TaskType } from '../../types/TaskListType';
+import { tasksRef, updateTasks, updateTaskList } from '../../api/apiTasks';
 import { getWeek } from './taskUtilities';
+import { RootState } from '../../store/store';
 
 type TasksInitialState = {
   week: TaskListType[] | [];
   isLoading: boolean;
+  unsubscribe: null | (() => void);
 };
 
 const initialState: TasksInitialState = {
   week: [],
   isLoading: true,
+  unsubscribe: null,
 };
 
 export const fetchWeek = createAsyncThunk(
   'tasks/fetchWeek',
   async (_, { dispatch }) => {
     try {
-      const tasksSnap = await getDoc(tasksRef);
-      const data = tasksSnap.data();
-      const userWeek = await getWeek(data!);
-      dispatch(tasksSlice.actions.setWeek(userWeek));
-      return data;
+      const unsubscribe = onSnapshot(tasksRef, async (doc) => {
+        const data = doc.data();
+        const userWeek = await getWeek(data!);
+        dispatch(tasksSlice.actions.setWeek(userWeek));
+      });
     } catch (err) {
       console.error(err);
+    }
+  }
+);
+
+export const unsubscribe = createAsyncThunk(
+  'tasks/unsubscribe',
+  (_, { getState }) => {
+    const { unsubscribe } = (getState() as RootState).tasks;
+    if (unsubscribe) {
+      unsubscribe();
     }
   }
 );
@@ -36,28 +49,41 @@ const tasksSlice = createSlice({
     setWeek: (state, action) => {
       state.week = action.payload;
     },
-    addTask: (state, action) => {
+    addTask: (_, action) => {
       const date = action.payload.date;
       const newTask = action.payload.task;
-      const updatedWeek = state.week.map((listItem: TaskListType) => {
-        return listItem?.date === date
-          ? { ...listItem, tasks: [...listItem.tasks, newTask] }
-          : listItem;
-      });
       updateTasks(date, newTask);
-      state.week = updatedWeek;
     },
-    toggleTask: () => {},
-    completeTaskList: (state, action) => {
+    completeTaskList: (_, action) => {
       const date = action.payload.date;
       const boolean = action.payload.boolean;
-      const updatedWeek = state.week.map((listItem) => {
-        return listItem.date === date
-          ? { ...listItem, complete: !listItem.complete }
-          : listItem;
-      });
       updateTasks(date, null, boolean);
-      state.week = updatedWeek;
+    },
+    updateList: (state, action) => {
+      const date = action.payload.date;
+      const taskId = action.payload.id;
+      const updatedTask: string = action.payload?.main;
+      const updatedStatus: string = action.payload?.newStatus;
+      const updatedTaskItems = state.week
+        .find((list) => list.date === date)
+        ?.tasks.map((task) =>
+          task.id === taskId
+            ? {
+                ...task,
+                main: updatedTask || task.main,
+                status: updatedStatus || task.status,
+              }
+            : task
+        ) as TaskType[];
+      updateTaskList(date, updatedTaskItems);
+    },
+    deleteTaskItem: (state, action) => {
+      const date = action.payload.date;
+      const taskId = action.payload.id;
+      const updatedTaskItems = state.week
+        .find((list) => list.date === date)
+        ?.tasks.filter((task) => task.id !== taskId) as TaskType[];
+      updateTaskList(date, updatedTaskItems);
     },
   },
   extraReducers: (builder) => {
@@ -67,10 +93,14 @@ const tasksSlice = createSlice({
       })
       .addCase(fetchWeek.fulfilled, (state) => {
         state.isLoading = false;
+      })
+      .addCase(unsubscribe.fulfilled, (state) => {
+        state.unsubscribe = null;
       });
   },
 });
 
-export const { addTask, toggleTask, completeTaskList } = tasksSlice.actions;
+export const { addTask, completeTaskList, updateList, deleteTaskItem } =
+  tasksSlice.actions;
 
 export default tasksSlice.reducer;

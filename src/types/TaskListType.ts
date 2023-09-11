@@ -1,12 +1,12 @@
-export type Task = {
+export type TaskType = {
   id: string;
   main: string;
-  status: 'incomplete' | 'complete';
+  status: 'complete' | 'incomplete';
 };
 
 export type TaskListType = {
   date: string;
   title: string | `All tasks`;
   complete: boolean;
-  tasks: Task[];
+  tasks: TaskType[];
 };

@@ -1,10 +1,10 @@
 import { createContext, ReactElement } from 'react';
 
-export type CardStateType = {
+type CardStateType = {
   week: any;
 };
 
-export const initialState: CardStateType = {
+const initialState: CardStateType = {
   week: [],
 };
 
@@ -18,8 +18,7 @@ const initialContextState: CardsContextType = {
   state: initialState,
 };
 
-export const CardsContext =
-  createContext<CardsContextType>(initialContextState);
+const CardsContext = createContext<CardsContextType>(initialContextState);
 
 type PropsType = {
   children?: ReactElement | undefined;

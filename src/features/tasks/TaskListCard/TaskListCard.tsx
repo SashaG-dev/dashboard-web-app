@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { BsThreeDotsVertical, BsXLg } from 'react-icons/bs';
-import AddTask from '../AddTask';
+import AddTask from '../AddTask/AddTask';
+import { Task } from '../Task';
 import { ButtonStyled } from '../../../components/Button';
 import Checkbox from '../../../components/Checkbox/Checkbox';
 import { TaskListType } from '../../../types/TaskListType';
-import { TextInputStyled } from '../../../components/Input';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { completeTaskList } from '../tasksSlice';
 import { TaskListCardStyled } from './styles';
@@ -27,28 +27,10 @@ const TaskListCard = (props: TaskCardPropsType) => {
   const dispatch = useAppDispatch();
 
   const handleChange = () => {
-    dispatch(completeTaskList({ date: date, boolean: !complete }));
-  };
-
-  const renderTasks = () => {
-    return tasks.map((task) => {
-      const titleStatus =
-        task.status === 'complete' ? 'incomplete' : 'complete';
-
-      return (
-        <li key={task.id}>
-          <Checkbox
-            id={task.id}
-            checked={task.status === 'complete'}
-            title={`Mark task as ${titleStatus}`}
-            onChange={() => console.log(true)}
-            ariaLabel={`mark task as ${titleStatus}`}
-          >
-            {task.main}
-          </Checkbox>
-        </li>
-      );
-    });
+    const tasksComplete = tasks.every((task) => task.status === 'complete');
+    if (tasksComplete) {
+      dispatch(completeTaskList({ date: date, boolean: !complete }));
+    }
   };
 
   return (
@@ -57,12 +39,10 @@ const TaskListCard = (props: TaskCardPropsType) => {
       $current={index === 0 ? 'current' : ''}
     >
       <div className="card-headings">
-        <form>
-          <div>
-            <h2>{title}</h2>
-            <p>{date}</p>
-          </div>
-        </form>
+        <div>
+          <h2>{title}</h2>
+          <p>{date}</p>
+        </div>
 
         <ButtonStyled
           aria-label={editMode ? 'cancel' : 'edit this task list'}
@@ -80,7 +60,10 @@ const TaskListCard = (props: TaskCardPropsType) => {
 
       <div className="list-wrapper">
         <ul>
-          {tasks && renderTasks()}
+          {tasks &&
+            tasks.map((task) => (
+              <Task key={task.id} {...task} date={date} editMode={editMode} />
+            ))}
           {editMode || <AddTask date={date} />}
         </ul>
       </div>
@@ -93,6 +76,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
             ariaLabel={complete ? 'undo finished task' : "finish today's tasks"}
             onChange={() => handleChange()}
             checked={complete}
+            disabled={editMode}
           >
             Finish Today
           </Checkbox>

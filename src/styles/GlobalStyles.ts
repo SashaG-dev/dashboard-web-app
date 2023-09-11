@@ -7,24 +7,22 @@ const GlobalStyles = createGlobalStyle<{
 :root {
   /* Colors */
   
+  --accent: #8d72e1;
+
   --primary: #151515;
   --secondary: #212121;
   --tertiary: #fff;
   --tertiary-opacity: rgba(255, 255, 255, .1);
  
-
-  --accent: #8d72e1;
+/* --success:  */
+ --error: #e74646;
 
 /* 
   --primary: #fff;
   --secondary: #eee;
   --tertiary: #000;
   --tertiary-opacity: rgba(0, 0, 0, .1);
-   */
-
- /*
- --success: 
- --error: */
+*/
 
   /* Borders and Radii */ 
   --radius-sm: .8rem;
