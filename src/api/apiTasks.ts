@@ -17,8 +17,7 @@ export const getTasks = async () => {
 export const updateTasks = async (
   date: string,
   task: TaskType | null,
-  complete: boolean = false,
-  title: string = 'All tasks'
+  complete: boolean = false
 ) => {
   try {
     if (date && task) {
@@ -27,7 +26,6 @@ export const updateTasks = async (
         {
           [date]: {
             date: date,
-            title: title,
             complete: complete,
             tasks: arrayUnion(task),
           },
@@ -42,7 +40,6 @@ export const updateTasks = async (
         {
           [date]: {
             date: date,
-            title: title,
             complete: complete,
           },
         },

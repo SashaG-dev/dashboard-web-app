@@ -1,6 +1,6 @@
 import { styled, css } from 'styled-components';
-import { StyledVariations } from '../../types/utilTypes';
-import { mediaQueries } from '../../styles/mediaQueries';
+import { StyledVariations } from '../../../types/utilTypes';
+import { mediaQueries } from '../../../styles/mediaQueries';
 
 const variations: StyledVariations = {
   closed: css`

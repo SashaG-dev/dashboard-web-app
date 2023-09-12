@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { mediaQueries } from '../../styles/mediaQueries';
+import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const UserMenuNavStyled = styled.nav`
   border-bottom: 1px solid var(--tertiary-opacity);

@@ -1,9 +1,9 @@
 import { KeyboardEvent } from 'react';
 import { BsChevronLeft } from 'react-icons/bs';
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { toggleMenu } from '../../features/menu/menuSlice';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
+import { toggleMenu } from '../menuSlice';
 import { UserMenuDetailsStyled } from './styles';
-import { UserDataType } from '../../types/UserDataType';
+import { UserDataType } from '../../../types/UserDataType';
 
 const UserMenuDetails = ({
   details: { firstName, currentTag, img },

@@ -4,17 +4,16 @@ import { CardStyled } from './styles';
 
 type CardTaskProps = {
   date: string;
-  title: string;
   tasks: [string, string | undefined];
   current: boolean;
 };
 
-const Card = ({ date, title, tasks, current }: CardTaskProps) => {
+const Card = ({ date, tasks, current }: CardTaskProps) => {
   return (
     <CardStyled $current={current} className="card">
       <div className="card-main">
         <div className="tasks-details">
-          <h3 className="tasks-heading">{title}</h3>
+          <h3 className="tasks-heading">All tasks</h3>
           <p className="tasks-date">{date}</p>
         </div>
 

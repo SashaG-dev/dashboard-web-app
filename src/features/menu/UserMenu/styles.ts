@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { mediaQueries } from '../../styles/mediaQueries';
+import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const UserMenuStyled = styled.div`
   background-color: var(--primary);

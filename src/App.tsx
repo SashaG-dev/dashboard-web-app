@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles.ts';
-import UserMenu from './components/UserMenu/UserMenu.tsx';
+import UserMenu from './features/menu/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
 import { useAppSelector } from './hooks/hooks.ts';

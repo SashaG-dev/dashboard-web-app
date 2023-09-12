@@ -8,7 +8,6 @@ export const getWeek = async (arr: DocumentData) => {
   const formattedToday = formatDate(getToday(), 'medium');
   const currentTaskList: TaskListType = {
     date: formattedToday,
-    title: 'All tasks',
     complete: false,
     tasks: [],
   };
@@ -19,7 +18,6 @@ export const getWeek = async (arr: DocumentData) => {
     const nextDay = new Date(today + dayPassed * i);
     const newTaskList: TaskListType = {
       date: formatDate(nextDay, 'medium'),
-      title: 'All tasks',
       complete: false,
       tasks: [],
     };

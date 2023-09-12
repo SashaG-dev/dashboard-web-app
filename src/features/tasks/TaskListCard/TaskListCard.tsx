@@ -19,7 +19,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
   const {
     index,
     date,
-    data: { title, complete, tasks },
+    data: { complete, tasks },
   } = props;
 
   const [editMode, setEditMode] = useState(false);
@@ -40,7 +40,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
     >
       <div className="card-headings">
         <div>
-          <h2>{title}</h2>
+          <h2>All tasks</h2>
           <p>{date}</p>
         </div>
 
@@ -70,7 +70,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
                 complete={complete}
               />
             ))}
-          {editMode || <AddTask date={date} />}
+          {editMode || complete || <AddTask date={date} />}
         </ul>
       </div>
 

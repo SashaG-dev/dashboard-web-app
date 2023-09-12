@@ -3,8 +3,8 @@ import { BsBoxArrowRight } from 'react-icons/bs';
 import UserMenuDetails from '../UserMenuDetails/UserMenuDetails';
 import UserMenuNav from '../UserMenuNav/UserMenuNav';
 import { UserMenuStyled } from './styles';
-import { useAppSelector } from '../../hooks/hooks';
-import { account } from '../../data/account';
+import { useAppSelector } from '../../../hooks/hooks';
+import { account } from '../../../data/account';
 
 const UserMenu = () => {
   const { isOpen } = useAppSelector((state) => state.menu);
@@ -15,10 +15,8 @@ const UserMenu = () => {
         <UserMenuDetails {...account} />
         <UserMenuNav />
         <div className="settings-container">
-          {/* TODO: add light/dark mode toggle button */}
-          {/* TODO: create styled component */}
-          <button type="button" title="Logout" aria-label="Logout of account">
-            <BsBoxArrowRight role="img" aria-label="logout" />
+          <button type="button" title="Logout" aria-label="logout of account">
+            <BsBoxArrowRight aria-hidden="true" />
             <span>Logout</span>
           </button>
         </div>

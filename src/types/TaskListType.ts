@@ -6,7 +6,6 @@ export type TaskType = {
 
 export type TaskListType = {
   date: string;
-  title: string | `All tasks`;
   complete: boolean;
   tasks: TaskType[];
 };
