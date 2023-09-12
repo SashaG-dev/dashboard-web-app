@@ -19,3 +19,10 @@ export const getDate = (): string => {
   const formattedDate = formatDate(getToday(), 'full');
   return formattedDate;
 };
+
+export const getFullWeek = (): string => {
+  const today = getToday();
+  const weekMs = today.getTime() + 1000 * 60 * 60 * 24 * 6;
+  const weekDate = new Date(weekMs);
+  return `${formatDate(today)} - ${formatDate(weekDate)}`;
+};

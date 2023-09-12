@@ -62,11 +62,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const { isOpen, isMobile } = useAppSelector((state) => state.menu);
+  const { isOpen } = useAppSelector((state) => state.menu);
 
   return (
     <>
-      <GlobalStyles $navOpen={isOpen} isMobile={isMobile} />
+      <GlobalStyles $navOpen={isOpen} />
       <RouterProvider router={router} />
     </>
   );

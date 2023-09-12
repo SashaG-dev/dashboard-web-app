@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 export const CardStyled = styled.article<{ $current?: boolean }>`
   width: 75%;
@@ -10,6 +11,11 @@ export const CardStyled = styled.article<{ $current?: boolean }>`
   border-radius: var(--radius-sm);
   overflow: hidden;
   position: relative;
+
+  @media ${mediaQueries.phoneLandscape} {
+    max-width: 36rem;
+    width: 90%;
+  }
 
   .card-main {
     color: var(--primary);
@@ -34,6 +40,12 @@ export const CardStyled = styled.article<{ $current?: boolean }>`
   .tasks-details {
     display: flex;
     justify-content: space-between;
+
+    @media ${mediaQueries.phoneLandscape} {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
   }
 
   a {

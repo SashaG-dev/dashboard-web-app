@@ -62,7 +62,13 @@ const TaskListCard = (props: TaskCardPropsType) => {
         <ul>
           {tasks &&
             tasks.map((task) => (
-              <Task key={task.id} {...task} date={date} editMode={editMode} />
+              <Task
+                key={task.id}
+                {...task}
+                date={date}
+                editMode={editMode}
+                complete={complete}
+              />
             ))}
           {editMode || <AddTask date={date} />}
         </ul>

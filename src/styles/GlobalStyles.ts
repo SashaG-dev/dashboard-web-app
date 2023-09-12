@@ -1,15 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
+import { mediaQueries } from './mediaQueries';
 
 const GlobalStyles = createGlobalStyle<{
   $navOpen?: boolean;
-  isMobile?: boolean;
 }>`
 :root {
   /* Colors */
   
   --accent: #8d72e1;
-
   --primary: #151515;
+  --primary-opacity: rgba(21, 21, 21, .95);
   --secondary: #212121;
   --tertiary: #fff;
   --tertiary-opacity: rgba(255, 255, 255, .1);
@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle<{
   /* Heights/Widths */
   --menu-width: 24rem;
   --menu-width-sm: 6rem;
-  --menu-mobile: 0;
+  --menu-height-mobile: 8rem;
 }
 
 *, 
@@ -59,8 +59,13 @@ body {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   background-color: var(--primary);
-  min-height: 100vh;
+  /* min-height: 100vh; */
   overflow-x: hidden;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
 }
 
 h1, h2, h3 {
@@ -90,11 +95,20 @@ button {
 
 main {
   margin-left: var(${(props) => {
-    if (props.isMobile) return '--menu-mobile';
     return props.$navOpen ? '--menu-width' : '--menu-width-sm';
   }});
   padding: .8rem 2.4rem;
   transition: margin-left .3s;
+  position: relative;
+
+  @media ${mediaQueries.tabPortrait} {
+    margin-left: 0;
+    padding-bottom: calc(var(--menu-height-mobile) + 2rem);
+  }
+  @media ${mediaQueries.phonePortrait} {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+  }
 }
 `;
 

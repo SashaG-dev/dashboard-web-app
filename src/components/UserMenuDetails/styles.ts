@@ -1,5 +1,6 @@
 import { styled, css } from 'styled-components';
 import { StyledVariations } from '../../types/utilTypes';
+import { mediaQueries } from '../../styles/mediaQueries';
 
 const variations: StyledVariations = {
   closed: css`
@@ -69,4 +70,8 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
   }
 
   ${(props) => (props.$navOpen ? variations[props.$navOpen] : '')}
+
+  @media ${mediaQueries.tabPortrait} {
+    display: none;
+  }
 `;

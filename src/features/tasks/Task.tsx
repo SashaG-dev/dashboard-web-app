@@ -19,9 +19,17 @@ type TaskPropType = {
   main: string;
   status: 'complete' | 'incomplete';
   editMode: boolean;
+  complete: boolean;
 };
 
-export const Task = ({ date, id, main, status, editMode }: TaskPropType) => {
+export const Task = ({
+  date,
+  id,
+  main,
+  status,
+  editMode,
+  complete,
+}: TaskPropType) => {
   const [isEditing, setIsEditing] = useState(false);
   const [task, setTask] = useState(main);
 
@@ -50,6 +58,54 @@ export const Task = ({ date, id, main, status, editMode }: TaskPropType) => {
 
   const titleStatus = status ? 'incomplete' : 'complete';
 
+  const renderButtonGroup = () => {
+    if (editMode) {
+      if (isEditing) {
+        return (
+          <>
+            <ButtonStyled
+              $type="iconSmall"
+              onClick={() => handleUpdate()}
+              title="Save changes"
+              aria-label="save changes"
+            >
+              <BsCheck2 aria-hidden="true" />
+            </ButtonStyled>
+            <ButtonStyled
+              $type="iconSmall"
+              onClick={() => setIsEditing(false)}
+              title="Cancel"
+              aria-label="cancel"
+            >
+              <BsXLg aria-hidden="true" />
+            </ButtonStyled>
+          </>
+        );
+      }
+      return (
+        <>
+          <ButtonStyled
+            $type="iconSmall"
+            onClick={() => setIsEditing(true)}
+            title="Edit this task"
+            aria-label="edit this task"
+          >
+            <BsPencilFill aria-hidden="true" />
+          </ButtonStyled>
+
+          <ButtonStyled
+            $type="iconSmall"
+            onClick={() => dispatch(deleteTaskItem({ date, id }))}
+            title="Delete this task"
+            aria-label="Delete this task"
+          >
+            <BsFillTrash3Fill />
+          </ButtonStyled>
+        </>
+      );
+    }
+  };
+
   return (
     <li>
       {editMode ? (
@@ -69,49 +125,7 @@ export const Task = ({ date, id, main, status, editMode }: TaskPropType) => {
           ) : (
             main
           )}
-
-          <ButtonGroupStyled>
-            {isEditing ? (
-              <>
-                <ButtonStyled
-                  $type="iconSmall"
-                  onClick={() => handleUpdate()}
-                  title="Save changes"
-                  aria-label="save changes"
-                >
-                  <BsCheck2 aria-hidden="true" />
-                </ButtonStyled>
-                <ButtonStyled
-                  $type="iconSmall"
-                  onClick={() => setIsEditing(false)}
-                  title="Cancel"
-                  aria-label="cancel"
-                >
-                  <BsXLg aria-hidden="true" />
-                </ButtonStyled>
-              </>
-            ) : (
-              <>
-                <ButtonStyled
-                  $type="iconSmall"
-                  onClick={() => setIsEditing(true)}
-                  title="Edit this task"
-                  aria-label="edit this task"
-                >
-                  <BsPencilFill aria-hidden="true" />
-                </ButtonStyled>
-
-                <ButtonStyled
-                  $type="iconSmall"
-                  onClick={() => dispatch(deleteTaskItem({ date, id }))}
-                  title="Delete this task"
-                  aria-label="Delete this task"
-                >
-                  <BsFillTrash3Fill />
-                </ButtonStyled>
-              </>
-            )}
-          </ButtonGroupStyled>
+          <ButtonGroupStyled>{renderButtonGroup()}</ButtonGroupStyled>
         </span>
       ) : (
         <Checkbox
@@ -120,6 +134,7 @@ export const Task = ({ date, id, main, status, editMode }: TaskPropType) => {
           title={`Mark task as ${titleStatus}`}
           onChange={() => handleStatusChange()}
           ariaLabel={`mark task as ${titleStatus}`}
+          disabled={complete}
         >
           {main}
         </Checkbox>

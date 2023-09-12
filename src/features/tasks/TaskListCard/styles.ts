@@ -1,5 +1,6 @@
 import { styled, css } from 'styled-components';
 import { StyledVariations } from '../../../types/utilTypes';
+import { mediaQueries } from '../../../styles/mediaQueries';
 
 const variations: StyledVariations = {
   current: css`
@@ -17,9 +18,18 @@ export const TaskListCardStyled = styled.div<{ $current?: string }>`
   border-radius: var(--radius-md);
   width: 32rem;
   height: 80vh;
+  max-height: 60rem;
   padding: 2.4rem 1.6rem;
   overflow: hidden;
   position: relative;
+
+  @media ${mediaQueries.tabPortrait} {
+    height: 90vh;
+  }
+  @media ${mediaQueries.phonePortrait} {
+    width: 28rem;
+    height: 80vh;
+  }
 
   .card-headings {
     margin-bottom: 1.6rem;
