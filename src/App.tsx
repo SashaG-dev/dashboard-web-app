@@ -8,6 +8,7 @@ import GlobalStyles from './styles/GlobalStyles.ts';
 import UserMenu from './features/menu/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
+import Focus from './pages/Focus.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 
 const router = createBrowserRouter(
@@ -17,14 +18,6 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="my-tasks" element={<Tasks />} />
         <Route
-          path="stats"
-          element={
-            <main>
-              <h1>Stats</h1>
-            </main>
-          }
-        />
-        <Route
           path="notebook"
           element={
             <main>
@@ -32,11 +25,12 @@ const router = createBrowserRouter(
             </main>
           }
         />
+        <Route path="focus" element={<Focus />} />
         <Route
-          path="focus"
+          path="stats"
           element={
             <main>
-              <h1>Focus</h1>
+              <h1>Stats</h1>
             </main>
           }
         />

@@ -23,8 +23,10 @@ export const fetchWeek = createAsyncThunk(
     try {
       const unsubscribe = onSnapshot(tasksRef, async (doc) => {
         const data = doc.data();
-        const userWeek = await getWeek(data!);
-        dispatch(tasksSlice.actions.setWeek(userWeek));
+        if (data) {
+          const userWeek = await getWeek(data);
+          dispatch(tasksSlice.actions.setWeek(userWeek));
+        }
       });
     } catch (err) {
       console.error(err);

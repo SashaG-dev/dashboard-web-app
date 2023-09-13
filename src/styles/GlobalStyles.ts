@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle<{
   --primary-opacity: rgba(21, 21, 21, .95);
   --secondary: #212121;
   --tertiary: #fff;
+  --tertiary-light: #aaa;
   --tertiary-opacity: rgba(255, 255, 255, .1);
  
 /* --success:  */
@@ -19,10 +20,12 @@ const GlobalStyles = createGlobalStyle<{
 
 /* 
   --primary: #fff;
+  --primary-opacity: rgba(255, 255, 255, .95);
   --secondary: #eee;
   --tertiary: #000;
+  --tertiary-light: #555;
   --tertiary-opacity: rgba(0, 0, 0, .1);
-*/
+ */
 
   /* Borders and Radii */ 
   --radius-sm: .8rem;
@@ -66,6 +69,8 @@ body {
 #root {
   position: relative;
   min-height: 100vh;
+  max-width: 120rem;
+  margin: 0 auto;
 }
 
 h1, h2, h3 {
@@ -109,6 +114,14 @@ main {
     padding-left: 1.6rem;
     padding-right: 1.6rem;
   }
+}
+
+.text-light {
+  color: var(--tertiary-light);
+}
+
+.text-center {
+  text-align: center;
 }
 `;
 

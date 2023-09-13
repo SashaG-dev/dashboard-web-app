@@ -19,11 +19,3 @@ export const getUserGreeting = (
     return name ? `Good evening, ${name}.` : `Good evening.`;
   }
 };
-
-export const getTime = (): string => {
-  const formattedTime = Intl.DateTimeFormat('en-US', {
-    timeStyle: 'short',
-  }).format(getToday());
-
-  return formattedTime;
-};

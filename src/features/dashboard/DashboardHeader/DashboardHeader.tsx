@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import { getUserGreeting } from '../headerUtilities';
 import { DashboardHeaderStyled } from './styles';
-import DashboardTime from '../DashboardTime';
+import { getTime } from '../../../hooks/getTime';
 import { getDate } from '../../../utils/helpers';
 import { account } from '../../../data/account';
 
 const DashboardHeader = () => {
+  const { time } = getTime();
+
   const displayUserGreeting = useCallback(() => {
     return getUserGreeting(account.details.firstName);
   }, []);
@@ -18,7 +20,7 @@ const DashboardHeader = () => {
 
       <div className="header-details">
         <p className="header-date">{getDate()}</p>
-        <DashboardTime />
+        <p className="header-time">{time}</p>
       </div>
     </DashboardHeaderStyled>
   );

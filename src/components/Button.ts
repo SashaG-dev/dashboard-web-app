@@ -25,6 +25,31 @@ const variations: StyledVariations = {
       transform: scale(1.1);
     }
   `,
+  secondary: css`
+    color: var(--tertiary);
+    font-size: 1.6rem;
+    background-color: var(--secondary);
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--radius-sm);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--primary);
+      background-color: var(--tertiary);
+    }
+  `,
+  accent: css`
+    color: var(--primary);
+    font-size: 1.6rem;
+    background-color: var(--accent);
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--radius-sm);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--tertiary);
+    }
+  `,
 };
 
 export const ButtonStyled = styled.button<{ $type?: string }>`
