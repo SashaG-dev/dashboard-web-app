@@ -23,18 +23,21 @@ export const FocusWaitingStyled = styled.div`
   }
 
   .saved-sessions {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 1.6rem;
+
+    &,
+    .sessions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
 
     @media ${mediaQueries.phonePortrait} {
       gap: 0.8rem;
     }
 
-    p {
-      margin-bottom: 2.4rem;
-
+    p,
+    span {
       @media ${mediaQueries.phonePortrait} {
         font-size: 1.6rem;
       }

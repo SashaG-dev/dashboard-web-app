@@ -24,8 +24,8 @@ const GlobalStyles = createGlobalStyle<{
   --secondary: #eee;
   --tertiary: #000;
   --tertiary-light: #555;
-  --tertiary-opacity: rgba(0, 0, 0, .1);
- */
+  --tertiary-opacity: rgba(0, 0, 0, .1); */
+
 
   /* Borders and Radii */ 
   --radius-sm: .8rem;
@@ -62,14 +62,13 @@ body {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   background-color: var(--primary);
-  /* min-height: 100vh; */
   overflow-x: hidden;
 }
 
 #root {
   position: relative;
   min-height: 100vh;
-  max-width: 120rem;
+  max-width: 150rem;
   margin: 0 auto;
 }
 

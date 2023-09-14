@@ -1,5 +1,7 @@
 export type SavedFocusType = {
   id: string;
   name: string | 'Unnamed Session';
-  time: number;
+  hours: string;
+  minutes: string;
+  seconds: string;
 };
