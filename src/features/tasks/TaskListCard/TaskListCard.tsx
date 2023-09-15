@@ -79,7 +79,6 @@ const TaskListCard = (props: TaskCardPropsType) => {
           <Checkbox
             id={date}
             title={complete ? 'Undo' : "Finish today's tasks"}
-            ariaLabel={complete ? 'undo finished task' : "finish today's tasks"}
             onChange={() => handleChange()}
             checked={complete}
             disabled={editMode}

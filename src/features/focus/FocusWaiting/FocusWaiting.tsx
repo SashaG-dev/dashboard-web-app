@@ -60,7 +60,6 @@ const FocusWaiting = () => {
           className="session-button"
           $type="secondary"
           title="Create a new session"
-          aria-label="create a new session"
           onClick={() => dispatch(editFocus())}
         >
           <BsPlusLg aria-hidden="true" />
@@ -71,7 +70,6 @@ const FocusWaiting = () => {
           <ButtonStyled
             $type="accent"
             title="Start timer"
-            aria-label="start timer"
             onClick={() => dispatch(startFocus())}
           >
             Start now

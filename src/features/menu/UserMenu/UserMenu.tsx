@@ -15,7 +15,7 @@ const UserMenu = () => {
         <UserMenuDetails {...account} />
         <UserMenuNav />
         <div className="settings-container">
-          <button type="button" title="Logout" aria-label="logout of account">
+          <button type="button" title="Logout">
             <BsBoxArrowRight aria-hidden="true" />
             <span>Logout</span>
           </button>

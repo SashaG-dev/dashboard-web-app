@@ -7,7 +7,7 @@ type CheckboxType = {
   checked: boolean;
   disabled?: boolean;
   title: string;
-  ariaLabel: string;
+  ariaLabel?: string;
   children: ReactNode;
 };
 
@@ -34,7 +34,7 @@ const Checkbox = ({
           className="checkbox-span"
           tabIndex={0}
           title={title}
-          aria-label={ariaLabel}
+          aria-label={ariaLabel || ''}
           role="checkbox"
           aria-checked={checked}
         ></span>

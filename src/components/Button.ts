@@ -37,6 +37,12 @@ const variations: StyledVariations = {
       color: var(--primary);
       background-color: var(--tertiary);
     }
+
+    &:disabled {
+      background-color: var(--secondary);
+      color: var(--tertiary-opacity);
+      cursor: default;
+    }
   `,
   accent: css`
     color: var(--primary);

@@ -26,7 +26,6 @@ const DashboardTasks = () => {
             <Card
               key={`${task.date}`}
               date={task.date}
-              title={task.title}
               current={i === 0}
               tasks={[task?.tasks[0]?.main, task?.tasks[1]?.main]}
             />

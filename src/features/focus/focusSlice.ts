@@ -7,6 +7,7 @@ type FocusStateType = {
   saved: SavedFocusType[] | null;
   status: 'waiting' | 'editing' | 'focusing' | 'finishing';
   currentTimer: TimerType;
+  isPaused: boolean;
 };
 
 const initialState: FocusStateType = {
@@ -18,6 +19,7 @@ const initialState: FocusStateType = {
     seconds: '0',
     name: '',
   },
+  isPaused: false,
 };
 
 export const fetchFocusData = createAsyncThunk(
@@ -38,12 +40,16 @@ const focusSlice = createSlice({
     startFocus: (state) => {
       state.status = 'focusing';
     },
+    toggleFocus: (state) => {
+      state.isPaused = !state.isPaused;
+    },
     setCurrentTimer: (state, action) => {
       state.currentTimer = { ...action.payload };
     },
   },
 });
 
-export const { editFocus, startFocus, setCurrentTimer } = focusSlice.actions;
+export const { editFocus, startFocus, toggleFocus, setCurrentTimer } =
+  focusSlice.actions;
 
 export default focusSlice.reducer;

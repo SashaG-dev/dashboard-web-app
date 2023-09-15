@@ -16,43 +16,43 @@ const UserMenuNav = () => {
       <ul className="links">
         <li>
           <NavLink to="/" title="Go to homepage">
-            <BsHouseDoor role="img" aria-label="home" />
+            <BsHouseDoor role="img" />
             <span>Home</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="my-tasks" title="Go to tasks">
-            <BsCalendarHeart role="img" aria-label="my tasks" />
+            <BsCalendarHeart role="img" />
             <span>My Tasks</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="notebook" title="Go to notebook">
-            <BsPencilSquare role="img" aria-label="notebook" />
+            <BsPencilSquare role="img" />
             <span>Notebook</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="focus" title="Enter focus mode">
-            <BsLightningCharge role="img" aria-label="focus mode settings" />
+            <BsLightningCharge role="img" />
             <span>Focus</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="stats" title="Go to statistics">
-            <BsBarChartLine role="img" aria-label="statistics" />
+            <BsBarChartLine role="img" />
             <span>Stats</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="more" title="Go to more features">
-            <BsThreeDots role="img" aria-label="More" />
+            <BsThreeDots role="img" />
             <span>More</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="settings" title="Go to settings">
-            <BsGear role="img" aria-label="settings" />
+            <BsGear role="img" />
             <span>Settings</span>
           </NavLink>
         </li>

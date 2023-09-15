@@ -1,6 +1,7 @@
 export const MAX_TEXT_LENGTH: number = 75;
-export const HOUR = 1000 * 60 * 60;
-export const MINUTE = 1000 * 60;
+export const HOUR = 1 * 60 * 60;
+export const MINUTE = 1 * 60;
+export const SECOND = 1;
 
 export const FOCUS_HOURS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 

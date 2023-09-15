@@ -94,7 +94,6 @@ const AddTask = ({ date }: Props) => {
       ) : (
         <ButtonStyled
           title="Add a new task"
-          aria-label="add new task"
           type="button"
           onClick={() => setToggleAddTask(true)}
         >

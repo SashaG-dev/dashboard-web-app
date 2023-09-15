@@ -99,7 +99,7 @@ export const Task = ({
             title="Delete this task"
             aria-label="Delete this task"
           >
-            <BsFillTrash3Fill />
+            <BsFillTrash3Fill aria-hidden="true" />
           </ButtonStyled>
         </>
       );
