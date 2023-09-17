@@ -34,11 +34,17 @@ const focusSlice = createSlice({
     setSavedFocus: (state, action) => {
       state.saved = action.payload;
     },
+    waitFocus: (state) => {
+      state.status = 'waiting';
+    },
     editFocus: (state) => {
       state.status = 'editing';
     },
     startFocus: (state) => {
       state.status = 'focusing';
+    },
+    finishFocus: (state) => {
+      state.status = 'finishing';
     },
     toggleFocus: (state) => {
       state.isPaused = !state.isPaused;
@@ -49,7 +55,13 @@ const focusSlice = createSlice({
   },
 });
 
-export const { editFocus, startFocus, toggleFocus, setCurrentTimer } =
-  focusSlice.actions;
+export const {
+  waitFocus,
+  editFocus,
+  startFocus,
+  finishFocus,
+  toggleFocus,
+  setCurrentTimer,
+} = focusSlice.actions;
 
 export default focusSlice.reducer;

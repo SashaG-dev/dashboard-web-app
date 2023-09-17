@@ -1,11 +1,15 @@
+import { useState } from 'react';
 import { BsPause, BsPlay } from 'react-icons/bs';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import { toggleFocus } from '../focusSlice';
+import { toggleFocus, finishFocus } from '../focusSlice';
+import Modal from '../../../components/Modal/Modal';
+import { focusModal } from '../../../hooks/focusModal';
 import { ButtonStyled, ButtonGroupStyled } from '../../../components/Button';
 import { countdown } from '../focusUtilities';
 import { FocusingStyled } from './styles';
 
 const Focusing = () => {
+  const [toggleModal, setToggleModal] = useState(false);
   const {
     currentTimer: { name, hours, minutes, seconds },
     isPaused,
@@ -13,10 +17,51 @@ const Focusing = () => {
 
   const dispatch = useAppDispatch();
 
+  const handleClick = () => {
+    if (time === '0:00') {
+      dispatch(finishFocus());
+    } else {
+      setToggleModal(true);
+    }
+  };
+
+  const onClick = () => dispatch(finishFocus());
+
+  const close = () => setToggleModal(false);
+
   const time = countdown({ hours, minutes, seconds });
+
+  const { modalRef } = focusModal({ toggleModal, setToggleModal, onClick });
+
+  const renderButton = () => {
+    if (isPaused) {
+      return (
+        <>
+          <BsPlay aria-hidden="true" />
+          Play
+        </>
+      );
+    }
+    return (
+      <>
+        <BsPause aria-hidden="true" />
+        Pause
+      </>
+    );
+  };
 
   return (
     <FocusingStyled>
+      {toggleModal && (
+        <Modal
+          role="alert"
+          heading="Are you sure you want to finish this session now?"
+          btnText="End session"
+          onClick={onClick}
+          close={close}
+          ref={modalRef}
+        />
+      )}
       <h2 className="focus-name text-light">{name || 'Unnamed Session'}</h2>
 
       <p className="time">{time}</p>
@@ -29,19 +74,15 @@ const Focusing = () => {
           onClick={() => dispatch(toggleFocus())}
           disabled={time === '0:00'}
         >
-          {isPaused ? (
-            <>
-              <BsPlay aria-hidden="true" />
-              Play
-            </>
-          ) : (
-            <>
-              <BsPause aria-hidden="true" />
-              Pause
-            </>
-          )}
+          {renderButton()}
         </ButtonStyled>
-        <ButtonStyled $type="accent">Done</ButtonStyled>
+        <ButtonStyled
+          $type="accent"
+          onClick={handleClick}
+          title="Finish this session"
+        >
+          Done
+        </ButtonStyled>
       </ButtonGroupStyled>
     </FocusingStyled>
   );

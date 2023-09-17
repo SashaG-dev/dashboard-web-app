@@ -115,6 +115,17 @@ main {
   }
 }
 
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--tertiary-opacity);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
 .text-light {
   color: var(--tertiary-light);
 }

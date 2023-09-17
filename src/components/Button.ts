@@ -56,6 +56,16 @@ const variations: StyledVariations = {
       background-color: var(--tertiary);
     }
   `,
+  underline: css`
+    font-size: 1.6rem;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--tertiary);
+      outline: none;
+      text-decoration: underline;
+    }
+  `,
 };
 
 export const ButtonStyled = styled.button<{ $type?: string }>`

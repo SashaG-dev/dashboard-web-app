@@ -1,11 +1,14 @@
 import { useState, ChangeEvent } from 'react';
-import { BsPlusLg } from 'react-icons/bs';
+import { BsPlusLg, BsArrowLeft } from 'react-icons/bs';
 import { useAppDispatch } from '../../../hooks/hooks';
-import { setCurrentTimer, startFocus, TimerType } from '../focusSlice';
-import Select from '../../../components/Select/Select';
+import {
+  setCurrentTimer,
+  startFocus,
+  waitFocus,
+  TimerType,
+} from '../focusSlice';
+import FocusOptions from '../FocusOptions';
 import { ButtonGroupStyled, ButtonStyled } from '../../../components/Button';
-import { LabelBottom } from '../../../components/Label';
-import { FOCUS_HOURS, FOCUS_MINUTES_SECONDS } from '../../../utils/constants';
 import { FocusEditingStyled } from './styles';
 
 const FocusEditing = () => {
@@ -32,65 +35,46 @@ const FocusEditing = () => {
   };
 
   return (
-    <FocusEditingStyled>
-      <h2 className="focus-display">
-        {focus.hours}:{focus.minutes.padStart(2, '0')}:
-        {focus.seconds.padStart(2, '0')}
-      </h2>
+    <div>
+      <ButtonStyled
+        onClick={() => dispatch(waitFocus())}
+        title="return to home"
+        $type="underline"
+      >
+        <BsArrowLeft aria-hidden="true" />
+        Go Back
+      </ButtonStyled>
 
-      <div className="edit-container">
-        <LabelBottom htmlFor="hours" label="hours">
-          <Select
-            options={FOCUS_HOURS}
-            id="hours"
-            name="hours"
-            title="set hours"
-            onChange={onChange}
-            value={focus.hours}
-          />
-        </LabelBottom>
-        <LabelBottom htmlFor="minutes" label="min">
-          <Select
-            options={FOCUS_MINUTES_SECONDS}
-            id="minutes"
-            name="minutes"
-            title="set minutes"
-            value={focus.minutes}
-            onChange={onChange}
-          />
-        </LabelBottom>
-        <LabelBottom htmlFor="seconds" label="sec">
-          <Select
-            options={FOCUS_MINUTES_SECONDS}
-            id="seconds"
-            name="seconds"
-            title="set seconds"
-            value={focus.seconds}
-            onChange={onChange}
-          />
-        </LabelBottom>
-      </div>
+      <FocusEditingStyled>
+        <h1 className="focus-name">{focus.name || 'Unnamed Session'}</h1>
+        <h2 className="focus-display">
+          {focus.hours}:{focus.minutes.padStart(2, '0')}:
+          {focus.seconds.padStart(2, '0')}
+        </h2>
 
-      <ButtonGroupStyled className="edit-buttons">
-        <ButtonStyled
-          $type="secondary"
-          title="Save this timer for later user"
-          aria-label="save this timer for later use"
-        >
-          <BsPlusLg aria-hidden="true" />
-          Save this timer
-        </ButtonStyled>
+        <FocusOptions focus={focus} onChange={onChange} />
 
-        <ButtonStyled
-          $type="accent"
-          title="Start timer"
-          aria-label="start timer"
-          onClick={startTimer}
-        >
-          Start now
-        </ButtonStyled>
-      </ButtonGroupStyled>
-    </FocusEditingStyled>
+        <ButtonGroupStyled className="edit-buttons">
+          <ButtonStyled
+            $type="secondary"
+            title="Save this timer for later user"
+            aria-label="save this timer for later use"
+          >
+            <BsPlusLg aria-hidden="true" />
+            Save this timer
+          </ButtonStyled>
+
+          <ButtonStyled
+            $type="accent"
+            title="Start timer"
+            aria-label="start timer"
+            onClick={startTimer}
+          >
+            Start now
+          </ButtonStyled>
+        </ButtonGroupStyled>
+      </FocusEditingStyled>
+    </div>
   );
 };
 export default FocusEditing;
