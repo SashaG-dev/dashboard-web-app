@@ -4,7 +4,6 @@ import { TaskListType } from '../types/TaskListType';
 export const allTasks: TaskListType[] = [
   {
     date: formatDate(new Date('September 8, 2023'), 'medium'),
-    title: 'Time with owner',
     complete: false,
     tasks: [
       {
@@ -21,7 +20,6 @@ export const allTasks: TaskListType[] = [
   },
   {
     date: formatDate(new Date('September 9, 2023'), 'medium'),
-    title: 'Park Day',
     complete: false,
     tasks: [
       {

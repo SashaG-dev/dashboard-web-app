@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { LabelBottom } from '../../components/Label';
 import Select from '../../components/Select/Select';
 import { FOCUS_HOURS, FOCUS_MINUTES_SECONDS } from '../../utils/constants';
-import { TimerType } from './focusSlice';
+import { TimerType } from '../../store/slices/focusSlice';
 
 type OptionsPropType = {
   focus: TimerType;

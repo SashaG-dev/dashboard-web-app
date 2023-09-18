@@ -2,7 +2,6 @@ import FocusHeader from '../FocusHeader';
 import FocusWaiting from '../FocusWaiting/FocusWaiting';
 import FocusEditing from '../FocusEditing/FocusEditing';
 import Focusing from '../Focusing/Focusing';
-import FocusFinish from '../FocusFinish/FocusFinish';
 import { useAppSelector } from '../../../hooks/hooks';
 import { FocusLayoutStyled } from './styles';
 
@@ -17,7 +16,6 @@ const FocusLayout = () => {
         {status === 'waiting' && <FocusWaiting />}
         {status === 'editing' && <FocusEditing />}
         {status === 'focusing' && <Focusing />}
-        {status === 'finishing' && <FocusFinish />}
       </section>
     </FocusLayoutStyled>
   );

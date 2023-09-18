@@ -3,7 +3,7 @@ import { BsFillPlusCircleFill, BsXLg, BsCheck2 } from 'react-icons/bs';
 import { TaskType } from '../../../types/TaskListType';
 import { ButtonGroupStyled, ButtonStyled } from '../../../components/Button';
 import { TextInputStyled } from '../../../components/Input';
-import { addTask } from '../tasksSlice';
+import { addTask } from '../../../store/slices/tasksSlice';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { MAX_TEXT_LENGTH } from '../../../utils/constants';
 import { AddTaskStyled } from './styles';

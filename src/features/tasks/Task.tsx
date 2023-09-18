@@ -6,7 +6,7 @@ import {
   BsCheck2,
 } from 'react-icons/bs';
 import { useAppDispatch } from '../../hooks/hooks';
-import { updateList, deleteTaskItem } from './tasksSlice';
+import { updateList, deleteTaskItem } from '../../store/slices/tasksSlice';
 import Checkbox from '../../components/Checkbox/Checkbox';
 import { ButtonGroupStyled } from '../../components/Button';
 import { ButtonStyled } from '../../components/Button';

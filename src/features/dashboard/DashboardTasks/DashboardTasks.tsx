@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Card from '../../../components/Card/Card';
 import { DashboardTasksStyled } from './styles';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { fetchWeek, unsubscribe } from '../../tasks/tasksSlice';
+import { fetchWeek, unsubscribe } from '../../../store/slices/tasksSlice';
 
 const DashboardTasks = () => {
   const dispatch = useAppDispatch();

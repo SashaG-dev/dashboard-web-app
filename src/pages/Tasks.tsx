@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { CardsContextProvider } from '../context/cardContext';
 import TasksLayout from '../features/tasks/TasksLayout/TasksLayout';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { fetchWeek, unsubscribe } from '../features/tasks/tasksSlice';
+import { fetchWeek, unsubscribe } from '../store/slices/tasksSlice';
 
 const Tasks = () => {
   const dispatch = useAppDispatch();
@@ -15,18 +14,8 @@ const Tasks = () => {
     };
   }, [dispatch]);
 
-  const { week, isLoading } = useAppSelector((state) => state.tasks);
+  const { isLoading } = useAppSelector((state) => state.tasks);
 
-  return (
-    <main>
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <CardsContextProvider week={week}>
-          <TasksLayout />
-        </CardsContextProvider>
-      )}
-    </main>
-  );
+  return <main>{isLoading ? <h1>Loading...</h1> : <TasksLayout />}</main>;
 };
 export default Tasks;

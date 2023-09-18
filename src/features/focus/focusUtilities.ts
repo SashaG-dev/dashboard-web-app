@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
 import { HOUR, MINUTE, SECOND } from '../../utils/constants';
-import { TimerType } from './focusSlice';
+import { TimerType } from '../../store/slices/focusSlice';
 
 const convertSeconds = (s: number) => {
   let hour = Math.floor(s / HOUR);
@@ -55,7 +55,9 @@ export const countdown = (data: Omit<TimerType, 'name'>) => {
     }, 1000);
 
     return () => {
-      clearInterval(timer.current!);
+      if (timer.current) {
+        clearInterval(timer.current);
+      }
       timer.current = null;
     };
   }, []);

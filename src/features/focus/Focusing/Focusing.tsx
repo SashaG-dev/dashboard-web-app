@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BsPause, BsPlay } from 'react-icons/bs';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import { toggleFocus, finishFocus } from '../focusSlice';
+import { toggleFocus, waitFocus } from '../../../store/slices/focusSlice';
 import Modal from '../../../components/Modal/Modal';
 import { focusModal } from '../../../hooks/focusModal';
 import { ButtonStyled, ButtonGroupStyled } from '../../../components/Button';
@@ -19,13 +19,13 @@ const Focusing = () => {
 
   const handleClick = () => {
     if (time === '0:00') {
-      dispatch(finishFocus());
+      dispatch(waitFocus());
     } else {
       setToggleModal(true);
     }
   };
 
-  const onClick = () => dispatch(finishFocus());
+  const onClick = () => dispatch(waitFocus());
 
   const close = () => setToggleModal(false);
 

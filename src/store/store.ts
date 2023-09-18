@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import menuReducer from '../features/menu/menuSlice';
-import tasksReducer from '../features/tasks/tasksSlice';
-import focusReducer from '../features/focus/focusSlice';
+import menuReducer from './slices/menuSlice';
+import tasksReducer from './slices/tasksSlice';
+import focusReducer from './slices/focusSlice';
 
 const store = configureStore({
   reducer: {

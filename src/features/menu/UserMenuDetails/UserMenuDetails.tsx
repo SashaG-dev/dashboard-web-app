@@ -1,7 +1,7 @@
 import { KeyboardEvent } from 'react';
 import { BsChevronLeft } from 'react-icons/bs';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import { toggleMenu } from '../menuSlice';
+import { toggleMenu } from '../../../store/slices/menuSlice';
 import { UserMenuDetailsStyled } from './styles';
 import { UserDataType } from '../../../types/UserDataType';
 

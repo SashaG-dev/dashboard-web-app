@@ -6,7 +6,7 @@ import { ButtonStyled } from '../../../components/Button';
 import Checkbox from '../../../components/Checkbox/Checkbox';
 import { TaskListType } from '../../../types/TaskListType';
 import { useAppDispatch } from '../../../hooks/hooks';
-import { completeTaskList } from '../tasksSlice';
+import { completeTaskList } from '../../../store/slices/tasksSlice';
 import { TaskListCardStyled } from './styles';
 
 type TaskCardPropsType = {

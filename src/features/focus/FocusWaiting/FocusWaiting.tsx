@@ -3,12 +3,11 @@ import { BsPlusLg } from 'react-icons/bs';
 import SavedSession from '../SavedSession/SavedSession';
 import { ButtonStyled } from '../../../components/Button';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
-import { editFocus, startFocus, setCurrentTimer } from '../focusSlice';
-import { savedFocus } from '../../../data/focusSaved';
+import * as focusSlice from '../../../store/slices/focusSlice';
 import { FocusWaitingStyled } from './styles';
 
 const FocusWaiting = () => {
-  const { currentTimer } = useAppSelector((state) => state.focus);
+  const { currentTimer, saved } = useAppSelector((state) => state.focus);
 
   const dispatch = useAppDispatch();
 
@@ -22,7 +21,7 @@ const FocusWaiting = () => {
     const { key } = e as KeyboardEvent;
     const { type } = e as MouseEvent;
     if (key === 'Enter' || type === 'click') {
-      dispatch(setCurrentTimer({ hours, minutes, seconds, name }));
+      dispatch(focusSlice.setCurrentTimer({ hours, minutes, seconds, name }));
     }
   };
 
@@ -40,8 +39,8 @@ const FocusWaiting = () => {
         <h2 className="sessions-heading">Your saved sessions</h2>
 
         <div className="sessions-list" role="listbox">
-          {savedFocus.length ? (
-            savedFocus.map((saved) => {
+          {saved.length ? (
+            saved.map((saved) => {
               const { name, hours, minutes, seconds, id } = saved;
               return (
                 <SavedSession
@@ -60,7 +59,7 @@ const FocusWaiting = () => {
           className="session-button"
           $type="secondary"
           title="Create a new session"
-          onClick={() => dispatch(editFocus())}
+          onClick={() => dispatch(focusSlice.editFocus())}
         >
           <BsPlusLg aria-hidden="true" />
           Create New Session
@@ -70,7 +69,7 @@ const FocusWaiting = () => {
           <ButtonStyled
             $type="accent"
             title="Start timer"
-            onClick={() => dispatch(startFocus())}
+            onClick={() => dispatch(focusSlice.startFocus())}
           >
             Start now
           </ButtonStyled>

@@ -1,18 +1,13 @@
 import { useState, ChangeEvent } from 'react';
 import { BsPlusLg, BsArrowLeft } from 'react-icons/bs';
 import { useAppDispatch } from '../../../hooks/hooks';
-import {
-  setCurrentTimer,
-  startFocus,
-  waitFocus,
-  TimerType,
-} from '../focusSlice';
+import * as focusSlice from '../../../store/slices/focusSlice';
 import FocusOptions from '../FocusOptions';
 import { ButtonGroupStyled, ButtonStyled } from '../../../components/Button';
 import { FocusEditingStyled } from './styles';
 
 const FocusEditing = () => {
-  const [focus, setFocus] = useState<TimerType>({
+  const [focus, setFocus] = useState<focusSlice.TimerType>({
     hours: '0',
     minutes: '0',
     seconds: '0',
@@ -29,15 +24,15 @@ const FocusEditing = () => {
   const startTimer = () => {
     const { hours, minutes, seconds } = focus;
     if (hours + minutes + seconds !== '000') {
-      dispatch(setCurrentTimer({ ...focus }));
-      dispatch(startFocus());
+      dispatch(focusSlice.setCurrentTimer({ ...focus }));
+      dispatch(focusSlice.startFocus());
     }
   };
 
   return (
     <div>
       <ButtonStyled
-        onClick={() => dispatch(waitFocus())}
+        onClick={() => dispatch(focusSlice.waitFocus())}
         title="return to home"
         $type="underline"
       >

@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, Unsubscribe } from 'firebase/firestore';
 import { TaskListType, TaskType } from '../../types/TaskListType';
 import { tasksRef, updateTasks, updateTaskList } from '../../api/apiTasks';
-import { getWeek } from './taskUtilities';
-import { RootState } from '../../store/store';
+import { getWeek } from '../../features/tasks/taskUtilities';
+import { RootState } from '../store';
 
 type TasksInitialState = {
   week: TaskListType[] | [];
   isLoading: boolean;
-  unsubscribe: null | (() => void);
+  unsubscribe: null | Unsubscribe;
 };
 
 const initialState: TasksInitialState = {
@@ -19,7 +19,7 @@ const initialState: TasksInitialState = {
 
 export const fetchWeek = createAsyncThunk(
   'tasks/fetchWeek',
-  async (_, { dispatch }) => {
+  async (_, { getState, dispatch }) => {
     try {
       const unsubscribe = onSnapshot(tasksRef, async (doc) => {
         const data = doc.data();
@@ -27,6 +27,7 @@ export const fetchWeek = createAsyncThunk(
           const userWeek = await getWeek(data);
           dispatch(tasksSlice.actions.setWeek(userWeek));
         }
+        // (getState() as RootState).tasks.unsubscribe = unsubscribe;
       });
     } catch (err) {
       console.error(err);
