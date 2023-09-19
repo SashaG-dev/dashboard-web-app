@@ -5,20 +5,18 @@ import { toggleFocus, waitFocus } from '../../../store/slices/focusSlice';
 import Modal from '../../../components/Modal/Modal';
 import { focusModal } from '../../../hooks/focusModal';
 import { ButtonStyled, ButtonGroupStyled } from '../../../components/Button';
-import { countdown } from '../focusUtilities';
 import { FocusingStyled } from './styles';
 
 const Focusing = () => {
   const [toggleModal, setToggleModal] = useState(false);
-  const {
-    currentTimer: { name, hours, minutes, seconds },
-    isPaused,
-  } = useAppSelector((state) => state.focus);
+  const { currentTimer, isPaused, timeLeft } = useAppSelector(
+    (state) => state.focus
+  );
 
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    if (time === '0:00') {
+    if (timeLeft === '0:00') {
       dispatch(waitFocus());
     } else {
       setToggleModal(true);
@@ -26,10 +24,7 @@ const Focusing = () => {
   };
 
   const onClick = () => dispatch(waitFocus());
-
   const close = () => setToggleModal(false);
-
-  const time = countdown({ hours, minutes, seconds });
 
   const { modalRef } = focusModal({ toggleModal, setToggleModal, onClick });
 
@@ -62,17 +57,21 @@ const Focusing = () => {
           ref={modalRef}
         />
       )}
-      <h2 className="focus-name text-light">{name || 'Unnamed Session'}</h2>
+      <h2 className="focus-name text-light">
+        {currentTimer.name || 'Unnamed Session'}
+      </h2>
 
-      <p className="time">{time}</p>
+      <p className="time">{timeLeft}</p>
 
       <ButtonGroupStyled className="btn-group">
         <ButtonStyled
           $type="secondary"
           title={isPaused ? 'Continue session' : 'Pause session'}
           className={isPaused ? 'play' : 'pause'}
-          onClick={() => dispatch(toggleFocus())}
-          disabled={time === '0:00'}
+          onClick={() =>
+            dispatch(toggleFocus({ boolean: isPaused ? false : true }))
+          }
+          disabled={timeLeft === '0:00'}
         >
           {renderButton()}
         </ButtonStyled>

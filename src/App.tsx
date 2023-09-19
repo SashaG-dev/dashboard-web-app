@@ -10,6 +10,7 @@ import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
 import Focus from './pages/Focus.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
+import Timer from './features/focus/Timer.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -61,6 +62,7 @@ function App() {
   return (
     <>
       <GlobalStyles $navOpen={isOpen} />
+      <Timer />
       <RouterProvider router={router} />
     </>
   );

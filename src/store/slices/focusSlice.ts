@@ -12,6 +12,7 @@ type FocusStateType = {
   currentTimer: TimerType;
   isPaused: boolean;
   isLoading: boolean;
+  timeLeft: string;
   unsubscribe: null | Unsubscribe;
 };
 
@@ -26,6 +27,7 @@ const initialState: FocusStateType = {
   },
   isPaused: false,
   isLoading: true,
+  timeLeft: '',
   unsubscribe: null,
 };
 
@@ -66,6 +68,7 @@ const focusSlice = createSlice({
     },
     waitFocus: (state) => {
       state.status = 'waiting';
+      state.currentTimer.name = '';
       state.isPaused = false;
     },
     editFocus: (state) => {
@@ -74,11 +77,16 @@ const focusSlice = createSlice({
     startFocus: (state) => {
       state.status = 'focusing';
     },
-    toggleFocus: (state) => {
-      state.isPaused = !state.isPaused;
+    toggleFocus: (state, action) => {
+      const boolean = action.payload.boolean;
+      state.isPaused = boolean;
     },
     setCurrentTimer: (state, action) => {
       state.currentTimer = { ...action.payload };
+    },
+    setTimeLeft: (state, action) => {
+      const timeLeft = action.payload.timeLeft;
+      state.timeLeft = timeLeft;
     },
   },
   extraReducers: (builder) => {
@@ -101,6 +109,7 @@ export const {
   startFocus,
   toggleFocus,
   setCurrentTimer,
+  setTimeLeft,
 } = focusSlice.actions;
 
 export default focusSlice.reducer;

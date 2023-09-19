@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
+import { useAppSelector } from '../../hooks/hooks';
 import { HOUR, MINUTE, SECOND } from '../../utils/constants';
-import { TimerType } from '../../store/slices/focusSlice';
 
 const convertSeconds = (s: number) => {
   let hour = Math.floor(s / HOUR);
@@ -19,9 +19,13 @@ const convertSeconds = (s: number) => {
   );
 };
 
-export const countdown = (data: Omit<TimerType, 'name'>) => {
+export const countdown = () => {
+  const { currentTimer, status } = useAppSelector((state) => state.focus);
+
   let timeLeft =
-    +data.hours * HOUR + +data.minutes * MINUTE + +data.seconds * SECOND;
+    +currentTimer.hours * HOUR +
+    +currentTimer.minutes * MINUTE +
+    +currentTimer.seconds * SECOND;
 
   const timer = useRef<NodeJS.Timeout | null>(null);
 
@@ -50,9 +54,15 @@ export const countdown = (data: Omit<TimerType, 'name'>) => {
   };
 
   useEffect(() => {
-    timer.current = setInterval(() => {
-      setNewTime((prev) => prev - 1);
-    }, 1000);
+    setNewTime(timeLeft);
+  }, [currentTimer]);
+
+  useEffect(() => {
+    if (status === 'focusing') {
+      timer.current = setInterval(() => {
+        setNewTime((prev) => prev - 1);
+      }, 1000);
+    }
 
     return () => {
       if (timer.current) {
@@ -60,7 +70,7 @@ export const countdown = (data: Omit<TimerType, 'name'>) => {
       }
       timer.current = null;
     };
-  }, []);
+  }, [status]);
 
   useEffect(() => {
     const playBtn = document.querySelector('.play') as HTMLButtonElement;
@@ -93,5 +103,7 @@ export const countdown = (data: Omit<TimerType, 'name'>) => {
     }
   }, [newTime]);
 
-  return convertSeconds(newTime);
+  const displayedTime = convertSeconds(newTime);
+
+  return { displayedTime };
 };
