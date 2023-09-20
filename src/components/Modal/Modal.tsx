@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { ButtonGroupStyled, ButtonStyled } from '../Button';
 import { ModalStyled } from './styles';
 
@@ -9,20 +9,22 @@ type ModalPropsType = {
   btnText: string;
   onClick: () => void;
   close: () => void;
+  children?: ReactNode | undefined;
 };
 
-const Modal = forwardRef(function Modal(props: ModalPropsType, ref: any) {
-  const { role, heading, subheading, btnText, onClick, close } = props;
+const Modal = forwardRef(function Modal(props: ModalPropsType, ref?: any) {
+  const { role, heading, subheading, btnText, onClick, close, children } =
+    props;
 
   return (
     <>
       <div className="overlay"></div>
-      <ModalStyled role={role} ref={ref}>
+      <ModalStyled role={role} ref={ref ? ref : undefined}>
         <div className="modal-headings">
           <h1 className="modal-heading">{heading}</h1>
           {subheading && <p className="modal-subheading">{subheading}</p>}
         </div>
-
+        {children}
         <ButtonGroupStyled className="modal-btns">
           <ButtonStyled
             title={btnText}

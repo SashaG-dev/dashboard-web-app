@@ -30,6 +30,7 @@ export const FocusWaitingStyled = styled.div`
       display: flex;
       flex-direction: column;
       gap: 1.6rem;
+      margin-bottom: 2.4rem;
     }
 
     @media ${mediaQueries.phonePortrait} {
@@ -41,6 +42,12 @@ export const FocusWaitingStyled = styled.div`
       @media ${mediaQueries.phonePortrait} {
         font-size: 1.6rem;
       }
+    }
+
+    .session {
+      display: flex;
+      justify-content: space-between;
+      gap: 2.4rem;
     }
   }
 

@@ -2,6 +2,7 @@ import {
   useEffect,
   useRef,
   KeyboardEvent,
+  MouseEvent,
   Dispatch,
   SetStateAction,
 } from 'react';
@@ -37,16 +38,24 @@ export const focusModal = ({ toggleModal, setToggleModal, onClick }: Props) => {
         }
       };
 
-      const handleKeyEvents = (e: KeyboardEvent<HTMLButtonElement>) => {
-        const target = e.target as HTMLButtonElement;
+      const handleKeyEvents = (
+        e: KeyboardEvent<HTMLElement> | MouseEvent<HTMLElement>
+      ) => {
+        const buttonTarget = e.target as HTMLButtonElement;
+        const keyboardEvent = e as KeyboardEvent;
+
         if (
-          e.key === 'Escape' ||
-          (target.classList.contains('modal-close') && e.key === 'Enter')
+          keyboardEvent.key === 'Escape' ||
+          (buttonTarget.classList.contains('modal-close') &&
+            keyboardEvent.key === 'Enter')
         ) {
           setToggleModal(false);
         }
 
-        if (target.classList.contains('modal-dispatch') && e.key === 'Enter') {
+        if (
+          buttonTarget.classList.contains('modal-dispatch') &&
+          keyboardEvent.key === 'Enter'
+        ) {
           onClick();
         }
       };

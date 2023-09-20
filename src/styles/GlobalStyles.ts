@@ -130,6 +130,10 @@ main {
   color: var(--tertiary-light);
 }
 
+.text-red {
+  color: var(--error);
+}
+
 .text-center {
   text-align: center;
 }

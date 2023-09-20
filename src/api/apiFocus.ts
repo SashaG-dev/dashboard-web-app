@@ -1,21 +1,29 @@
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './firebase';
 import { SavedFocusType } from '../types/SavedFocusType';
 
 export const focusRef = doc(db, 'account-1', 'focus');
 
 export const createSession = async (data: SavedFocusType) => {
-  await setDoc(
-    focusRef,
-    {
-      saved: {
-        id: data.id,
-        name: data.name || 'Unnamed Session',
-        hours: data.hours,
-        minutes: data.minutes,
-        seconds: data.seconds,
-      },
-    },
-    { merge: true }
-  );
+  try {
+    const newSession = {
+      id: data.id,
+      name: data.name || 'Unnamed Session',
+      hours: data.hours,
+      minutes: data.minutes.padStart(2, '0'),
+      seconds: data.seconds.padStart(2, '0'),
+    };
+
+    await setDoc(focusRef, { saved: arrayUnion(newSession) }, { merge: true });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const updateSaved = async (data: SavedFocusType[]) => {
+  try {
+    await setDoc(focusRef, { saved: data });
+  } catch (err) {
+    console.error(err);
+  }
 };

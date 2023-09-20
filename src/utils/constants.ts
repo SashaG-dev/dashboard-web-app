@@ -1,4 +1,6 @@
-export const MAX_TEXT_LENGTH: number = 75;
+export const MAX_TEXT_LENGTH = 75;
+export const MAX_TITLE_LENGTH = 15;
+
 export const HOUR = 1 * 60 * 60;
 export const MINUTE = 1 * 60;
 export const SECOND = 1;

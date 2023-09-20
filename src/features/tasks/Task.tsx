@@ -22,14 +22,9 @@ type TaskPropType = {
   complete: boolean;
 };
 
-export const Task = ({
-  date,
-  id,
-  main,
-  status,
-  editMode,
-  complete,
-}: TaskPropType) => {
+export const Task = (props: TaskPropType) => {
+  const { id, date, main, status, editMode, complete } = props;
+
   const [isEditing, setIsEditing] = useState(false);
   const [task, setTask] = useState(main);
 

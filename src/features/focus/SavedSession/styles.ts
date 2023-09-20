@@ -29,8 +29,4 @@ export const SavedSessionStyled = styled.div`
       color: var(--primary);
     }
   }
-
-  &:last-of-type {
-    margin-bottom: 1.6rem;
-  }
 `;

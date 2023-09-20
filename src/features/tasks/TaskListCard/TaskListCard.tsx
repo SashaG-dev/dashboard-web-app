@@ -81,7 +81,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
             title={complete ? 'Undo' : "Finish today's tasks"}
             onChange={() => handleChange()}
             checked={complete}
-            disabled={editMode}
+            disabled={editMode || !tasks || !tasks?.length}
           >
             Finish Today
           </Checkbox>

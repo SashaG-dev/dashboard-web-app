@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { onSnapshot, Unsubscribe } from 'firebase/firestore';
-import { focusRef } from '../../api/apiFocus';
+import { focusRef, createSession, updateSaved } from '../../api/apiFocus';
 import { SavedFocusType } from '../../types/SavedFocusType';
 import { RootState } from '../store';
 
@@ -88,6 +88,14 @@ const focusSlice = createSlice({
       const timeLeft = action.payload.timeLeft;
       state.timeLeft = timeLeft;
     },
+    addNewFocus: (_, action) => {
+      const newSession = action.payload.data;
+      createSession(newSession);
+    },
+    updateSavedFocus: (_, action) => {
+      const newSaved = action.payload.newSaved;
+      updateSaved(newSaved);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -110,6 +118,8 @@ export const {
   toggleFocus,
   setCurrentTimer,
   setTimeLeft,
+  addNewFocus,
+  updateSavedFocus,
 } = focusSlice.actions;
 
 export default focusSlice.reducer;

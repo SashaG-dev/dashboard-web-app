@@ -12,7 +12,7 @@ const FocusWaiting = () => {
   const dispatch = useAppDispatch();
 
   const handleClick = (
-    e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>,
+    e: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
     hours: string,
     minutes: string,
     seconds: string,
@@ -23,6 +23,11 @@ const FocusWaiting = () => {
     if (key === 'Enter' || type === 'click') {
       dispatch(focusSlice.setCurrentTimer({ hours, minutes, seconds, name }));
     }
+  };
+
+  const deleteSession = (id: string) => {
+    const newSaved = saved.filter((save) => save.id !== id);
+    dispatch(focusSlice.updateSavedFocus({ newSaved }));
   };
 
   return (
@@ -43,11 +48,15 @@ const FocusWaiting = () => {
             saved.map((saved) => {
               const { name, hours, minutes, seconds, id } = saved;
               return (
-                <SavedSession
-                  key={id}
-                  {...saved}
-                  onClick={(e) => handleClick(e, hours, minutes, seconds, name)}
-                />
+                <div className="session" key={id}>
+                  <SavedSession
+                    {...saved}
+                    onClick={(e) =>
+                      handleClick(e, hours, minutes, seconds, name)
+                    }
+                    deleteSession={() => deleteSession(id)}
+                  />
+                </div>
               );
             })
           ) : (
