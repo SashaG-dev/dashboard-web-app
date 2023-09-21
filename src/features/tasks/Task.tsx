@@ -12,6 +12,7 @@ import { ButtonGroupStyled } from '../../components/Button';
 import { ButtonStyled } from '../../components/Button';
 import { TextInputStyled } from '../../components/Input';
 import { MAX_TEXT_LENGTH } from '../../utils/constants';
+import { errorToast } from '../../utils/toasts';
 
 type TaskPropType = {
   date: string;
@@ -45,7 +46,11 @@ export const Task = (props: TaskPropType) => {
   };
 
   const handleUpdate = () => {
-    if (task.trim() !== '' && task.length <= MAX_TEXT_LENGTH) {
+    if (task.trim() === '') {
+      errorToast('Please enter valid text before saving.');
+    } else if (task.length > MAX_TEXT_LENGTH) {
+      errorToast('Task text length is too long.');
+    } else {
       dispatch(updateList({ date, id, main: task.trim() }));
       setIsEditing(false);
     }

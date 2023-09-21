@@ -5,16 +5,16 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles.ts';
+import AppLayout from './components/AppLayout.tsx';
 import UserMenu from './features/menu/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
 import Focus from './pages/Focus.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
-import Timer from './features/focus/Timer.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/">
+    <Route path="/" element={<AppLayout />}>
       <Route element={<UserMenu />}>
         <Route index element={<Home />} />
         <Route path="my-tasks" element={<Tasks />} />
@@ -62,7 +62,6 @@ function App() {
   return (
     <>
       <GlobalStyles $navOpen={isOpen} />
-      <Timer />
       <RouterProvider router={router} />
     </>
   );

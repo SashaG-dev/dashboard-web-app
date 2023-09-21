@@ -115,6 +115,11 @@ main {
   }
 }
 
+.toast {
+  color: var(--tertiary);
+  background-color: var(--secondary);
+}
+
 .overlay {
   position: absolute;
   top: 0;

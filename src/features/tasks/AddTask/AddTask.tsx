@@ -6,6 +6,7 @@ import { TextInputStyled } from '../../../components/Input';
 import { addTask } from '../../../store/slices/tasksSlice';
 import { useAppDispatch } from '../../../hooks/hooks';
 import { MAX_TEXT_LENGTH } from '../../../utils/constants';
+import { errorToast } from '../../../utils/toasts';
 import { AddTaskStyled } from './styles';
 
 type Props = {
@@ -34,7 +35,10 @@ const AddTask = ({ date }: Props) => {
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (task.main && task.main.trim().length <= MAX_TEXT_LENGTH) {
+    if (!task.main) errorToast('Please enter valid text before saving.');
+    else if (task.main.trim().length > MAX_TEXT_LENGTH) {
+      errorToast('Task text length is too long.');
+    } else {
       setToggleAddTask(false);
       dispatch(addTask({ date, task }));
       setTask((prev) => ({ ...prev, id: '', main: '' }));

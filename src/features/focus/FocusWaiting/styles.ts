@@ -48,6 +48,10 @@ export const FocusWaitingStyled = styled.div`
       display: flex;
       justify-content: space-between;
       gap: 2.4rem;
+
+      @media ${mediaQueries.phoneSmall} {
+        gap: 1.6rem;
+      }
     }
   }
 

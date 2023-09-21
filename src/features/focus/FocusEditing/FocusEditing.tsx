@@ -7,6 +7,7 @@ import SaveFocusModal from '../SaveFocusModal/SaveFocusModal';
 import { ButtonGroupStyled, ButtonStyled } from '../../../components/Button';
 import { MAX_TITLE_LENGTH } from '../../../utils/constants';
 import { SavedFocusType } from '../../../types/SavedFocusType';
+import { errorToast } from '../../../utils/toasts';
 import { FocusEditingStyled } from './styles';
 
 const FocusEditing = () => {
@@ -40,13 +41,15 @@ const FocusEditing = () => {
     if (hours + minutes + seconds !== '000') {
       dispatch(focusSlice.setCurrentTimer({ ...focus }));
       dispatch(focusSlice.startFocus());
-    }
+    } else errorToast('Please enter a valid time!');
   };
 
   const onClick = () => {
     const focusString = focus.hours + focus.minutes + focus.seconds;
-    if (focus.name.length > MAX_TITLE_LENGTH) return;
-    else if (focusString === '000') return;
+    if (focus.name.length > MAX_TITLE_LENGTH)
+      return errorToast('Please use a shorter name.');
+    else if (focusString === '000')
+      return errorToast('Saved timers must be more than 0:00');
     else {
       dispatch(focusSlice.addNewFocus({ data: focus }));
       setToggleModal(false);

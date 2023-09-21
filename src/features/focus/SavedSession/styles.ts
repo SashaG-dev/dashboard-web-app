@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const SavedSessionStyled = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ export const SavedSessionStyled = styled.div`
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: var(--transition-all);
+
+  @media ${mediaQueries.phoneSmall} {
+    width: 22rem;
+  }
 
   &:focus-visible,
   &:hover {
