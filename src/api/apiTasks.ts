@@ -1,18 +1,8 @@
-import { doc, getDoc, setDoc, arrayUnion } from 'firebase/firestore';
+import { doc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './firebase';
 import { TaskType } from '../types/TaskListType';
 
 export const tasksRef = doc(db, 'account-1', 'tasks');
-
-export const getTasks = async () => {
-  try {
-    const tasksSnap = await getDoc(tasksRef);
-    const data = tasksSnap.data();
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 export const updateTasks = async (
   date: string,

@@ -1,4 +1,4 @@
-import FocusHeader from '../FocusHeader';
+import Header from '../../../components/Header/Header';
 import FocusWaiting from '../FocusWaiting/FocusWaiting';
 import FocusEditing from '../FocusEditing/FocusEditing';
 import Focusing from '../Focusing/Focusing';
@@ -10,7 +10,7 @@ const FocusLayout = () => {
 
   return (
     <FocusLayoutStyled>
-      <FocusHeader />
+      <Header heading="Focus" name="focus" />
 
       <section className="focus-main">
         {status === 'waiting' && <FocusWaiting />}

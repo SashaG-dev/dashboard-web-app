@@ -9,6 +9,7 @@ import AppLayout from './components/AppLayout.tsx';
 import UserMenu from './features/menu/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
+import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 
@@ -18,14 +19,7 @@ const router = createBrowserRouter(
       <Route element={<UserMenu />}>
         <Route index element={<Home />} />
         <Route path="my-tasks" element={<Tasks />} />
-        <Route
-          path="notebook"
-          element={
-            <main>
-              <h1>Notebook</h1>
-            </main>
-          }
-        />
+        <Route path="notebook" element={<Notebook />} />
         <Route path="focus" element={<Focus />} />
         <Route
           path="stats"

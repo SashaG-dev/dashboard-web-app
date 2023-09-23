@@ -15,14 +15,30 @@ const variations: StyledVariations = {
       border: 2px solid currentColor;
     }
   `,
+  iconLarge: css`
+    color: var(--accent);
+    font-size: 4.8rem;
+    border-radius: var(--radius-round);
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 5px;
+    }
+  `,
   iconSmall: css`
     font-size: 2rem;
+    border-radius: var(--radius-round);
 
     &:hover,
     &:focus-visible,
     &:active {
       outline: none;
       transform: scale(1.1);
+    }
+
+    &:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 7px;
     }
   `,
   secondary: css`

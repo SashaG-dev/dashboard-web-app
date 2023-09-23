@@ -1,13 +1,15 @@
 import CardsContainer from '../CardsContainer';
 import { getFullWeek } from '../../../utils/helpers';
+import Header from '../../../components/Header/Header';
 import { TasksLayoutStyled } from './styles';
 
 const TasksLayout = () => {
   return (
     <TasksLayoutStyled>
       <div className="tasks-layout--headings">
-        <h1 className="tasks-heading">This Week's Tasks</h1>
-        <p>{getFullWeek()}</p>
+        <Header heading="This Week's Tasks" name="tasks" displayTime={false}>
+          <p>{getFullWeek()}</p>
+        </Header>
       </div>
       <CardsContainer />
     </TasksLayoutStyled>

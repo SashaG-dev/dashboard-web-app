@@ -1,4 +1,4 @@
-import DashboardHeader from '../DashboardHeader/DashboardHeader';
+import DashboardHeader from '../DashboardHeader';
 import DashboardTasks from '../DashboardTasks/DashboardTasks';
 import { DashboardLayoutStyled } from './styles';
 

@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import { mediaQueries } from '../../../styles/mediaQueries';
+import { mediaQueries } from '../../styles/mediaQueries';
 
-export const DashboardHeaderStyled = styled.header`
+export const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--tertiary-opacity);
