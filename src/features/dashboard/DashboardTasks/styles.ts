@@ -41,7 +41,8 @@ export const DashboardTasksStyled = styled.div`
         }
       }
 
-      &:hover {
+      &:hover,
+      &.focus {
         z-index: 2;
         transform: translateY(-5px) scale(1.02);
 

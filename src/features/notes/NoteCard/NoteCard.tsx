@@ -1,31 +1,30 @@
-import { BsPencilFill } from 'react-icons/bs';
-import { ButtonStyled } from '../../../components/Button';
+import { useState, Dispatch, SetStateAction } from 'react';
+import { NoteType } from '../../../types/NoteType';
+import { NoteProvider } from '../../../context/noteContext';
+import NoteCardSave from '../NoteCardSave';
+import NoteCardEdit from '../NoteCardEdit';
 import { NoteCardStyled } from './styles';
 
-type NoteCardProps = {
-  heading: string;
-  main: string;
-  id: string;
+export type NoteCardProps = {
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
 };
 
-const NoteCard = (props: NoteCardProps) => {
-  return (
-    <NoteCardStyled>
-      <div className="note-headings">
-        <h2 className="note-heading">{props.heading}</h2>
-        <ButtonStyled
-          title="Edit note"
-          aria-label="edit note"
-          $type="iconSmall"
-        >
-          <BsPencilFill aria-hidden="true" />
-        </ButtonStyled>
-      </div>
+const NoteCard = (props: NoteType) => {
+  const { id, date, heading, main } = props;
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
-      <div className="note-main">
-        <p className="text-light">{props.main}</p>
-      </div>
-    </NoteCardStyled>
+  const data = { id, date, heading, main };
+
+  return (
+    <NoteProvider {...data}>
+      <NoteCardStyled>
+        {isEditing ? (
+          <NoteCardEdit {...props} setIsEditing={setIsEditing} />
+        ) : (
+          <NoteCardSave {...props} setIsEditing={setIsEditing} />
+        )}
+      </NoteCardStyled>
+    </NoteProvider>
   );
 };
 export default NoteCard;

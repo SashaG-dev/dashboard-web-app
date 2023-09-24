@@ -24,6 +24,10 @@ const variations: StyledVariations = {
       outline: 2px solid currentColor;
       outline-offset: 5px;
     }
+
+    &:disabled {
+      color: var(--secondary);
+    }
   `,
   iconSmall: css`
     font-size: 2rem;

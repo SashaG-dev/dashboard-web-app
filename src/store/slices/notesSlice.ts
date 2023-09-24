@@ -6,11 +6,15 @@ import { notesRef } from '../../api/apiNotes';
 type NotesInitialState = {
   recentNotes: [] | NoteType[];
   isLoading: boolean;
+  newNote: NoteType | {};
+  hasCurrent: boolean;
 };
 
 const initialState: NotesInitialState = {
   recentNotes: [],
   isLoading: true,
+  newNote: {},
+  hasCurrent: false,
 };
 
 export const fetchRecentNotes = createAsyncThunk(

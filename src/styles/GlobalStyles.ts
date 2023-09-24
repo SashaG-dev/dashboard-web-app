@@ -103,7 +103,6 @@ main {
   }});
   padding: .8rem 2.4rem;
   transition: margin-left .3s;
-  position: relative;
 
   @media ${mediaQueries.tabPortrait} {
     margin-left: 0;
@@ -121,7 +120,7 @@ main {
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;

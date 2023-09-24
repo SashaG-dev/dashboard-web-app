@@ -3,6 +3,7 @@ interface Queries {
 }
 
 export const mediaQueries: Queries = {
+  desktop: '(min-width: 97.5em)', // ~1560px
   laptop: '(min-width: 81.25em)', // ~1300px
   tabLandscape: '(max-width: 69.1em)', // ~1100px
   tabPortrait: '(max-width: 59.2em)', // ~950px
