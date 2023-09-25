@@ -1,20 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { onSnapshot } from 'firebase/firestore';
 import { NoteType } from '../../types/NoteType';
-import { notesRef } from '../../api/apiNotes';
+import { notesRef, updateNote, deleteNote } from '../../api/apiNotes';
 
 type NotesInitialState = {
   recentNotes: [] | NoteType[];
   isLoading: boolean;
-  newNote: NoteType | {};
+  currentNote: NoteType;
   hasCurrent: boolean;
+  addNote: boolean;
 };
 
 const initialState: NotesInitialState = {
   recentNotes: [],
   isLoading: true,
-  newNote: {},
+  currentNote: { id: '', heading: '', main: '', date: '' },
   hasCurrent: false,
+  addNote: false,
 };
 
 export const fetchRecentNotes = createAsyncThunk(
@@ -40,6 +42,20 @@ const notesSlice = createSlice({
     setRecentNotes: (state, action) => {
       const notes = Object.values(action.payload).slice(0, 5) as NoteType[];
       state.recentNotes = notes;
+      state.currentNote = notes[0];
+    },
+    toggleAddNote: (state, action) => {
+      const { toggle } = action?.payload;
+      if (toggle === 'false') state.addNote = false;
+      else state.addNote = !state.addNote;
+    },
+    deleteUserNote: (_, action) => {
+      const { date } = action.payload;
+      deleteNote(date);
+    },
+    updateUserNote: (_, action) => {
+      const { data } = action.payload;
+      updateNote(data);
     },
   },
   extraReducers: (builder) => {
@@ -52,5 +68,8 @@ const notesSlice = createSlice({
       });
   },
 });
+
+export const { updateUserNote, toggleAddNote, deleteUserNote } =
+  notesSlice.actions;
 
 export default notesSlice.reducer;

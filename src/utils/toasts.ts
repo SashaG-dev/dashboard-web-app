@@ -12,3 +12,9 @@ export const iconToast = (text: string, icon: string) => {
     className: 'toast',
   });
 };
+
+export const successToast = (text: string) => {
+  return toast.success(text, {
+    className: 'toast',
+  });
+};

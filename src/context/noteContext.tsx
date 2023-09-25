@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, ReactElement } from 'react';
+import { createContext, useContext, ReactElement } from 'react';
 import { NoteType } from '../types/NoteType';
 
 type NoteStateType = NoteType;
@@ -10,22 +10,9 @@ const initialState: NoteStateType = {
   main: '',
 };
 
-type ReducerActionType = {
-  type: 'SET_NOTE';
-  payload?: {
-    data: string;
-  };
-};
-
-const reducer = (state: NoteStateType, action: ReducerActionType) => {
-  return state;
-};
-
-const useNoteContext = (initialState: NoteStateType) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  return { state };
-};
+const useNoteContext = (initialState: NoteStateType) => ({
+  state: initialState,
+});
 
 type UseNoteContextType = ReturnType<typeof useNoteContext>;
 

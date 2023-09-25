@@ -41,9 +41,22 @@ export const NoteCardStyled = styled.div`
   .note-main {
     p {
       line-height: 1.2;
+      overflow-wrap: break-word;
+      inline-size: 100%;
 
       @media ${mediaQueries.phoneSmall} {
         font-size: 1.6rem;
+      }
+    }
+
+    .note-more {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.2rem 0.4rem;
+
+      small.red {
+        color: var(--error);
       }
     }
   }

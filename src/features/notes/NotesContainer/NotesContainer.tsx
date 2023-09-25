@@ -5,6 +5,13 @@ import { NotesContainerStyled } from './styles';
 const NotesContainer = ({ addNote }: { addNote: boolean }) => {
   const { recentNotes } = useAppSelector((state) => state.notes);
 
+  const displayNotes = () => {
+    if (recentNotes.length) {
+      return recentNotes.map((note) => <NoteCard key={note.id} {...note} />);
+    } else
+      return addNote ? '' : <h2 className="text-light">No notes saved.</h2>;
+  };
+
   return (
     <NotesContainerStyled>
       {addNote && (
@@ -15,9 +22,7 @@ const NotesContainer = ({ addNote }: { addNote: boolean }) => {
           main="Start editing and enter your text here"
         />
       )}
-      {recentNotes.map((note) => {
-        return <NoteCard key={note.id} {...note} />;
-      })}
+      {displayNotes()}
     </NotesContainerStyled>
   );
 };

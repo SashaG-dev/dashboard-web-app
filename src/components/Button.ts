@@ -27,6 +27,7 @@ const variations: StyledVariations = {
 
     &:disabled {
       color: var(--secondary);
+      cursor: default;
     }
   `,
   iconSmall: css`

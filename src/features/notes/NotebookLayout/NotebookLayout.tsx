@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { toggleAddNote } from '../../../store/slices/notesSlice';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import Header from '../../../components/Header/Header';
 import NotesContainer from '../NotesContainer/NotesContainer';
 import { ButtonStyled } from '../../../components/Button';
+import { formatDate } from '../../../utils/helpers';
 import { NotebookLayoutStyled } from './styles';
 
 const NotebookLayout = () => {
-  const [addNote, setAddNote] = useState<boolean>(false);
+  const { addNote, currentNote } = useAppSelector((state) => state.notes);
+
+  const dispatch = useAppDispatch();
+
+  const currentDate = useCallback(() => formatDate(new Date(), 'medium'), []);
 
   return (
     <NotebookLayoutStyled>
@@ -17,7 +24,8 @@ const NotebookLayout = () => {
         title={addNote ? 'Cancel' : 'Add new note'}
         aria-label={addNote ? 'cancel' : 'add new note'}
         $type="iconLarge"
-        onClick={() => setAddNote((prev) => !prev)}
+        onClick={() => dispatch(toggleAddNote({}))}
+        disabled={currentDate() === currentNote?.date}
       >
         <BsFillPlusCircleFill aria-hidden="true" />
       </ButtonStyled>
