@@ -4,16 +4,19 @@ import { getNoteContext } from '../../context/noteContext';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import * as notesSlice from '../../store/slices/notesSlice';
 import { formatDate } from '../../utils/helpers';
+import Modal from '../../components/Modal/Modal';
 import { TextInputStyled } from '../../components/Input';
 import { TextareaStyled } from '../../components/Textarea';
 import { ButtonStyled, ButtonGroupStyled } from '../../components/Button';
 import { NoteCardProps } from './NoteCard/NoteCard';
 import { NoteType } from '../../types/NoteType';
-import { errorToast, successToast } from '../../utils/toasts';
+import { errorToast } from '../../utils/toasts';
 import { MAX_NOTE_TITLE_LENGTH, MAX_NOTE_LENGTH } from '../../utils/constants';
+import { focusModal } from '../../hooks/focusModal';
 
 const NoteCardEdit = (props: NoteCardProps) => {
   const { heading, main, date } = getNoteContext().state;
+  const [toggleModal, setToggleModal] = useState<boolean>(false);
   const [userNote, setUserNote] = useState<NoteType>({
     id: `${new Date().getTime()}`,
     date: formatDate(new Date(), 'medium'),
@@ -52,66 +55,102 @@ const NoteCardEdit = (props: NoteCardProps) => {
     else {
       dispatch(notesSlice.updateUserNote({ data: userNote }));
       props.setIsEditing(false);
-      successToast('Note saved!');
       if (addNote) dispatch(notesSlice.toggleAddNote({ toggle: 'false' }));
     }
   };
 
-  return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <div className="note-headings">
-        <TextInputStyled
-          value={userNote.heading}
-          name="heading"
-          onChange={(e) => handleChange(e)}
-        />
-        <ButtonGroupStyled>
-          <ButtonStyled
-            title="Save changes"
-            aria-label="save changes"
-            $type="iconSmall"
-            type="submit"
-            onClick={(e) => handleSubmit(e)}
-          >
-            <BsCheck2 aria-hidden="true" />
-          </ButtonStyled>
-          <ButtonStyled
-            title="Cancel"
-            aria-label="cancel"
-            $type="iconSmall"
-            type="button"
-            onClick={() => props.setIsEditing(false)}
-          >
-            <BsXLg aria-hidden="true" />
-          </ButtonStyled>
-        </ButtonGroupStyled>
-      </div>
+  const headingSmallClasses = () => {
+    return `heading-small ${
+      userNote.heading.length > MAX_NOTE_TITLE_LENGTH ? 'red' : ''
+    }`;
+  };
 
-      <div className="note-main">
-        <TextareaStyled
-          value={userNote.main}
-          name="main"
-          onChange={(e) => handleChange(e)}
+  const mainSmallClasses = () => {
+    return `main-small ${userNote.main.length > MAX_NOTE_LENGTH ? 'red' : ''}`;
+  };
+
+  const handleToggle = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setToggleModal(true);
+  };
+
+  const onClick = () => {
+    dispatch(notesSlice.deleteUserNote({ date }));
+  };
+  const close = () => setToggleModal(false);
+
+  const { modalRef } = focusModal({ toggleModal, setToggleModal, onClick });
+
+  return (
+    <>
+      {toggleModal && (
+        <Modal
+          role="alertdialog"
+          btnText="Delete"
+          heading="Are you sure you want to delete this note?"
+          onClick={onClick}
+          close={close}
+          ref={modalRef}
         />
-        <div className="note-more">
-          <ButtonStyled
-            title="Delete note"
-            aria-label="delete note"
-            $type="iconSmall"
-            onClick={() => dispatch(notesSlice.deleteUserNote({ date }))}
-          >
-            <BsFillTrash3Fill aria-hidden="true" />
-          </ButtonStyled>
-          <small
-            className={`main-small ${
-              userNote.main.length > MAX_NOTE_LENGTH ? 'red' : ''
-            }`}
-          >
-            {userNote.main.length}/{MAX_NOTE_LENGTH}
+      )}
+
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div className="note-headings">
+          <TextInputStyled
+            value={userNote.heading}
+            name="heading"
+            onChange={(e) => handleChange(e)}
+          />
+          <small className={headingSmallClasses()}>
+            {MAX_NOTE_TITLE_LENGTH - userNote.heading.length}
           </small>
+          <ButtonGroupStyled>
+            <ButtonStyled
+              title="Save changes"
+              aria-label="save changes"
+              $type="iconSmall"
+              type="submit"
+              onClick={(e) => handleSubmit(e)}
+            >
+              <BsCheck2 aria-hidden="true" />
+            </ButtonStyled>
+            <ButtonStyled
+              title="Cancel"
+              aria-label="cancel"
+              $type="iconSmall"
+              type="button"
+              onClick={() => props.setIsEditing(false)}
+            >
+              <BsXLg aria-hidden="true" />
+            </ButtonStyled>
+          </ButtonGroupStyled>
         </div>
-      </div>
-    </form>
+
+        <div className="note-main">
+          <TextareaStyled
+            value={userNote.main}
+            name="main"
+            onChange={(e) => handleChange(e)}
+          />
+
+          <div className="note-more">
+            {addNote || (
+              <ButtonStyled
+                title="Delete note"
+                aria-label="delete note"
+                $type="iconSmall"
+                onClick={(e) => handleToggle(e)}
+              >
+                <BsFillTrash3Fill aria-hidden="true" />
+              </ButtonStyled>
+            )}
+            <small className={mainSmallClasses()}>
+              {userNote.main.length}/{MAX_NOTE_LENGTH}
+            </small>
+          </div>
+        </div>
+      </form>
+    </>
   );
 };
 export default NoteCardEdit;

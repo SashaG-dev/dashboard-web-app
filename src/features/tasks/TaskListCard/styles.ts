@@ -40,7 +40,7 @@ export const TaskListCardStyled = styled.div<{ $current?: string }>`
 
   .list-wrapper {
     height: calc(80% - 1.6rem);
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: scroll;
     padding: 0.4rem;
 
@@ -72,10 +72,14 @@ export const TaskListCardStyled = styled.div<{ $current?: string }>`
       }
 
       li .edit-span {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.8rem;
+        display: inline-block;
+        overflow-wrap: break-word;
+        inline-size: 90%;
+
+        input {
+          margin-right: 0.8rem;
+          margin-bottom: 0.8rem;
+        }
       }
     }
   }

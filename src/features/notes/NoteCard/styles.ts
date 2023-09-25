@@ -25,6 +25,12 @@ export const NoteCardStyled = styled.div`
     padding-bottom: 1.6rem;
     margin-bottom: 0.8rem;
     border-bottom: 1px solid var(--tertiary-opacity);
+
+    small {
+      &.red {
+        color: var(--error);
+      }
+    }
   }
 
   .note-heading {

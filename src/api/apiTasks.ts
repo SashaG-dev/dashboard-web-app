@@ -1,6 +1,7 @@
 import { doc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './firebase';
 import { TaskType } from '../types/TaskListType';
+import { errorToast, randomTaskToast } from '../utils/toasts';
 
 export const tasksRef = doc(db, 'account-1', 'tasks');
 
@@ -36,8 +37,10 @@ export const updateTasks = async (
         { merge: true }
       );
     }
+    if (complete) randomTaskToast();
   } catch (err) {
     console.error(err);
+    errorToast('Your tasks could not be updated.');
   }
 };
 
@@ -59,5 +62,6 @@ export const updateTaskList = async (
     }
   } catch (err) {
     console.error(err);
+    errorToast('Your tasks could not be updated.');
   }
 };

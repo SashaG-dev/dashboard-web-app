@@ -31,6 +31,8 @@ export const CheckboxStyled = styled.div`
 
     .checkbox-text {
       line-height: 1;
+      overflow-wrap: break-word;
+      inline-size: 90%;
 
       &:hover,
       &:focus-visible {
