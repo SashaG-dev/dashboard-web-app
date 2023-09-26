@@ -3,12 +3,16 @@ import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const NotesContainerStyled = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem;
+  grid-template-columns: repeat(2, minmax(48rem, 1fr));
+  column-gap: 1.6rem;
+  row-gap: 3.2rem;
 
-  @media ${mediaQueries.tabPortrait} {
+  @media ${mediaQueries.laptop} {
+    grid-template-columns: repeat(2, minmax(42rem, 1fr));
+  }
+  @media ${mediaQueries.tabLandscape} {
     justify-items: center;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(34rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(42rem, 1fr));
   }
 `;

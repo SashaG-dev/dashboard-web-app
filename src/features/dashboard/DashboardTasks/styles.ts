@@ -2,8 +2,10 @@ import { styled } from 'styled-components';
 import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const DashboardTasksStyled = styled.div`
+  margin: 0 auto;
+
   .tasks-container {
-    max-width: 48rem;
+    width: 48rem;
     min-height: 28rem;
     background-color: var(--secondary);
     border-radius: var(--radius-md);

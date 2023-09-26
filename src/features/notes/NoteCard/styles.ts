@@ -6,12 +6,15 @@ export const NoteCardStyled = styled.div`
   border-radius: var(--radius-sm);
   padding: 1.6rem;
   min-height: 28rem;
+  width: 90%;
 
-  @media ${mediaQueries.tabPortrait} {
-    width: 100%;
-    max-width: 42rem;
+  @media ${mediaQueries.tabLandscape} {
+    width: 42rem;
   }
   @media ${mediaQueries.phoneLandscape} {
+    width: 32rem;
+  }
+  @media ${mediaQueries.phonePortrait} {
     width: 28rem;
   }
   @media ${mediaQueries.phoneSmall} {
@@ -48,7 +51,7 @@ export const NoteCardStyled = styled.div`
     p {
       line-height: 1.2;
       overflow-wrap: break-word;
-      inline-size: 100%;
+      inline-size: 95%;
 
       @media ${mediaQueries.phoneSmall} {
         font-size: 1.6rem;

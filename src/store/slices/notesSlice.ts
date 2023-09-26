@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, Unsubscribe } from 'firebase/firestore';
 import { NoteType } from '../../types/NoteType';
 import { notesRef, updateNote, deleteNote } from '../../api/apiNotes';
+import { RootState } from '../store';
 
 type NotesInitialState = {
   recentNotes: [] | NoteType[];
@@ -9,6 +10,7 @@ type NotesInitialState = {
   currentNote: NoteType;
   hasCurrent: boolean;
   addNote: boolean;
+  unsubscribe: null | Unsubscribe | void;
 };
 
 const initialState: NotesInitialState = {
@@ -17,6 +19,7 @@ const initialState: NotesInitialState = {
   currentNote: { id: '', heading: '', main: '', date: '' },
   hasCurrent: false,
   addNote: false,
+  unsubscribe: null,
 };
 
 export const fetchRecentNotes = createAsyncThunk(
@@ -29,8 +32,20 @@ export const fetchRecentNotes = createAsyncThunk(
           dispatch(notesSlice.actions.setRecentNotes(data));
         }
       });
+      // (getState() as RootState).notes.unsubscribe = unsubscribe;
     } catch (err) {
       console.error(err);
+    }
+  }
+);
+
+export const unsubscribe = createAsyncThunk(
+  'notesSlice/unsubscribe',
+  (_, { getState }) => {
+    const { unsubscribe } = (getState() as RootState).focus;
+
+    if (unsubscribe) {
+      unsubscribe();
     }
   }
 );
@@ -47,6 +62,7 @@ const notesSlice = createSlice({
     toggleAddNote: (state, action) => {
       const { toggle } = action?.payload;
       if (toggle === 'false') state.addNote = false;
+      else if (toggle === 'true') state.addNote = true;
       else state.addNote = !state.addNote;
     },
     deleteUserNote: (_, action) => {
@@ -65,6 +81,9 @@ const notesSlice = createSlice({
       })
       .addCase(fetchRecentNotes.fulfilled, (state) => {
         state.isLoading = false;
+      })
+      .addCase(unsubscribe.fulfilled, (state) => {
+        state.unsubscribe = null;
       });
   },
 });
