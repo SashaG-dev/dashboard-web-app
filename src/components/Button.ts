@@ -76,6 +76,11 @@ const variations: StyledVariations = {
     &:focus-visible {
       background-color: var(--tertiary);
     }
+
+    &:disabled {
+      background-color: var(--tertiary-opacity);
+      cursor: default;
+    }
   `,
   underline: css`
     font-size: 1.6rem;

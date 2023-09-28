@@ -3,15 +3,15 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import { toggleMenu } from '../../../store/slices/menuSlice';
 import { UserMenuDetailsStyled } from './styles';
-import { UserDataType } from '../../../types/UserDataType';
+import img from '../../../assets/placeholder-img.jpg';
 
-const UserMenuDetails = ({
-  details: { firstName, currentTag, img },
-}: UserDataType) => {
+const UserMenuDetails = () => {
+  const { displayedName, username, tag, image } = useAppSelector(
+    (state) => state.user.userData
+  );
   const { isOpen } = useAppSelector((state) => state.menu);
   const dispatch = useAppDispatch();
 
-  // TODO: create util function for Enter key events
   const keyDownEvent = (e: KeyboardEvent<HTMLImageElement>): void => {
     if (e.key === 'Enter') dispatch(toggleMenu());
   };
@@ -30,8 +30,8 @@ const UserMenuDetails = ({
         title={isOpen ? '' : 'open navigation'}
       />
       <div className="user-text">
-        <p className="user-name">{firstName}</p>
-        <p className="custom-tag">{currentTag}</p>
+        <p className="user-name">{displayedName}</p>
+        <p className="custom-tag">{tag.hasTag ? tag.currentTag : username}</p>
       </div>
 
       <button

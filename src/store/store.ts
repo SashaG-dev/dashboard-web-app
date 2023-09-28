@@ -3,6 +3,7 @@ import menuReducer from './slices/menuSlice';
 import tasksReducer from './slices/tasksSlice';
 import focusReducer from './slices/focusSlice';
 import notesReducer from './slices/notesSlice';
+import userReducer from './slices/userSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     tasks: tasksReducer,
     focus: focusReducer,
     notes: notesReducer,
+    user: userReducer,
   },
 });
 

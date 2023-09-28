@@ -11,6 +11,7 @@ import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
 import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
+import Settings from './pages/Settings.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 
 const router = createBrowserRouter(
@@ -37,14 +38,7 @@ const router = createBrowserRouter(
             </main>
           }
         />
-        <Route
-          path="settings"
-          element={
-            <main>
-              <h1>Settings</h1>
-            </main>
-          }
-        />
+        <Route path="settings" element={<Settings />} />
       </Route>
     </Route>
   )
