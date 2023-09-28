@@ -3,6 +3,7 @@ import { onSnapshot } from 'firebase/firestore';
 import { userRef } from '../../api/apiAuth';
 import { UserType } from '../../types/UserType';
 import { RootState } from '../store';
+import { toggleMode, updateName } from '../../api/apiSettings';
 
 type UserStateType = {
   userData: UserType;
@@ -60,9 +61,16 @@ const userSlice = createSlice({
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
+    toggleUserMode: (state) => {
+      toggleMode(!state.userData.darkMode);
+    },
+    updateCurrentName: (_, action) => {
+      const { newName } = action.payload;
+      updateName(newName);
+    },
   },
 });
 
-export const {} = userSlice.actions;
+export const { toggleUserMode, updateCurrentName } = userSlice.actions;
 
 export default userSlice.reducer;

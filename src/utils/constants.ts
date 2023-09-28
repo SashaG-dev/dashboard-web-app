@@ -4,6 +4,8 @@ export const MAX_TITLE_LENGTH = 15;
 export const MAX_NOTE_TITLE_LENGTH = 20;
 export const MAX_NOTE_LENGTH = 200;
 
+export const MAX_NAME_LENGTH = 12;
+
 export const HOUR = 1 * 60 * 60;
 export const MINUTE = 1 * 60;
 export const SECOND = 1;

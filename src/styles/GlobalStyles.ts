@@ -1,30 +1,29 @@
 import { createGlobalStyle } from 'styled-components';
 import { mediaQueries } from './mediaQueries';
 
-const GlobalStyles = createGlobalStyle<{
-  $navOpen?: boolean;
-}>`
+const GlobalStyles = createGlobalStyle<{ $navOpen?: boolean }>`
 :root {
   /* Colors */
-  
   --accent: #8d72e1;
+  --error: #e74646;
+
+  &, &.darkMode {
   --primary: #151515;
   --primary-opacity: rgba(21, 21, 21, .95);
   --secondary: #212121;
   --tertiary: #fff;
   --tertiary-light: #aaa;
   --tertiary-opacity: rgba(255, 255, 255, .1);
- 
-/* --success:  */
- --error: #e74646;
+  }
 
-/* 
+  &.lightMode {
   --primary: #fff;
   --primary-opacity: rgba(255, 255, 255, .95);
   --secondary: #eee;
   --tertiary: #000;
   --tertiary-light: #555;
-  --tertiary-opacity: rgba(0, 0, 0, .1); */
+  --tertiary-opacity: rgba(0, 0, 0, .1);
+  }
 
 
   /* Borders and Radii */ 
@@ -48,7 +47,10 @@ const GlobalStyles = createGlobalStyle<{
   padding: 0;
   font-family: inherit;
   box-sizing: inherit;
-  /* transition: background-color .3s; */
+
+  &:not(body) {
+    transition: background-color .3s;
+  }
 }
 
 html {
@@ -140,6 +142,17 @@ main {
 
 .text-center {
   text-align: center;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 `;
 

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Route,
   createRoutesFromElements,
@@ -12,6 +13,7 @@ import Tasks from './pages/Tasks.tsx';
 import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
 import Settings from './pages/Settings.tsx';
+import { DarkModeProvider } from './context/darkModeContext.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 
 const router = createBrowserRouter(
@@ -46,12 +48,26 @@ const router = createBrowserRouter(
 
 function App() {
   const { isOpen } = useAppSelector((state) => state.menu);
+  const { darkMode } = useAppSelector((state) => state.user.userData);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('darkMode');
+      document.documentElement.classList.remove('lightMode');
+    }
+    if (!darkMode) {
+      document.documentElement.classList.add('lightMode');
+      document.documentElement.classList.remove('darkMode');
+    }
+  }, [darkMode]);
 
   return (
-    <>
-      <GlobalStyles $navOpen={isOpen} />
-      <RouterProvider router={router} />
-    </>
+    <DarkModeProvider darkMode={darkMode}>
+      <>
+        <GlobalStyles $navOpen={isOpen} />
+        <RouterProvider router={router} />
+      </>
+    </DarkModeProvider>
   );
 }
 

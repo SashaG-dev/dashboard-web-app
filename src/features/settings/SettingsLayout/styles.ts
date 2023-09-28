@@ -4,6 +4,9 @@ import { mediaQueries } from '../../../styles/mediaQueries';
 export const SettingsLayoutStyled = styled.div`
   max-width: 120rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
 
   .settings-heading,
   .settings-h3,
