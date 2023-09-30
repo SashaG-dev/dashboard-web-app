@@ -6,7 +6,7 @@ const NotesContainer = ({ addNote }: { addNote: boolean }) => {
   const { recentNotes } = useAppSelector((state) => state.notes);
 
   const displayNotes = () => {
-    if (recentNotes.length) {
+    if (recentNotes.length !== 0) {
       return recentNotes.map((note) => <NoteCard key={note.id} {...note} />);
     } else
       return addNote ? '' : <h2 className="text-light">No notes saved.</h2>;

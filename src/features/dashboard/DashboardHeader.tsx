@@ -2,11 +2,14 @@ import { useCallback } from 'react';
 import Header from '../../components/Header/Header';
 import { getUserGreeting } from './headerUtilities';
 import { getDate } from '../../utils/helpers';
-import { account } from '../../data/account';
+import { useAppSelector } from '../../hooks/hooks';
 
 const DashboardHeader = () => {
+  const { displayName } = useAppSelector((state) => state.user.userData);
+
   const displayUserGreeting = useCallback(() => {
-    return getUserGreeting(account.details.firstName);
+    if (displayName) return getUserGreeting(displayName);
+    else return getUserGreeting();
   }, []);
 
   return (

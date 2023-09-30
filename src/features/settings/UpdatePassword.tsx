@@ -3,8 +3,9 @@ import { FormRowStyled } from '../../components/Form';
 import { LabelTop } from '../../components/Label';
 import { TextInputStyled } from '../../components/Input';
 import { ButtonStyled, ButtonGroupStyled } from '../../components/Button';
+import { updateCurrentPassword } from '../../store/slices/userSlice';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { errorToast } from '../../utils/toasts';
+import { checkError } from './settingsUtilities';
 
 type Props = {
   onClick: (name: 'email' | 'password') => void;
@@ -18,21 +19,18 @@ const UpdatePassword = ({ onClick }: Props) => {
   });
 
   const { password } = useAppSelector((state) => state.user.userData);
+  const dispatch = useAppDispatch();
+
+  const handler = () => {
+    dispatch(updateCurrentPassword({ newPassword: userInput.newPassword }));
+    onClick('password');
+  };
 
   const handleSubmit = (
     e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    // if (userInput.currentPassword !== password)
-    //   errorToast('Current password does not match.');
-    // else if (userInput.newPassword.trim() === '')
-    //   errorToast('Please enter a valid password.');
-    // else if (userInput.newPassword.trim().length < 6)
-    //   errorToast('Password must be at least 6 characters long.');
-    // else if (userInput.newPassword !== userInput.confirmNew)
-    //   errorToast('Passwords do not match.');
-    // else if (userInput.newPassword === password)
-    //   errorToast('Your new password cannot be the same as your previous.');
+    if (password) checkError(userInput, password, handler);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +66,6 @@ const UpdatePassword = ({ onClick }: Props) => {
               name="newPassword"
               value={userInput.newPassword}
               onChange={(e) => handleChange(e)}
-              type="password"
             />
           </LabelTop>
         </FormRowStyled>
@@ -84,7 +81,6 @@ const UpdatePassword = ({ onClick }: Props) => {
               name="confirmNew"
               value={userInput.confirmNew}
               onChange={(e) => handleChange(e)}
-              type="password"
             />
           </LabelTop>
         </FormRowStyled>

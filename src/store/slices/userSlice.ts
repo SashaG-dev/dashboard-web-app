@@ -1,9 +1,15 @@
 import { createSlice, createAsyncThunk, Unsubscribe } from '@reduxjs/toolkit';
-import { onSnapshot } from 'firebase/firestore';
-import { userRef } from '../../api/apiAuth';
+import { onSnapshot, doc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { db } from '../../api/firebase';
+import { apiAuth } from '../../api/apiAuth';
 import { UserType } from '../../types/UserType';
 import { RootState } from '../store';
-import { toggleMode, updateName } from '../../api/apiSettings';
+import {
+  toggleMode,
+  updateName,
+  updateUserPassword,
+} from '../../api/apiSettings';
 
 type UserStateType = {
   userData: UserType;
@@ -13,18 +19,16 @@ type UserStateType = {
 const initialState: UserStateType = {
   userData: {
     id: null,
-    username: null,
     email: null,
     password: null,
-    displayedName: null,
-    image: undefined,
+    displayName: null,
+    photoURL: null,
     tag: {
       hasTag: false,
       currentTag: null,
     },
     color: 'purple',
     darkMode: true,
-    isLoggedIn: true,
   },
   unsubscribe: null,
 };
@@ -33,13 +37,18 @@ export const fetchUserData = createAsyncThunk(
   'user/fetchUserData',
   async (_, { getState, dispatch }) => {
     try {
-      const unsubscribe = onSnapshot(userRef, (doc) => {
-        const data = doc.data();
-        if (data) {
-          dispatch(userSlice.actions.setUserData(data));
+      onAuthStateChanged(apiAuth, (user) => {
+        if (user !== null) {
+          const userRef = doc(db, 'users', user!.uid);
+          const unsubscribe = onSnapshot(userRef, (doc) => {
+            const data = doc.data();
+            if (data) {
+              dispatch(userSlice.actions.setUserData(data.details));
+            }
+          });
+          // (getState() as RootState).user.unsubscribe = unsubscribe;
         }
       });
-      // (getState() as RootState).user.unsubscribe = unsubscribe;
     } catch (err) {
       console.error(err);
     }
@@ -68,9 +77,14 @@ const userSlice = createSlice({
       const { newName } = action.payload;
       updateName(newName);
     },
+    updateCurrentPassword: (_, action) => {
+      const { newPassword } = action.payload;
+      updateUserPassword(newPassword);
+    },
   },
 });
 
-export const { toggleUserMode, updateCurrentName } = userSlice.actions;
+export const { toggleUserMode, updateCurrentName, updateCurrentPassword } =
+  userSlice.actions;
 
 export default userSlice.reducer;

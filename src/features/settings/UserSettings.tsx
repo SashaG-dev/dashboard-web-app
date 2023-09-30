@@ -8,9 +8,7 @@ import UpdateName from './UpdateName';
 const UserSettings = () => {
   const [changeDisplay, setChangeDisplay] = useState(false);
 
-  const { displayedName, color } = useAppSelector(
-    (state) => state.user.userData
-  );
+  const { userData } = useAppSelector((state) => state.user);
 
   return (
     <div>
@@ -18,7 +16,7 @@ const UserSettings = () => {
       <div className="settings-container">
         <FormRowStyled>
           <p>
-            name: <span>{displayedName}</span>
+            name: <span>{userData?.displayName || 'user'}</span>
           </p>
           <ButtonStyled
             $type="accent"
@@ -33,7 +31,7 @@ const UserSettings = () => {
 
         <FormRowStyled>
           <p>
-            theme: <span>{color}</span>
+            theme: <span>{userData.color}</span>
           </p>
 
           <div className="colors" role="listbox"></div>

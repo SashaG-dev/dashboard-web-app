@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { doc, onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import { TaskListType, TaskType } from '../../types/TaskListType';
-import { tasksRef, updateTasks, updateTaskList } from '../../api/apiTasks';
+import { updateTasks, updateTaskList } from '../../api/apiTasks';
 import { getWeek } from '../../features/tasks/taskUtilities';
+import { apiAuth } from '../../api/apiAuth';
+import { db } from '../../api/firebase';
 import { RootState } from '../store';
 
 type TasksInitialState = {
@@ -21,13 +24,18 @@ export const fetchWeek = createAsyncThunk(
   'tasks/fetchWeek',
   async (_, { getState, dispatch }) => {
     try {
-      const unsubscribe = onSnapshot(tasksRef, async (doc) => {
-        const data = doc.data();
-        if (data) {
-          const userWeek = await getWeek(data);
-          dispatch(tasksSlice.actions.setWeek(userWeek));
+      onAuthStateChanged(apiAuth, (user) => {
+        if (user !== null) {
+          const ref = doc(db, 'users', user?.uid);
+          const unsubscribe = onSnapshot(ref, async (doc) => {
+            const data = doc.data();
+            if (data) {
+              const userWeek = await getWeek(data.tasks);
+              dispatch(tasksSlice.actions.setWeek(userWeek));
+            }
+            // (getState() as RootState).tasks.unsubscribe = unsubscribe;
+          });
         }
-        // (getState() as RootState).tasks.unsubscribe = unsubscribe;
       });
     } catch (err) {
       console.error(err);

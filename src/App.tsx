@@ -10,6 +10,8 @@ import AppLayout from './components/AppLayout.tsx';
 import Login from './pages/Login.tsx';
 import { loginAction } from './features/authentication/UserLogin/UserLogin.tsx';
 import { loader as loginLoader } from './features/authentication/LoginLayout/LoginLayout.tsx';
+import SignUp from './pages/SignUp.tsx';
+import { action as signUpAction } from './features/authentication/UserSignUp/UserSignUp.tsx';
 import UserMenu from './features/menu/UserMenu/UserMenu.tsx';
 import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
@@ -29,6 +31,7 @@ const router = createBrowserRouter(
         action={loginAction}
         loader={loginLoader}
       />
+      <Route path="sign-up" element={<SignUp />} action={signUpAction} />
       <Route element={<UserMenu />}>
         <Route
           index

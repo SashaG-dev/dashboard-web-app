@@ -10,7 +10,7 @@ const Settings = () => {
     dispatch(fetchUserData());
 
     return () => {
-      dispatch(unsubscribe());
+      unsubscribe();
     };
   }, [dispatch]);
 

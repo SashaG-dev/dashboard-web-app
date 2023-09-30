@@ -1,11 +1,11 @@
 import { doc, setDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './firebase';
 import { SavedFocusType } from '../types/SavedFocusType';
+import { apiAuth } from './apiAuth';
 import { successToast, errorToast } from '../utils/toasts';
 
-export const focusRef = doc(db, 'account-1', 'focus');
-
 export const createSession = async (data: SavedFocusType) => {
+  const user = apiAuth.currentUser;
   try {
     const newSession = {
       id: data.id,
@@ -14,9 +14,11 @@ export const createSession = async (data: SavedFocusType) => {
       minutes: data.minutes.padStart(2, '0'),
       seconds: data.seconds.padStart(2, '0'),
     };
-
-    await setDoc(focusRef, { saved: arrayUnion(newSession) }, { merge: true });
-    successToast('New focus session saved!');
+    if (user !== null) {
+      const ref = doc(db, 'users', user.uid);
+      await setDoc(ref, { focus: arrayUnion(newSession) }, { merge: true });
+      successToast('New focus session saved!');
+    }
   } catch (err) {
     console.error(err);
     errorToast('Session could not be saved.');
@@ -24,9 +26,13 @@ export const createSession = async (data: SavedFocusType) => {
 };
 
 export const updateSaved = async (data: SavedFocusType[]) => {
+  const user = apiAuth.currentUser;
   try {
-    await setDoc(focusRef, { saved: data });
-    successToast('Session deleted.');
+    if (user) {
+      const ref = doc(db, 'users', user.uid);
+      await setDoc(ref, { focus: data }, { merge: true });
+      successToast('Session deleted.');
+    }
   } catch (err) {
     console.error(err);
     errorToast('Could not delete session.');

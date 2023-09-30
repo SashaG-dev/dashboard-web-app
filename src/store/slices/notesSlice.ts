@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { doc, onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 import { NoteType } from '../../types/NoteType';
-import { notesRef, updateNote, deleteNote } from '../../api/apiNotes';
+import { db } from '../../api/firebase';
+import { updateNote, deleteNote } from '../../api/apiNotes';
+import { apiAuth } from '../../api/apiAuth';
 import { RootState } from '../store';
 
 type NotesInitialState = {
@@ -26,13 +29,18 @@ export const fetchRecentNotes = createAsyncThunk(
   'notes/fetchRecentNotes',
   async (_, { getState, dispatch }) => {
     try {
-      const unsubscribe = onSnapshot(notesRef, (doc) => {
-        const data = doc.data();
-        if (data) {
-          dispatch(notesSlice.actions.setRecentNotes(data));
+      onAuthStateChanged(apiAuth, (user) => {
+        if (user !== null) {
+          const ref = doc(db, 'users', user.uid);
+          const unsubscribe = onSnapshot(ref, (doc) => {
+            const data = doc.data();
+            if (data) {
+              dispatch(notesSlice.actions.setRecentNotes(data.notes));
+            }
+          });
+          // (getState() as RootState).notes.unsubscribe = unsubscribe;
         }
       });
-      // (getState() as RootState).notes.unsubscribe = unsubscribe;
     } catch (err) {
       console.error(err);
     }
@@ -55,8 +63,8 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     setRecentNotes: (state, action) => {
-      const notes = Object.values(action.payload).slice(0, 5) as NoteType[];
-      state.recentNotes = notes;
+      const notes = action.payload as NoteType[];
+      state.recentNotes = notes.slice(0, 5);
       state.currentNote = notes[0];
     },
     toggleAddNote: (state, action) => {
@@ -65,9 +73,12 @@ const notesSlice = createSlice({
       else if (toggle === 'true') state.addNote = true;
       else state.addNote = !state.addNote;
     },
-    deleteUserNote: (_, action) => {
+    deleteUserNote: (state, action) => {
       const { date } = action.payload;
-      deleteNote(date);
+      const newNotesArr = state.recentNotes.filter(
+        (note) => note.date !== date
+      );
+      deleteNote(newNotesArr);
     },
     updateUserNote: (_, action) => {
       const { data } = action.payload;

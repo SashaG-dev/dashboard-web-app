@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { onSnapshot, Unsubscribe } from 'firebase/firestore';
-import { focusRef, createSession, updateSaved } from '../../api/apiFocus';
+import { doc, onSnapshot, Unsubscribe } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { createSession, updateSaved } from '../../api/apiFocus';
 import { SavedFocusType } from '../../types/SavedFocusType';
 import { RootState } from '../store';
+import { apiAuth } from '../../api/apiAuth';
+import { db } from '../../api/firebase';
 
 export type TimerType = Omit<SavedFocusType, 'id'>;
 
@@ -35,12 +38,17 @@ export const fetchFocusData = createAsyncThunk(
   'focus/fetchFocusData',
   async (_, { getState, dispatch }) => {
     try {
-      const unsubscribe = onSnapshot(focusRef, async (doc) => {
-        const data = doc.data();
-        if (data) {
-          dispatch(focusSlice.actions.setSavedFocus(data?.saved));
+      onAuthStateChanged(apiAuth, (user) => {
+        if (user !== null) {
+          const ref = doc(db, 'users', user.uid);
+          const unsubscribe = onSnapshot(ref, async (doc) => {
+            const data = doc.data();
+            if (data) {
+              dispatch(focusSlice.actions.setSavedFocus(data.focus));
+            }
+            // (getState() as RootState).focus.unsubscribe = unsubscribe;
+          });
         }
-        // (getState() as RootState).focus.unsubscribe = unsubscribe;
       });
     } catch (err) {
       console.error(err);

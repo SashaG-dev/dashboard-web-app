@@ -21,7 +21,7 @@ const LoginLayout = () => {
       <UserLogin />
 
       <small className="login-small">
-        Don't have an account? <Link to="sign-up">Create one now.</Link>
+        Don't have an account? <Link to="/sign-up">Create one now.</Link>
       </small>
     </LoginLayoutStyled>
   );
