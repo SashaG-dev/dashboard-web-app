@@ -13,7 +13,7 @@ const UserMenuDetails = () => {
   const dispatch = useAppDispatch();
 
   const keyDownEvent = (e: KeyboardEvent<HTMLImageElement>): void => {
-    if (e.key === 'Enter') dispatch(toggleMenu());
+    if (e.key === 'Enter') dispatch(toggleMenu({}));
   };
 
   return (
@@ -24,7 +24,7 @@ const UserMenuDetails = () => {
         src={img}
         alt="placeholder"
         className="user-img"
-        onClick={() => (isOpen ? null : dispatch(toggleMenu()))}
+        onClick={() => (isOpen ? null : dispatch(toggleMenu({})))}
         onKeyDown={(e) => keyDownEvent(e)}
         aria-label={isOpen ? '' : 'open navigation'}
         title={isOpen ? '' : 'open navigation'}
@@ -38,7 +38,7 @@ const UserMenuDetails = () => {
         type="button"
         className="toggle-btn"
         title="Collapse navigation"
-        onClick={() => (isOpen ? dispatch(toggleMenu()) : null)}
+        onClick={() => (isOpen ? dispatch(toggleMenu({})) : null)}
         aria-label="collapse navigation"
       >
         <BsChevronLeft aria-hidden="true" />

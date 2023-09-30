@@ -116,6 +116,10 @@ main {
   }
 }
 
+.login-main {
+  margin: 0;
+}
+
 .toast {
   color: var(--tertiary);
   background-color: var(--secondary);
@@ -129,7 +133,7 @@ main {
   width: 100%;
   background-color: var(--tertiary-opacity);
   backdrop-filter: blur(2px);
-  z-index: 2;
+  z-index: 4;
 }
 
 .text-light {

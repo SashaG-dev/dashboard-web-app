@@ -2,19 +2,19 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type MenuInitialState = {
   isOpen: boolean;
-  isDark: boolean;
 };
 
 const initialState: MenuInitialState = {
   isOpen: true,
-  isDark: false,
 };
 
 const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
-    toggleMenu: (state) => {
+    toggleMenu: (state, action?) => {
+      const { booleanStr } = action.payload;
+      if (booleanStr) state.isOpen = false;
       state.isOpen = !state.isOpen;
     },
   },

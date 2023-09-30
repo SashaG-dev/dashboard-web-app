@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { forwardRef, ReactNode } from 'react';
 import { ButtonGroupStyled, ButtonStyled } from '../Button';
 import { ModalStyled } from './styles';
@@ -15,6 +16,15 @@ type ModalPropsType = {
 const Modal = forwardRef(function Modal(props: ModalPropsType, ref?: any) {
   const { role, heading, subheading, btnText, onClick, close, children } =
     props;
+
+  useEffect(() => {
+    const body = document.querySelector('body') as HTMLBodyElement;
+    body.style.overflow = 'hidden';
+
+    return () => {
+      body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
     <>

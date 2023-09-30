@@ -2,7 +2,7 @@ import { styled } from 'styled-components';
 import { mediaQueries } from '../../styles/mediaQueries';
 
 export const ModalStyled = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -10,7 +10,7 @@ export const ModalStyled = styled.div`
   background-color: var(--secondary);
   border-radius: var(--radius-sm);
   padding: 1.6rem 2.4rem;
-  z-index: 3;
+  z-index: 5;
 
   @media ${mediaQueries.tabSmall} {
     width: 46rem;

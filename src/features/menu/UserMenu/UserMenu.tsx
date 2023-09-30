@@ -1,25 +1,46 @@
-import { Outlet } from 'react-router-dom';
-import { BsBoxArrowRight } from 'react-icons/bs';
+import { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import UserMenuDetails from '../UserMenuDetails/UserMenuDetails';
 import UserMenuNav from '../UserMenuNav/UserMenuNav';
-import { UserMenuStyled } from './styles';
+import UserMenuLogout from '../UserMenuLogout';
+import Modal from '../../../components/Modal/Modal';
+import { focusModal } from '../../../hooks/focusModal';
 import { useAppSelector } from '../../../hooks/hooks';
-import { account } from '../../../data/account';
+import { signOutUser } from '../../../api/apiAuth';
+import { UserMenuStyled } from './styles';
 
 const UserMenu = () => {
   const { isOpen } = useAppSelector((state) => state.menu);
+  const [toggleModal, setToggleModal] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    signOutUser();
+    navigate('/login');
+    localStorage.removeItem('token');
+  };
+
+  const close = () => setToggleModal(false);
+
+  const { modalRef } = focusModal({ toggleModal, setToggleModal, onClick });
 
   return (
     <>
+      {toggleModal && (
+        <Modal
+          role="alertdialog"
+          heading="Are you sure you want to log out?"
+          ref={modalRef}
+          onClick={onClick}
+          close={close}
+          btnText="Log out"
+        />
+      )}
       <UserMenuStyled className={isOpen ? '' : 'closed'}>
-        <UserMenuDetails {...account} />
+        <UserMenuDetails />
         <UserMenuNav />
-        <div className="settings-container">
-          <button type="button" title="Logout">
-            <BsBoxArrowRight aria-hidden="true" />
-            <span>Logout</span>
-          </button>
-        </div>
+        <UserMenuLogout setToggleModal={setToggleModal} />
       </UserMenuStyled>
       <Outlet />
     </>
