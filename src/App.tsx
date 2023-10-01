@@ -21,6 +21,7 @@ import Settings from './pages/Settings.tsx';
 import { DarkModeProvider } from './context/darkModeContext.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 import { requestAuth } from './api/apiAuth.ts';
+import ForgotPassword from './pages/ForgotPassword.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,8 @@ const router = createBrowserRouter(
         action={loginAction}
         loader={loginLoader}
       />
+      <Route path="login/forgot-password" element={<ForgotPassword />} />
+
       <Route path="sign-up" element={<SignUp />} action={signUpAction} />
       <Route element={<UserMenu />}>
         <Route

@@ -33,7 +33,9 @@ export const fetchWeek = createAsyncThunk(
               const userWeek = await getWeek(data.tasks);
               dispatch(tasksSlice.actions.setWeek(userWeek));
             }
-            // (getState() as RootState).tasks.unsubscribe = unsubscribe;
+            if (!user) {
+              (getState() as RootState).tasks.unsubscribe = unsubscribe;
+            }
           });
         }
       });

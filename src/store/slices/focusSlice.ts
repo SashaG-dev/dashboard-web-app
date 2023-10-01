@@ -46,7 +46,9 @@ export const fetchFocusData = createAsyncThunk(
             if (data) {
               dispatch(focusSlice.actions.setSavedFocus(data.focus));
             }
-            // (getState() as RootState).focus.unsubscribe = unsubscribe;
+            if (!user) {
+              (getState() as RootState).focus.unsubscribe = unsubscribe;
+            }
           });
         }
       });

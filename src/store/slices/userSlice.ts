@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, Unsubscribe } from '@reduxjs/toolkit';
 import { onSnapshot, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { db } from '../../api/firebase';
-import { apiAuth } from '../../api/apiAuth';
+import { apiAuth, resetPassword } from '../../api/apiAuth';
 import { UserType } from '../../types/UserType';
 import { RootState } from '../store';
 import {
@@ -45,8 +45,10 @@ export const fetchUserData = createAsyncThunk(
             if (data) {
               dispatch(userSlice.actions.setUserData(data.details));
             }
+            if (!user) {
+              (getState() as RootState).user.unsubscribe = unsubscribe;
+            }
           });
-          // (getState() as RootState).user.unsubscribe = unsubscribe;
         }
       });
     } catch (err) {
@@ -81,10 +83,18 @@ const userSlice = createSlice({
       const { newPassword } = action.payload;
       updateUserPassword(newPassword);
     },
+    resetUserPassword: (_, action) => {
+      const { email } = action.payload;
+      resetPassword(email);
+    },
   },
 });
 
-export const { toggleUserMode, updateCurrentName, updateCurrentPassword } =
-  userSlice.actions;
+export const {
+  toggleUserMode,
+  updateCurrentName,
+  updateCurrentPassword,
+  resetUserPassword,
+} = userSlice.actions;
 
 export default userSlice.reducer;

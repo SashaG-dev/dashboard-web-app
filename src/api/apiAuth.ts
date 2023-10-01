@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   User,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 import { errorToast, successToast } from '../utils/toasts';
 import { redirect } from 'react-router-dom';
@@ -98,4 +99,12 @@ export const requestAuth = async () => {
     throw redirect('/login?message=Please log in first');
   }
   return null;
+};
+
+export const resetPassword = async (email: string) => {
+  try {
+    await sendPasswordResetEmail(apiAuth, email);
+  } catch (err) {
+    console.error(err);
+  }
 };

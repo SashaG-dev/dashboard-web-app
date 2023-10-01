@@ -37,8 +37,10 @@ export const fetchRecentNotes = createAsyncThunk(
             if (data) {
               dispatch(notesSlice.actions.setRecentNotes(data.notes));
             }
+            if (!user) {
+              (getState() as RootState).notes.unsubscribe = unsubscribe;
+            }
           });
-          // (getState() as RootState).notes.unsubscribe = unsubscribe;
         }
       });
     } catch (err) {

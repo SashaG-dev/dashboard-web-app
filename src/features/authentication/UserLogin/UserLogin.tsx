@@ -3,6 +3,7 @@ import {
   Form,
   ActionFunction,
   redirect,
+  Link,
 } from 'react-router-dom';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaLock } from 'react-icons/fa6';
@@ -63,7 +64,7 @@ const UserLogin = () => {
           </div>
         </FormRowStyled>
 
-        <FormRowStyled>
+        <FormRowStyled className="flex-column">
           <ButtonStyled
             $type="accent"
             className="login-btn"
@@ -71,6 +72,8 @@ const UserLogin = () => {
           >
             {navigation.state === 'submitting' ? 'Logging in' : 'Log in'}
           </ButtonStyled>
+
+          <Link to="forgot-password">Forgot Password?</Link>
         </FormRowStyled>
       </Form>
     </UserLoginStyled>

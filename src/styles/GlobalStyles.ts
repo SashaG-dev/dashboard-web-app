@@ -148,6 +148,12 @@ main {
   text-align: center;
 }
 
+.flex-column {
+  flex-direction: column;
+  gap: 1.6rem;
+  align-items: center
+}
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
