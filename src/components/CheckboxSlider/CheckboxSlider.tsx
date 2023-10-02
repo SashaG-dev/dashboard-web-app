@@ -4,11 +4,12 @@ import { CheckboxSliderStyled } from './styles';
 type Props = {
   id: string;
   label: string;
+  title: string;
   checked: boolean;
   onChange: (e: KeyboardEvent<HTMLElement> | MouseEvent<HTMLElement>) => void;
 };
 
-const CheckboxSlider = ({ id, label, checked, onChange }: Props) => {
+const CheckboxSlider = ({ id, label, title, checked, onChange }: Props) => {
   return (
     <CheckboxSliderStyled>
       <label
@@ -17,6 +18,7 @@ const CheckboxSlider = ({ id, label, checked, onChange }: Props) => {
         tabIndex={0}
         role="checkbox"
         onKeyDown={(e) => onChange(e)}
+        title={title}
       >
         <span className="visually-hidden">{label}</span>
         <div className={`slider-div ${checked ? 'start' : 'end'}`}>

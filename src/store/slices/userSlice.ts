@@ -9,6 +9,7 @@ import {
   toggleMode,
   updateName,
   updateUserPassword,
+  updateTheme,
 } from '../../api/apiSettings';
 
 type UserStateType = {
@@ -75,6 +76,10 @@ const userSlice = createSlice({
     toggleUserMode: (state) => {
       toggleMode(!state.userData.darkMode);
     },
+    updateUserTheme: (_, action) => {
+      const { newColor } = action.payload;
+      updateTheme(newColor);
+    },
     updateCurrentName: (_, action) => {
       const { newName } = action.payload;
       updateName(newName);
@@ -92,6 +97,7 @@ const userSlice = createSlice({
 
 export const {
   toggleUserMode,
+  updateUserTheme,
   updateCurrentName,
   updateCurrentPassword,
   resetUserPassword,

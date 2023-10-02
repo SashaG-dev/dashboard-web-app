@@ -8,6 +8,6 @@ export type UserType = {
     hasTag: boolean;
     currentTag: string | null;
   };
-  color: 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink';
+  color: 'red' | 'yellow' | 'green' | 'blue' | 'purple';
   darkMode: boolean;
 };

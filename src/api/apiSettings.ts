@@ -23,6 +23,28 @@ export const toggleMode = async (darkMode: boolean) => {
   }
 };
 
+export const updateTheme = async (color: string) => {
+  const user = apiAuth.currentUser;
+  try {
+    if (user !== null) {
+      const ref = doc(db, 'users', user.uid);
+      await setDoc(
+        ref,
+        {
+          details: {
+            color: color,
+          },
+        },
+        { merge: true }
+      );
+    }
+    successToast('Theme updated!');
+  } catch (err) {
+    console.error(err);
+    errorToast('Could not update user theme.');
+  }
+};
+
 export const updateName = async (newName: string) => {
   try {
     const user = apiAuth.currentUser;

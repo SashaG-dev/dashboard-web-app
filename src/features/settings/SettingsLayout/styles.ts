@@ -12,6 +12,11 @@ export const SettingsLayoutStyled = styled.div`
   .settings-h3,
   .form-container {
     margin-bottom: 1.6rem;
+
+    @media ${mediaQueries.phoneLandscape} {
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
   }
 
   .settings-container {
@@ -21,6 +26,15 @@ export const SettingsLayoutStyled = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
+
+    @media ${mediaQueries.phoneSmall} {
+      background-color: transparent;
+    }
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1.6rem;
   }
 
   label {
@@ -38,8 +52,7 @@ export const SettingsLayoutStyled = styled.div`
       margin-left: 0.8rem;
 
       @media ${mediaQueries.phoneLandscape} {
-        margin: 0.8rem 0;
-        display: block;
+        margin: 0;
         font-size: 1.6rem;
       }
     }

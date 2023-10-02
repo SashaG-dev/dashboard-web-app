@@ -19,14 +19,13 @@ const UpdateMode = () => {
 
   return (
     <FormRowStyled>
-      <p>
-        Mode: <span>{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
-      </p>
+      <p>{darkMode ? 'dark mode' : 'light mode'}</p>
 
       <CheckboxSlider
         id="mode"
         checked={darkMode}
         label={darkMode ? 'switch to light mode' : 'switch to dark mode'}
+        title={darkMode ? 'switch to light mode' : 'switch to dark mode'}
         onChange={(e: any) => onChange(e)}
       />
     </FormRowStyled>

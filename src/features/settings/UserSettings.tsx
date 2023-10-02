@@ -3,6 +3,7 @@ import { FormRowStyled } from '../../components/Form';
 import { ButtonStyled } from '../../components/Button';
 import { useAppSelector } from '../../hooks/hooks';
 import UpdateMode from './UpdateMode';
+import UpdateTheme from './UpdateTheme';
 import UpdateName from './UpdateName';
 
 const UserSettings = () => {
@@ -29,13 +30,7 @@ const UserSettings = () => {
 
         <UpdateMode />
 
-        <FormRowStyled>
-          <p>
-            theme: <span>{userData.color}</span>
-          </p>
-
-          <div className="colors" role="listbox"></div>
-        </FormRowStyled>
+        <UpdateTheme />
 
         <div>
           {changeDisplay && (
