@@ -33,3 +33,29 @@ export const checkEmailError = (
     errorToast('New email address cannot be current address.');
   else handler();
 };
+
+export const checkDeleteError = (data: any) => {
+  const { inputEmail, inputPassword, inputConfirm, email, password, handler } =
+    data;
+
+  if (
+    !inputEmail.trim().length ||
+    !inputPassword.trim().length ||
+    !inputConfirm.trim().length
+  ) {
+    errorToast('Please enter valid data before submitting.');
+    return;
+  } else if (inputEmail !== email) {
+    errorToast('Incorrect email.');
+    return;
+  } else if (inputConfirm !== inputPassword) {
+    errorToast('Password and confirm password do not match.');
+    return;
+  } else if (inputPassword !== password) {
+    errorToast('Incorrect password.');
+    return;
+  } else {
+    handler(inputEmail, inputPassword);
+    return { redirect: true };
+  }
+};

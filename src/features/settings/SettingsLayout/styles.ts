@@ -10,13 +10,17 @@ export const SettingsLayoutStyled = styled.div`
 
   .settings-heading,
   .settings-h3,
-  .form-container {
+  .form-container,
+  .headings-container {
     margin-bottom: 1.6rem;
 
     @media ${mediaQueries.phoneLandscape} {
       margin-bottom: 0.8rem;
       text-align: center;
     }
+  }
+
+  .headings-container {
   }
 
   .settings-container {
@@ -71,6 +75,17 @@ export const SettingsLayoutStyled = styled.div`
 
     @media ${mediaQueries.phoneLandscape} {
       width: 100%;
+    }
+  }
+
+  .delete-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+
+    .delete-row {
+      justify-content: center;
     }
   }
 `;

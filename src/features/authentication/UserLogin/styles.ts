@@ -57,4 +57,9 @@ export const UserLoginStyled = styled.div`
       width: 100%;
     }
   }
+
+  a {
+    display: inline-block;
+    margin: 0 auto;
+  }
 `;

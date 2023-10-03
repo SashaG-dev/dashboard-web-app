@@ -83,7 +83,10 @@ const UserSignUp = () => {
             />
           </FormRowStyled>
 
-          <ButtonStyled $type="accent">
+          <ButtonStyled
+            $type="accent"
+            disabled={navigation.state === 'submitting'}
+          >
             {navigation.state === 'submitting'
               ? 'Creating account'
               : 'Create Account'}

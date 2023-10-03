@@ -81,6 +81,8 @@ export const signInUser = async (email: string, password: string) => {
     )
       errorToast('Please enter your email and password before logging in.');
     if (errorCode === 'auth/wrong-password') errorToast('Incorrect password.');
+    if (errorCode === 'auth/user-not-found')
+      errorToast('No user found. Try creating a new account.');
   }
 };
 
@@ -119,12 +121,6 @@ export const deleteUserAccount = async () => {
     }
   } catch (err: any) {
     console.error(err);
-    const errorCode = err.code;
-    const errorMessage = err.message;
-    if (errorCode === 'auth/requires-recent-login')
-      errorToast(
-        'Session expired! Please log out and log in again to delete account.'
-      );
-    else errorToast('Could not delete account.');
+    errorToast('Could not delete account.');
   }
 };

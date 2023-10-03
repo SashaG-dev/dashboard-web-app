@@ -17,6 +17,7 @@ import Tasks from './pages/Tasks.tsx';
 import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
 import Settings from './pages/Settings.tsx';
+import { settingsAction } from './features/settings/settingsAction.ts';
 import { useAppSelector } from './hooks/hooks.ts';
 import { updateDisplay } from './hooks/updateDisplay.ts';
 import { authLoader } from './utils/helpers.ts';
@@ -56,7 +57,12 @@ const router = createBrowserRouter(
           }
           loader={authLoader}
         />
-        <Route path="settings" element={<Settings />} loader={authLoader} />
+        <Route
+          path="settings"
+          element={<Settings />}
+          loader={authLoader}
+          action={settingsAction}
+        />
       </Route>
     </Route>
   )

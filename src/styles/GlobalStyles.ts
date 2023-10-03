@@ -121,6 +121,7 @@ main {
 
 .login-main {
   margin: 0;
+  padding: 0;
 }
 
 .toast {
