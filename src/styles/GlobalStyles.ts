@@ -1,11 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 import { mediaQueries } from './mediaQueries';
 
-const GlobalStyles = createGlobalStyle<{ $navOpen?: boolean }>`
+const GlobalStyles = createGlobalStyle<{
+  $navOpen?: boolean;
+  $isDark?: boolean;
+}>`
 :root {
   /* Colors */
   --accent: #8d72e1;
-  --error: #e74646;
+  --error: ${(props) => (props.$isDark ? '#E84545' : '#CE1212')};
 
   &, &.darkMode {
   --primary: #151515;

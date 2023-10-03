@@ -92,6 +92,21 @@ const variations: StyledVariations = {
       text-decoration: underline;
     }
   `,
+  warning: css`
+    color: var(--error);
+    font-size: 2rem;
+    font-weight: 500;
+    background-color: var(--secondary);
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--radius-sm);
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+      color: var(--secondary);
+      background-color: var(--error);
+    }
+  `,
 };
 
 export const ButtonStyled = styled.button<{ $type?: string }>`

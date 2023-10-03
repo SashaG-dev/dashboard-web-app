@@ -1,4 +1,4 @@
-import { doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import {
   getAuth,
@@ -7,6 +7,7 @@ import {
   signOut,
   User,
   sendPasswordResetEmail,
+  deleteUser,
 } from 'firebase/auth';
 import { errorToast, successToast } from '../utils/toasts';
 import { redirect } from 'react-router-dom';
@@ -53,8 +54,8 @@ export const createUser = async (email: string, password: string) => {
     );
     const user = newUser.user as any;
     await createUserData(user, password);
-
     localStorage.setItem('token', user.accessToken);
+    await signInWithEmailAndPassword(apiAuth, email, password);
   } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -71,7 +72,6 @@ export const createUser = async (email: string, password: string) => {
 export const signInUser = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(apiAuth, email, password);
-    successToast('Welcome back!');
   } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -106,5 +106,25 @@ export const resetPassword = async (email: string) => {
     await sendPasswordResetEmail(apiAuth, email);
   } catch (err) {
     console.error(err);
+  }
+};
+
+export const deleteUserAccount = async () => {
+  const user = apiAuth.currentUser;
+  try {
+    if (user !== null) {
+      await deleteDoc(doc(db, 'users', user.uid));
+      await deleteUser(user);
+      successToast('Account deleted.');
+    }
+  } catch (err: any) {
+    console.error(err);
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    if (errorCode === 'auth/requires-recent-login')
+      errorToast(
+        'Session expired! Please log out and log in again to delete account.'
+      );
+    else errorToast('Could not delete account.');
   }
 };

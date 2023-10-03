@@ -37,6 +37,10 @@ export const SettingsLayoutStyled = styled.div`
     gap: 1.6rem;
   }
 
+  .delete-container {
+    margin: 0.8rem auto 0;
+  }
+
   label {
     margin-bottom: 0.8rem;
     color: var(--tertiary-light);

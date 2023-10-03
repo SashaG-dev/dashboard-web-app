@@ -19,7 +19,7 @@ import Focus from './pages/Focus.tsx';
 import Settings from './pages/Settings.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 import { updateDisplay } from './hooks/updateDisplay.ts';
-import { requestAuth } from './api/apiAuth.ts';
+import { authLoader } from './utils/helpers.ts';
 import ForgotPassword from './pages/ForgotPassword.tsx';
 
 const router = createBrowserRouter(
@@ -32,33 +32,11 @@ const router = createBrowserRouter(
         loader={loginLoader}
       />
       <Route path="login/forgot-password" element={<ForgotPassword />} />
-
       <Route path="sign-up" element={<SignUp />} action={signUpAction} />
       <Route element={<UserMenu />}>
-        <Route
-          index
-          element={<Home />}
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
-        />
-        <Route
-          path="my-tasks"
-          element={<Tasks />}
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
-        />
-        <Route
-          path="notebook"
-          element={<Notebook />}
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
-        />
+        <Route index element={<Home />} loader={authLoader} />
+        <Route path="my-tasks" element={<Tasks />} loader={authLoader} />
+        <Route path="notebook" element={<Notebook />} loader={authLoader} />
         <Route path="focus" element={<Focus />} />
         <Route
           path="stats"
@@ -67,10 +45,7 @@ const router = createBrowserRouter(
               <h1>Stats</h1>
             </main>
           }
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
+          loader={authLoader}
         />
         <Route
           path="more"
@@ -79,19 +54,9 @@ const router = createBrowserRouter(
               <h1>More</h1>
             </main>
           }
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
+          loader={authLoader}
         />
-        <Route
-          path="settings"
-          element={<Settings />}
-          loader={async () => {
-            await requestAuth();
-            return null;
-          }}
-        />
+        <Route path="settings" element={<Settings />} loader={authLoader} />
       </Route>
     </Route>
   )
@@ -104,7 +69,7 @@ function App() {
 
   return (
     <>
-      <GlobalStyles $navOpen={isOpen} />
+      <GlobalStyles $navOpen={isOpen} $isDark={darkMode} />
       <RouterProvider router={router} />
     </>
   );

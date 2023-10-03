@@ -11,7 +11,7 @@ import { FormRowStyled } from '../../../components/Form';
 import { TextInputStyled } from '../../../components/Input';
 import { ButtonStyled } from '../../../components/Button';
 import { signInUser } from '../../../api/apiAuth';
-import { errorToast } from '../../../utils/toasts';
+import { errorToast, successToast } from '../../../utils/toasts';
 import { UserLoginStyled } from './styles';
 import { apiAuth } from '../../../api/apiAuth';
 
@@ -25,7 +25,10 @@ export const loginAction: ActionFunction = async ({
     await signInUser(email, password);
     const user = apiAuth.currentUser as any;
     localStorage.setItem('token', user?.accessToken);
-    if (user) return redirect('/');
+    if (user) {
+      successToast('Welcome back!');
+      return redirect('/');
+    }
   } catch (err) {
     console.error(err);
     errorToast('Something went wrong. Check your connection and try again.');

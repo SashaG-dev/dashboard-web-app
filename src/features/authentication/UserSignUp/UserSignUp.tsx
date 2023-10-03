@@ -20,13 +20,16 @@ export const action: ActionFunction = async ({ request }): Promise<any> => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const confirm = formData.get('confirm') as string;
-
     if (password !== confirm) errorToast('Passwords do not match.');
-    else createUser(email, password);
-    const user = apiAuth.currentUser;
-    if (user !== null) {
-      successToast('New account created!');
-      return redirect('/');
+    else if (password.trim().length < 6)
+      errorToast('Password must be at least 6 characters long.');
+    else {
+      await createUser(email, password);
+      const user = apiAuth.currentUser;
+      if (user !== null) {
+        successToast('New account created!');
+        return redirect('/');
+      }
     }
   } catch (err) {
     console.error(err);

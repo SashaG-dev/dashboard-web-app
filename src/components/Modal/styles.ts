@@ -27,7 +27,9 @@ export const ModalStyled = styled.div`
   }
 
   .modal-heading {
-    line-height: 1.2;
+    line-height: 1.1;
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
 
     @media ${mediaQueries.tabSmall} {
       font-size: 2.4rem;

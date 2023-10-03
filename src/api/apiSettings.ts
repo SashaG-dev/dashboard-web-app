@@ -1,5 +1,5 @@
 import { setDoc, doc } from 'firebase/firestore';
-import { updateProfile, updatePassword } from 'firebase/auth';
+import { updateProfile, updateEmail, updatePassword } from 'firebase/auth';
 import { db } from './firebase';
 import { apiAuth } from './apiAuth';
 import { errorToast, successToast } from '../utils/toasts';
@@ -46,8 +46,8 @@ export const updateTheme = async (color: string) => {
 };
 
 export const updateName = async (newName: string) => {
+  const user = apiAuth.currentUser;
   try {
-    const user = apiAuth.currentUser;
     if (user !== null) {
       const ref = doc(db, 'users', user.uid);
       await updateProfile(user, { displayName: newName });
@@ -68,9 +68,38 @@ export const updateName = async (newName: string) => {
   }
 };
 
-export const updateUserPassword = async (newPassword: string) => {
+export const updateUserEmail = async (newEmail: string) => {
+  const user = apiAuth.currentUser;
   try {
-    const user = apiAuth.currentUser;
+    if (user !== null) {
+      const ref = doc(db, 'users', user.uid);
+      await updateEmail(user, newEmail);
+      await setDoc(
+        ref,
+        {
+          details: {
+            email: newEmail,
+          },
+        },
+        { merge: true }
+      );
+      successToast('Email successfully updated!');
+    }
+  } catch (err: any) {
+    console.error(err);
+    const errorCode = err.code;
+    const errorMessage = err.message;
+    if (errorCode === 'auth/requires-recent-login')
+      errorToast(
+        'Session expired! Please log out and log back in to update email address.'
+      );
+    errorToast('Could not update user email.');
+  }
+};
+
+export const updateUserPassword = async (newPassword: string) => {
+  const user = apiAuth.currentUser;
+  try {
     if (user !== null) {
       const ref = doc(db, 'users', user.uid);
       await updatePassword(user, newPassword);
@@ -91,7 +120,7 @@ export const updateUserPassword = async (newPassword: string) => {
     console.error(err);
     if (errorCode === 'auth/requires-recent-login')
       errorToast(
-        'Session outdated! Please log out and log back in to update password.'
+        'Session expired! Please log out and log back in to update password.'
       );
     else errorToast('Could not update password.');
   }

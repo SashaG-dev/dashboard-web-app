@@ -1,3 +1,5 @@
+import { requestAuth } from '../api/apiAuth';
+
 export const getToday = (): Date => {
   const today = new Date();
   return today;
@@ -25,4 +27,9 @@ export const getFullWeek = (): string => {
   const weekMs = today.getTime() + 1000 * 60 * 60 * 24 * 6;
   const weekDate = new Date(weekMs);
   return `${formatDate(today)} - ${formatDate(weekDate)}`;
+};
+
+export const authLoader = async () => {
+  await requestAuth();
+  return null;
 };

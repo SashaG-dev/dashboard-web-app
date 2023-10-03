@@ -8,6 +8,7 @@ import { RootState } from '../store';
 import {
   toggleMode,
   updateName,
+  updateUserEmail,
   updateUserPassword,
   updateTheme,
 } from '../../api/apiSettings';
@@ -84,6 +85,10 @@ const userSlice = createSlice({
       const { newName } = action.payload;
       updateName(newName);
     },
+    updateCurrentEmail: (_, action) => {
+      const { newEmail } = action.payload;
+      updateUserEmail(newEmail);
+    },
     updateCurrentPassword: (_, action) => {
       const { newPassword } = action.payload;
       updateUserPassword(newPassword);
@@ -99,6 +104,7 @@ export const {
   toggleUserMode,
   updateUserTheme,
   updateCurrentName,
+  updateCurrentEmail,
   updateCurrentPassword,
   resetUserPassword,
 } = userSlice.actions;

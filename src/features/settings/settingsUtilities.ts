@@ -17,3 +17,19 @@ export const checkError = (
     errorToast('Your new password cannot be the same as your previous.');
   else handler();
 };
+
+export const checkEmailError = (
+  input: any,
+  email: string,
+  password: string,
+  handler: () => void
+) => {
+  if (input.newEmail.trim() === '' || !input.newEmail.includes('@'))
+    errorToast('Please enter a valid email address.');
+  else if (input.password.trim() === '')
+    errorToast('Please enter your password and confirm change.');
+  else if (input.password !== password) errorToast('Incorrect password.');
+  else if (input.newEmail === email)
+    errorToast('New email address cannot be current address.');
+  else handler();
+};
