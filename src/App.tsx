@@ -18,6 +18,7 @@ import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
 import Settings from './pages/Settings.tsx';
 import { settingsAction } from './features/settings/settingsAction.ts';
+import NotFound from './pages/NotFound.tsx';
 import { useAppSelector } from './hooks/hooks.ts';
 import { updateDisplay } from './hooks/updateDisplay.ts';
 import { authLoader } from './utils/helpers.ts';
@@ -64,6 +65,7 @@ const router = createBrowserRouter(
           action={settingsAction}
         />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

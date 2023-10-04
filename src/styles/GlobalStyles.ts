@@ -140,6 +140,10 @@ main {
   z-index: 4;
 }
 
+.text-accent {
+  color: var(--accent);
+}
+
 .text-light {
   color: var(--tertiary-light);
 }

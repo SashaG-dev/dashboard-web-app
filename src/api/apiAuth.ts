@@ -23,7 +23,7 @@ const createUserData = async (user: User, password: string) => {
       id: user.uid,
       email: user.email,
       password,
-      displayName: '',
+      displayName: 'user',
       photoURL: null,
       color: 'purple',
       darkMode: true,
