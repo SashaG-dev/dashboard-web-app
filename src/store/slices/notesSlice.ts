@@ -6,6 +6,7 @@ import { db } from '../../api/firebase';
 import { updateNote, deleteNote } from '../../api/apiNotes';
 import { apiAuth } from '../../api/apiAuth';
 import { RootState } from '../store';
+import { unsubscribeFn } from '../../utils/helpers';
 
 type NotesInitialState = {
   recentNotes: [] | NoteType[];
@@ -49,16 +50,7 @@ export const fetchRecentNotes = createAsyncThunk(
   }
 );
 
-export const unsubscribe = createAsyncThunk(
-  'notesSlice/unsubscribe',
-  (_, { getState }) => {
-    const { unsubscribe } = (getState() as RootState).focus;
-
-    if (unsubscribe) {
-      unsubscribe();
-    }
-  }
-);
+export const unsubscribe = unsubscribeFn('notes/unsubscribe', 'notes');
 
 const notesSlice = createSlice({
   name: 'notes',

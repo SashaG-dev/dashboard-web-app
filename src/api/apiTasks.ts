@@ -4,8 +4,6 @@ import { TaskType } from '../types/TaskListType';
 import { apiAuth } from './apiAuth';
 import { errorToast, randomTaskToast } from '../utils/toasts';
 
-export const tasksRef = doc(db, 'account-1', 'tasks');
-
 export const updateTasks = async (
   date: string,
   task: TaskType | null,

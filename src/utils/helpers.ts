@@ -1,4 +1,6 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { requestAuth } from '../api/apiAuth';
+import { RootState } from '../store/store';
 
 export const getToday = (): Date => {
   const today = new Date();
@@ -32,4 +34,16 @@ export const getFullWeek = (): string => {
 export const authLoader = async () => {
   await requestAuth();
   return null;
+};
+
+export const unsubscribeFn = (
+  location: string,
+  name: keyof Omit<RootState, 'menu'>
+) => {
+  return createAsyncThunk(location, async (_, { getState }) => {
+    const slice = (getState() as RootState)[name];
+    if (slice.unsubscribe) {
+      slice.unsubscribe();
+    }
+  });
 };

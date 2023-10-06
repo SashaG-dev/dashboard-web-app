@@ -3,6 +3,7 @@ import { BsXLg, BsCheck2, BsFillTrash3Fill } from 'react-icons/bs';
 import { getNoteContext } from '../../context/noteContext';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import * as notesSlice from '../../store/slices/notesSlice';
+import { toggleTotalNotes } from '../../store/slices/statsSlice';
 import { formatDate } from '../../utils/helpers';
 import Modal from '../../components/Modal/Modal';
 import { TextInputStyled } from '../../components/Input';
@@ -55,7 +56,10 @@ const NoteCardEdit = (props: NoteCardProps) => {
     else {
       dispatch(notesSlice.updateUserNote({ data: userNote }));
       props.setIsEditing(false);
-      if (addNote) dispatch(notesSlice.toggleAddNote({ toggle: 'false' }));
+      if (addNote) {
+        dispatch(notesSlice.toggleAddNote({ toggle: 'false' }));
+        dispatch(toggleTotalNotes({ method: 'add' }));
+      }
     }
   };
 
@@ -76,6 +80,7 @@ const NoteCardEdit = (props: NoteCardProps) => {
 
   const onClick = () => {
     dispatch(notesSlice.deleteUserNote({ date }));
+    dispatch(toggleTotalNotes({ method: 'remove' }));
   };
   const close = () => setToggleModal(false);
 

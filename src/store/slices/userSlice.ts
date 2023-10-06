@@ -12,6 +12,7 @@ import {
   updateUserPassword,
   updateTheme,
 } from '../../api/apiSettings';
+import { unsubscribeFn } from '../../utils/helpers';
 
 type UserStateType = {
   userData: UserType;
@@ -59,16 +60,10 @@ export const fetchUserData = createAsyncThunk(
   }
 );
 
-export const unsubscribe = createAsyncThunk(
-  'userSlice/unsubscribe',
-  (_, { getState }) => {
-    const { unsubscribe } = (getState() as RootState).user;
-    if (unsubscribe) unsubscribe();
-  }
-);
+export const unsubscribe = unsubscribeFn('user/unsubscribe', 'user');
 
 const userSlice = createSlice({
-  name: 'settings',
+  name: 'user',
   initialState,
   reducers: {
     setUserData: (state, action) => {

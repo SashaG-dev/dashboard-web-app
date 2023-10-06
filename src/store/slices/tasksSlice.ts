@@ -7,6 +7,7 @@ import { getWeek } from '../../features/tasks/taskUtilities';
 import { apiAuth } from '../../api/apiAuth';
 import { db } from '../../api/firebase';
 import { RootState } from '../store';
+import { unsubscribeFn } from '../../utils/helpers';
 
 type TasksInitialState = {
   week: TaskListType[] | [];
@@ -45,15 +46,7 @@ export const fetchWeek = createAsyncThunk(
   }
 );
 
-export const unsubscribe = createAsyncThunk(
-  'tasks/unsubscribe',
-  (_, { getState }) => {
-    const { unsubscribe } = (getState() as RootState).tasks;
-    if (unsubscribe) {
-      unsubscribe();
-    }
-  }
-);
+export const unsubscribe = unsubscribeFn('tasks/unsubscribe', 'tasks');
 
 const tasksSlice = createSlice({
   name: 'tasks',

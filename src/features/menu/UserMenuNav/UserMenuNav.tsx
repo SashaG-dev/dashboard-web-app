@@ -3,7 +3,6 @@ import {
   BsHouseDoor,
   BsCalendarHeart,
   BsBarChartLine,
-  BsThreeDots,
   BsGear,
   BsPencilSquare,
   BsLightningCharge,
@@ -39,14 +38,8 @@ const UserMenuNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="stats" title="Go to statistics">
-            <BsBarChartLine role="img" />
-            <span>Stats</span>
-          </NavLink>
-        </li>
-        <li>
           <NavLink to="more" title="Go to more features">
-            <BsThreeDots role="img" />
+            <BsBarChartLine role="img" />
             <span>More</span>
           </NavLink>
         </li>

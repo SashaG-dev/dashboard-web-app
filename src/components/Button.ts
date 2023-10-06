@@ -14,6 +14,10 @@ const variations: StyledVariations = {
       outline: none;
       border: 2px solid currentColor;
     }
+
+    &:disabled {
+      display: none;
+    }
   `,
   iconLarge: css`
     color: var(--accent);

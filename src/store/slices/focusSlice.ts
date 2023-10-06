@@ -6,6 +6,7 @@ import { SavedFocusType } from '../../types/SavedFocusType';
 import { RootState } from '../store';
 import { apiAuth } from '../../api/apiAuth';
 import { db } from '../../api/firebase';
+import { unsubscribeFn } from '../../utils/helpers';
 
 export type TimerType = Omit<SavedFocusType, 'id'>;
 
@@ -58,16 +59,7 @@ export const fetchFocusData = createAsyncThunk(
   }
 );
 
-export const unsubscribe = createAsyncThunk(
-  'focusSlice/unsubscribe',
-  (_, { getState }) => {
-    const { unsubscribe } = (getState() as RootState).focus;
-
-    if (unsubscribe) {
-      unsubscribe();
-    }
-  }
-);
+export const unsubscribe = unsubscribeFn('focus/unsubscribe', 'focus');
 
 const focusSlice = createSlice({
   name: 'focus',

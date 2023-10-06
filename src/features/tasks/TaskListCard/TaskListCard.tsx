@@ -5,8 +5,9 @@ import { Task } from '../Task';
 import { ButtonStyled } from '../../../components/Button';
 import Checkbox from '../../../components/Checkbox/Checkbox';
 import { TaskListType } from '../../../types/TaskListType';
-import { useAppDispatch } from '../../../hooks/hooks';
 import { completeTaskList } from '../../../store/slices/tasksSlice';
+import { addTotalTasks } from '../../../store/slices/statsSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
 import { TaskListCardStyled } from './styles';
 
 type TaskCardPropsType = {
@@ -21,7 +22,6 @@ const TaskListCard = (props: TaskCardPropsType) => {
     date,
     data: { complete, tasks },
   } = props;
-
   const [editMode, setEditMode] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -29,7 +29,8 @@ const TaskListCard = (props: TaskCardPropsType) => {
   const handleChange = () => {
     const tasksComplete = tasks.every((task) => task.status === 'complete');
     if (tasksComplete) {
-      dispatch(completeTaskList({ date: date, boolean: !complete }));
+      dispatch(completeTaskList({ date, boolean: true }));
+      dispatch(addTotalTasks());
     }
   };
 
@@ -49,6 +50,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
           title={editMode ? 'Cancel' : 'Edit this task list'}
           onClick={() => setEditMode((prev) => !prev)}
           $type="icon"
+          disabled={complete}
         >
           {editMode ? (
             <BsXLg aria-hidden="true" />
@@ -78,10 +80,10 @@ const TaskListCard = (props: TaskCardPropsType) => {
         <div className="status-container">
           <Checkbox
             id={date}
-            title={complete ? 'Undo' : "Finish today's tasks"}
+            title="Finish today's tasks"
             onChange={() => handleChange()}
             checked={complete}
-            disabled={editMode || !tasks || !tasks?.length}
+            disabled={complete || editMode || !tasks || !tasks?.length}
           >
             Finish Today
           </Checkbox>

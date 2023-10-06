@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { fetchUserData, unsubscribe } from '../store/slices/userSlice';
+import { fetchUserStats, unsubscribe } from '../store/slices/statsSlice';
 import { useAppDispatch } from '../hooks/hooks';
-import SettingsLayout from '../features/settings/SettingsLayout/SettingsLayout';
+import StatsLayout from '../features/stats/StatsLayout/StatsLayout';
 
-const Settings = () => {
+const More = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData());
+    dispatch(fetchUserStats());
 
     return () => {
       dispatch(unsubscribe());
@@ -16,8 +16,8 @@ const Settings = () => {
 
   return (
     <main>
-      <SettingsLayout />
+      <StatsLayout />
     </main>
   );
 };
-export default Settings;
+export default More;

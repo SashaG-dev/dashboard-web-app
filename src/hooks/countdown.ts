@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
-import { useAppSelector } from './hooks';
+import { addTotalFocus } from '../store/slices/statsSlice';
+import { useAppSelector, useAppDispatch } from './hooks';
 import { convertSeconds } from '../features/focus/focusUtilities';
 import { HOUR, MINUTE, SECOND } from '../utils/constants';
 import { iconToast } from '../utils/toasts';
 
 export const countdown = (pathname: string) => {
   const { currentTimer, status } = useAppSelector((state) => state.focus);
+  const dispatch = useAppDispatch();
 
   let timeLeft =
     +currentTimer.hours * HOUR +
@@ -48,6 +50,10 @@ export const countdown = (pathname: string) => {
         setNewTime((prev) => prev - 1);
       }, 1000);
     }
+    if (newTime > 1 && status === 'waiting') {
+      const timeFocused = timeLeft - newTime;
+      dispatch(addTotalFocus({ time: timeFocused }));
+    }
 
     return () => {
       if (timer.current) {
@@ -85,11 +91,12 @@ export const countdown = (pathname: string) => {
   useEffect(() => {
     if (newTime < 1) {
       clearInterval(timer.current!);
+      dispatch(addTotalFocus({ time: timeLeft }));
       pathname !== '/focus' ? iconToast('Your timer has ended!', '⌛') : null;
     }
   }, [newTime]);
 
   const displayedTime = convertSeconds(newTime);
 
-  return { displayedTime };
+  return { displayedTime, newTime };
 };

@@ -37,7 +37,11 @@ const createUserData = async (user: User, password: string) => {
       details,
       focus: [],
       notes: [],
-      statistics: {},
+      statistics: {
+        totalFocusTime: 0,
+        totalTasksComplete: 0,
+        totalNotesTaken: 0,
+      },
       tasks: [],
     });
   } catch (err) {
