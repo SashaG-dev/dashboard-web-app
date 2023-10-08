@@ -6,9 +6,10 @@ export const MAX_NOTE_LENGTH = 200;
 
 export const MAX_NAME_LENGTH = 12;
 
-export const HOUR = 1 * 60 * 60;
-export const MINUTE = 1 * 60;
 export const SECOND = 1;
+export const MINUTE = SECOND * 60;
+export const HOUR = SECOND * MINUTE * 60;
+export const DAY = SECOND * MINUTE * HOUR * 24;
 
 export const FOCUS_HOURS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 

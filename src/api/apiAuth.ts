@@ -12,6 +12,7 @@ import {
 import { errorToast, successToast } from '../utils/toasts';
 import { redirect } from 'react-router-dom';
 import { UserType } from '../types/UserType';
+import { UserStatsType } from '../types/UserStatsType';
 
 export const apiAuth = getAuth();
 
@@ -28,20 +29,23 @@ const createUserData = async (user: User, password: string) => {
       color: 'purple',
       darkMode: true,
       tag: {
-        currentTag: '',
+        customTag: '',
         hasTag: false,
       },
+    };
+
+    const stats: UserStatsType = {
+      totalFocusTime: 0,
+      totalTasksComplete: 0,
+      totalTaskItems: 0,
+      totalNotesTaken: 0,
     };
 
     await setDoc(userRef, {
       details,
       focus: [],
       notes: [],
-      statistics: {
-        totalFocusTime: 0,
-        totalTasksComplete: 0,
-        totalNotesTaken: 0,
-      },
+      stats,
       tasks: [],
     });
   } catch (err) {

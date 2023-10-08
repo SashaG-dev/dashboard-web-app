@@ -28,7 +28,7 @@ const initialState: UserStateType = {
     photoURL: null,
     tag: {
       hasTag: false,
-      currentTag: null,
+      customTag: null,
     },
     color: 'purple',
     darkMode: true,
@@ -92,6 +92,11 @@ const userSlice = createSlice({
       const { email } = action.payload;
       resetPassword(email);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(unsubscribe.fulfilled, (state) => {
+      state.unsubscribe = null;
+    });
   },
 });
 

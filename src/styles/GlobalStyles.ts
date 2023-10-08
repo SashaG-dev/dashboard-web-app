@@ -50,10 +50,6 @@ const GlobalStyles = createGlobalStyle<{
   padding: 0;
   font-family: inherit;
   box-sizing: inherit;
-
-  &:not(body) {
-    transition: background-color .3s;
-  }
 }
 
 html {

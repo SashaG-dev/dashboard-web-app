@@ -20,8 +20,9 @@ type StatsStateType = {
 const initialState: StatsStateType = {
   statistics: {
     totalFocusTime: 0,
-    totalNotesTaken: 0,
     totalTasksComplete: 0,
+    totalTaskItems: 0,
+    totalNotesTaken: 0,
   },
   unsubscribe: null,
 };
@@ -71,9 +72,11 @@ const statsSlice = createSlice({
       else newTotal = state.statistics.totalNotesTaken - 1;
       addNotesTotal(newTotal);
     },
-    addTotalTasks: (state) => {
+    addTotalTasks: (state, action) => {
+      const { itemsTotal } = action.payload;
       const newTotal = state.statistics.totalTasksComplete + 1;
-      addTasksComplete(newTotal);
+      const newItemsTotal = state.statistics.totalTaskItems + itemsTotal;
+      addTasksComplete(newTotal, newItemsTotal);
     },
   },
 });

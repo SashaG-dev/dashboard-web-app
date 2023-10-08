@@ -30,7 +30,7 @@ const TaskListCard = (props: TaskCardPropsType) => {
     const tasksComplete = tasks.every((task) => task.status === 'complete');
     if (tasksComplete) {
       dispatch(completeTaskList({ date, boolean: true }));
-      dispatch(addTotalTasks());
+      dispatch(addTotalTasks({ itemsTotal: tasks.length }));
     }
   };
 

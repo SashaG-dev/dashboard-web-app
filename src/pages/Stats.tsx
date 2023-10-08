@@ -3,7 +3,7 @@ import { fetchUserStats, unsubscribe } from '../store/slices/statsSlice';
 import { useAppDispatch } from '../hooks/hooks';
 import StatsLayout from '../features/stats/StatsLayout/StatsLayout';
 
-const More = () => {
+const Stats = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const More = () => {
     </main>
   );
 };
-export default More;
+export default Stats;

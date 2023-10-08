@@ -6,7 +6,7 @@ export type UserType = {
   photoURL: string | null;
   tag: {
     hasTag: boolean;
-    currentTag: string | null;
+    customTag: string | null;
   };
   color: 'red' | 'yellow' | 'green' | 'blue' | 'purple';
   darkMode: boolean;

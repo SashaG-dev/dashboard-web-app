@@ -42,7 +42,10 @@ export const addNotesTotal = async (total: number) => {
   }
 };
 
-export const addTasksComplete = async (total: number) => {
+export const addTasksComplete = async (
+  totalTasks: number,
+  totalItems: number
+) => {
   const user = apiAuth.currentUser;
   try {
     if (user !== null) {
@@ -51,7 +54,8 @@ export const addTasksComplete = async (total: number) => {
         ref,
         {
           statistics: {
-            totalTasksComplete: total,
+            totalTasksComplete: totalTasks,
+            totalTaskItems: totalItems,
           },
         },
         { merge: true }

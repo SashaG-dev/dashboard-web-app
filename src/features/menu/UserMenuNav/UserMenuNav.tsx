@@ -38,9 +38,9 @@ const UserMenuNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="more" title="Go to more features">
+          <NavLink to="stats" title="Go to statistics">
             <BsBarChartLine role="img" />
-            <span>More</span>
+            <span>Stats</span>
           </NavLink>
         </li>
         <li>

@@ -16,7 +16,7 @@ import Home from './pages/Home.tsx';
 import Tasks from './pages/Tasks.tsx';
 import Notebook from './pages/Notebook.tsx';
 import Focus from './pages/Focus.tsx';
-import More from './pages/More.tsx';
+import Stats from './pages/Stats.tsx';
 import Settings from './pages/Settings.tsx';
 import { settingsAction } from './features/settings/settingsAction.ts';
 import NotFound from './pages/NotFound.tsx';
@@ -41,7 +41,7 @@ const router = createBrowserRouter(
         <Route path="my-tasks" element={<Tasks />} loader={authLoader} />
         <Route path="notebook" element={<Notebook />} loader={authLoader} />
         <Route path="focus" element={<Focus />} loader={authLoader} />
-        <Route path="more" element={<More />} loader={authLoader} />
+        <Route path="stats" element={<Stats />} loader={authLoader} />
         <Route
           path="settings"
           element={<Settings />}
