@@ -72,9 +72,10 @@ const userSlice = createSlice({
     toggleUserMode: (state) => {
       toggleMode(!state.userData.darkMode);
     },
-    updateUserTheme: (_, action) => {
+    updateUserTheme: (state, action) => {
       const { newColor } = action.payload;
-      updateTheme(newColor);
+      if (newColor === state.userData.color) return;
+      else updateTheme(newColor);
     },
     updateCurrentName: (_, action) => {
       const { newName } = action.payload;

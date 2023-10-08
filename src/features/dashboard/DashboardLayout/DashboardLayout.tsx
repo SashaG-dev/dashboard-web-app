@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import DashboardHeader from '../DashboardHeader';
 import DashboardTasks from '../DashboardTasks/DashboardTasks';
 import DashboardNote from '../DashboardNote/DashboardNote';
-import { fetchUserData, unsubscribe } from '../../../store/slices/userSlice';
+import DashboardStats from '../DashboardStats/DashboardStats';
+import * as userSlice from '../../../store/slices/userSlice';
+import * as statSlice from '../../../store/slices/statsSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import { DashboardLayoutStyled } from './styles';
 
@@ -12,10 +14,12 @@ const DashboardLayout = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserData());
+    dispatch(userSlice.fetchUserData());
+    dispatch(statSlice.fetchUserStats());
 
     return () => {
-      unsubscribe();
+      userSlice.unsubscribe();
+      statSlice.unsubscribe();
     };
   }, [dispatch]);
 
@@ -25,6 +29,7 @@ const DashboardLayout = () => {
       <div className="dashboard-container">
         <DashboardTasks />
         <DashboardNote />
+        <DashboardStats />
       </div>
     </DashboardLayoutStyled>
   );

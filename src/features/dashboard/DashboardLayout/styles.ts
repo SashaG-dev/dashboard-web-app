@@ -9,5 +9,6 @@ export const DashboardLayoutStyled = styled.div<{ $isOpen?: boolean }>`
     justify-content: center;
     column-gap: 2.4rem;
     row-gap: 3.2rem;
+    padding-bottom: 1.6rem;
   }
 `;
