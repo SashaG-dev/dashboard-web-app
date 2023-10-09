@@ -38,8 +38,8 @@ export const UserMenuDetailsStyled = styled.header<{ $navOpen?: string }>`
   border-bottom: 1px solid var(--tertiary-opacity);
   padding-bottom: 1.8rem;
 
-  .custom-tag {
-    font-size: 1.6rem;
+  .user-name {
+    font-size: 1.4rem;
   }
 
   .user-img {

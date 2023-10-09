@@ -50,12 +50,11 @@ export const updateName = async (newName: string) => {
   try {
     if (user !== null) {
       const ref = doc(db, 'users', user.uid);
-      await updateProfile(user, { displayName: newName });
       await setDoc(
         ref,
         {
           details: {
-            displayName: newName,
+            name: newName,
           },
         },
         { merge: true }

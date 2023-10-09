@@ -25,11 +25,8 @@ const initialState: UserStateType = {
     email: null,
     password: null,
     displayName: null,
+    name: null,
     photoURL: null,
-    tag: {
-      hasTag: false,
-      customTag: null,
-    },
     color: 'purple',
     darkMode: true,
   },

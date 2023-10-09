@@ -18,13 +18,18 @@ export const action: ActionFunction = async ({ request }): Promise<any> => {
   try {
     const formData = await request.formData();
     const email = formData.get('email') as string;
+    const username = formData.get('username') as string;
     const password = formData.get('password') as string;
     const confirm = formData.get('confirm') as string;
     if (password !== confirm) errorToast('Passwords do not match.');
     else if (password.trim().length < 6)
       errorToast('Password must be at least 6 characters long.');
+    else if (!username.trim().length || username.length < 6)
+      errorToast('Username must be at least 6 characters long.');
+    else if (username.trim().length > 10)
+      errorToast("Username can't be more than 10 characters.");
     else {
-      await createUser(email, password);
+      await createUser(email.trim(), password.trim(), username.trim());
       const user = apiAuth.currentUser;
       if (user !== null) {
         successToast('New account created!');
@@ -56,6 +61,18 @@ const UserSignUp = () => {
               name="email"
               id="email"
               type="email"
+            />
+          </FormRowStyled>
+
+          <FormRowStyled>
+            <label htmlFor="username" className="visually-hidden">
+              Email
+            </label>
+            <TextInputStyled
+              placeholder="Username"
+              name="username"
+              id="username"
+              type="text"
             />
           </FormRowStyled>
 

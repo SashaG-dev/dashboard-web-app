@@ -17,7 +17,7 @@ const UserSettings = () => {
       <div className="settings-container">
         <FormRowStyled>
           <p>
-            name: <span>{userData?.displayName || 'user'}</span>
+            name: <span>{userData?.name || 'user'}</span>
           </p>
           <ButtonStyled
             $type="accent"

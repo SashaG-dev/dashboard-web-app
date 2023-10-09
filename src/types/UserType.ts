@@ -3,11 +3,8 @@ export type UserType = {
   email: string | null;
   password: string | null;
   displayName: string | null;
+  name: string | null;
   photoURL: string | null;
-  tag: {
-    hasTag: boolean;
-    customTag: string | null;
-  };
   color: 'red' | 'yellow' | 'green' | 'blue' | 'purple';
   darkMode: boolean;
 };

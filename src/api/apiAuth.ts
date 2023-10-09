@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  updateProfile,
   User,
   sendPasswordResetEmail,
   deleteUser,
@@ -16,7 +17,11 @@ import { UserStatsType } from '../types/UserStatsType';
 
 export const apiAuth = getAuth();
 
-const createUserData = async (user: User, password: string) => {
+const createUserData = async (
+  user: User,
+  password: string,
+  username: string
+) => {
   try {
     const userRef = doc(db, 'users', user.uid);
 
@@ -24,14 +29,11 @@ const createUserData = async (user: User, password: string) => {
       id: user.uid,
       email: user.email,
       password,
-      displayName: 'user',
+      displayName: username,
+      name: '',
       photoURL: null,
       color: 'purple',
       darkMode: true,
-      tag: {
-        customTag: '',
-        hasTag: false,
-      },
     };
 
     const stats: UserStatsType = {
@@ -53,7 +55,11 @@ const createUserData = async (user: User, password: string) => {
   }
 };
 
-export const createUser = async (email: string, password: string) => {
+export const createUser = async (
+  email: string,
+  password: string,
+  username: string
+) => {
   try {
     const newUser = await createUserWithEmailAndPassword(
       apiAuth,
@@ -61,9 +67,10 @@ export const createUser = async (email: string, password: string) => {
       password
     );
     const user = newUser.user as any;
-    await createUserData(user, password);
+    await createUserData(user, password, username);
     localStorage.setItem('token', user.accessToken);
     await signInWithEmailAndPassword(apiAuth, email, password);
+    await updateProfile(apiAuth.currentUser!, { displayName: username });
   } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;

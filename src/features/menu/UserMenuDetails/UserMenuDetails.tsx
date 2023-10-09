@@ -6,7 +6,7 @@ import { UserMenuDetailsStyled } from './styles';
 import img from '../../../assets/placeholder-img.jpg';
 
 const UserMenuDetails = () => {
-  const { displayName, tag } = useAppSelector((state) => state.user.userData);
+  const { displayName, name } = useAppSelector((state) => state.user.userData);
   const { isOpen } = useAppSelector((state) => state.menu);
   const dispatch = useAppDispatch();
 
@@ -28,10 +28,8 @@ const UserMenuDetails = () => {
         title={isOpen ? '' : 'open navigation'}
       />
       <div className="user-text">
-        <p className="user-name">{displayName || 'user'}</p>
-        <p className="custom-tag">
-          {tag.hasTag ? tag.currentTag : 'Task Novice'}
-        </p>
+        <p className="custom-tag">{name || 'User'}</p>
+        <p className="user-name">{displayName}</p>
       </div>
 
       <button

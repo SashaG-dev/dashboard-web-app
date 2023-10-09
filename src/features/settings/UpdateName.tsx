@@ -23,7 +23,7 @@ type Props = {
 const UpdateName = ({ onClick, setChangeDisplay }: Props) => {
   const [userInput, setUserInput] = useState('');
 
-  const { displayName } = useAppSelector((state) => state.user.userData);
+  const { name } = useAppSelector((state) => state.user.userData);
   const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ const UpdateName = ({ onClick, setChangeDisplay }: Props) => {
     if (userInput.trim() === '') errorToast('Please enter a valid name');
     else if (userInput.length > MAX_NAME_LENGTH)
       errorToast('Name cannot be longer than 12 characters.');
-    else if (userInput === displayName) errorToast('New name matches current');
+    else if (userInput === name) errorToast('New name matches current');
     else {
       dispatch(updateCurrentName({ newName: userInput }));
       setChangeDisplay(false);

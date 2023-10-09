@@ -13,6 +13,12 @@ const AccountSettings = () => {
 
   const { userData } = useAppSelector((state) => state.user);
 
+  const displayEmail = () => {
+    if (userData.email) {
+      const main = userData.email.split('@');
+      return main[0][0].padEnd(main[0].length, '*') + '@' + main[1];
+    }
+  };
   const displayPassword = () => {
     if (userData.password) {
       return ''.padEnd(userData.password.length, '*');
@@ -34,7 +40,7 @@ const AccountSettings = () => {
       <div className="settings-container">
         <FormRowStyled>
           <p>
-            email address: <span>{userData.email}</span>
+            email address: <span>{displayEmail()}</span>
           </p>
           <ButtonStyled
             type="button"
