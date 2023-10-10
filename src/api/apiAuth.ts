@@ -31,7 +31,7 @@ const createUserData = async (
       password,
       displayName: username,
       name: 'Taskmaster',
-      photoURL: 'avatar-5',
+      photoURL: 'avatar5',
       color: 'purple',
       darkMode: true,
     };
@@ -83,7 +83,7 @@ export const createUser = async (
       errorToast("There's already an account associated with this email.");
     else
       errorToast(
-        'Could not create new acocunt. Check connection and try again!'
+        'Could not create new account. Check connection and try again!'
       );
   }
 };

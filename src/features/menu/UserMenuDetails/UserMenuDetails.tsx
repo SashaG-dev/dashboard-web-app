@@ -3,6 +3,7 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import { toggleMenu } from '../../../store/slices/menuSlice';
 import { UserMenuDetailsStyled } from './styles';
+import placeholder from '../../../assets/placeholder.jpg';
 
 const UserMenuDetails = () => {
   const { displayName, name, photoURL } = useAppSelector(
@@ -21,7 +22,7 @@ const UserMenuDetails = () => {
       <img
         role={isOpen ? 'img' : 'button'}
         tabIndex={isOpen ? -1 : 0}
-        src={`/src/assets/${photoURL}.jpg`}
+        src={photoURL ? `/src/assets/${photoURL}.jpg` : placeholder}
         alt="placeholder"
         className="user-img"
         onClick={() => (isOpen ? null : dispatch(toggleMenu({})))}

@@ -11,6 +11,7 @@ import {
   updateUserEmail,
   updateUserPassword,
   updateTheme,
+  updateAvatar,
 } from '../../api/apiSettings';
 import { unsubscribeFn } from '../../utils/helpers';
 
@@ -74,6 +75,11 @@ const userSlice = createSlice({
       if (newColor === state.userData.color) return;
       else updateTheme(newColor);
     },
+    updateUserAvatar: (state, action) => {
+      const { avatar } = action.payload;
+      if (state.userData.photoURL === avatar) return;
+      else updateAvatar(avatar);
+    },
     updateCurrentName: (_, action) => {
       const { newName } = action.payload;
       updateName(newName);
@@ -101,6 +107,7 @@ const userSlice = createSlice({
 export const {
   toggleUserMode,
   updateUserTheme,
+  updateUserAvatar,
   updateCurrentName,
   updateCurrentEmail,
   updateCurrentPassword,

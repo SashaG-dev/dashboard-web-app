@@ -20,9 +20,6 @@ export const SettingsLayoutStyled = styled.div`
     }
   }
 
-  .headings-container {
-  }
-
   .settings-container {
     background-color: var(--secondary);
     padding: 1.6rem 2.4rem;
@@ -86,6 +83,43 @@ export const SettingsLayoutStyled = styled.div`
 
     .delete-row {
       justify-content: center;
+    }
+  }
+
+  .avatar-options {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .option {
+    height: 4.8rem;
+    width: 4.8rem;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: var(--transition-all);
+    cursor: pointer;
+
+    @media ${mediaQueries.phoneLandscape} {
+      height: 3.2rem;
+      width: 3.2rem;
+      border-radius: var(--radius-round);
+    }
+
+    &:hover,
+    &:focus-visible,
+    &.selected {
+      outline-offset: 2px;
+      border: 2px solid var(--accent);
+
+      & .avatar-img {
+        transform: scale(1.1);
+      }
+    }
+
+    .avatar-img {
+      width: 100%;
+      transition: var(--transition-all);
     }
   }
 `;

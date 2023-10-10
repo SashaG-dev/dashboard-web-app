@@ -1,5 +1,5 @@
 import { setDoc, doc } from 'firebase/firestore';
-import { updateEmail, updatePassword } from 'firebase/auth';
+import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
 import { db } from './firebase';
 import { apiAuth } from './apiAuth';
 import { errorToast, successToast } from '../utils/toasts';
@@ -64,6 +64,29 @@ export const updateName = async (newName: string) => {
   } catch (err) {
     console.error(err);
     errorToast('Could not update name.');
+  }
+};
+
+export const updateAvatar = async (avatar: string) => {
+  const user = apiAuth.currentUser;
+  try {
+    if (user !== null) {
+      const ref = doc(db, 'users', user.uid);
+      await updateProfile(user, { photoURL: avatar });
+      await setDoc(
+        ref,
+        {
+          details: {
+            photoURL: avatar,
+          },
+        },
+        { merge: true }
+      );
+      successToast('Avatar image successfully updated!');
+    }
+  } catch (err) {
+    console.error(err);
+    errorToast('Could not update user profile.');
   }
 };
 
