@@ -1,5 +1,5 @@
 import { setDoc, doc } from 'firebase/firestore';
-import { updateProfile, updateEmail, updatePassword } from 'firebase/auth';
+import { updateEmail, updatePassword } from 'firebase/auth';
 import { db } from './firebase';
 import { apiAuth } from './apiAuth';
 import { errorToast, successToast } from '../utils/toasts';

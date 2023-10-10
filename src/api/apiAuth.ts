@@ -30,8 +30,8 @@ const createUserData = async (
       email: user.email,
       password,
       displayName: username,
-      name: '',
-      photoURL: null,
+      name: 'Taskmaster',
+      photoURL: 'avatar-5',
       color: 'purple',
       darkMode: true,
     };
@@ -79,8 +79,12 @@ export const createUser = async (
       errorCode === 'auth/missing-password'
     )
       errorToast('Please enter a valid email and password.');
-    if (errorCode === 'auth/email-already-in-use')
+    else if (errorCode === 'auth/email-already-in-use')
       errorToast("There's already an account associated with this email.");
+    else
+      errorToast(
+        'Could not create new acocunt. Check connection and try again!'
+      );
   }
 };
 
@@ -95,9 +99,11 @@ export const signInUser = async (email: string, password: string) => {
       errorCode === 'auth/missing-password'
     )
       errorToast('Please enter your email and password before logging in.');
-    if (errorCode === 'auth/wrong-password') errorToast('Incorrect password.');
-    if (errorCode === 'auth/user-not-found')
+    else if (errorCode === 'auth/wrong-password')
+      errorToast('Incorrect password.');
+    else if (errorCode === 'auth/user-not-found')
       errorToast('No user found. Try creating a new account.');
+    else errorToast('Could not sign in. Check connection and try again!');
   }
 };
 

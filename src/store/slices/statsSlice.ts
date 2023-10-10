@@ -79,6 +79,11 @@ const statsSlice = createSlice({
       addTasksComplete(newTotal, newItemsTotal);
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(unsubscribe.fulfilled, (state) => {
+      state.unsubscribe = null;
+    });
+  },
 });
 
 export const { addTotalFocus, toggleTotalNotes, addTotalTasks } =

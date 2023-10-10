@@ -5,10 +5,10 @@ import { getDate } from '../../utils/helpers';
 import { useAppSelector } from '../../hooks/hooks';
 
 const DashboardHeader = () => {
-  const { displayName } = useAppSelector((state) => state.user.userData);
+  const { name } = useAppSelector((state) => state.user.userData);
 
   const displayUserGreeting = useCallback(() => {
-    if (displayName) return getUserGreeting(displayName);
+    if (name) return getUserGreeting(name);
     else return getUserGreeting();
   }, []);
 
