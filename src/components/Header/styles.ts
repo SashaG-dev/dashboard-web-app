@@ -4,6 +4,7 @@ import { mediaQueries } from '../../styles/mediaQueries';
 export const HeaderStyled = styled.header`
   display: flex;
   justify-content: space-between;
+  gap: 0.8rem;
   border-bottom: 1px solid var(--tertiary-opacity);
   margin-bottom: 2.4rem;
   padding-bottom: 1.6rem;
@@ -15,12 +16,10 @@ export const HeaderStyled = styled.header`
   }
 
   .header-heading {
-    font-size: 3.2rem;
+    font-size: 2.7rem;
     font-weight: 300;
+    letter-spacing: -1px;
 
-    @media ${mediaQueries.tabSmall} {
-      font-size: 2.8rem;
-    }
     @media ${mediaQueries.phonePortrait} {
       font-size: 2.4rem;
     }
@@ -29,7 +28,7 @@ export const HeaderStyled = styled.header`
   .header-details {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
 
     @media ${mediaQueries.phoneLandscape} {
       flex-direction: column;

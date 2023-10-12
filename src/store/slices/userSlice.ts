@@ -20,17 +20,19 @@ type UserStateType = {
   unsubscribe: null | Unsubscribe;
 };
 
+const defaultUser: UserType = {
+  id: null,
+  email: null,
+  password: null,
+  displayName: null,
+  name: null,
+  photoURL: null,
+  color: 'purple',
+  darkMode: true,
+};
+
 const initialState: UserStateType = {
-  userData: {
-    id: null,
-    email: null,
-    password: null,
-    displayName: null,
-    name: null,
-    photoURL: null,
-    color: 'purple',
-    darkMode: true,
-  },
+  userData: defaultUser,
   unsubscribe: null,
 };
 
@@ -96,6 +98,9 @@ const userSlice = createSlice({
       const { email } = action.payload;
       resetPassword(email);
     },
+    clearUserData: (state) => {
+      state.userData = defaultUser;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(unsubscribe.fulfilled, (state) => {
@@ -112,6 +117,7 @@ export const {
   updateCurrentEmail,
   updateCurrentPassword,
   resetUserPassword,
+  clearUserData,
 } = userSlice.actions;
 
 export default userSlice.reducer;

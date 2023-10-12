@@ -6,6 +6,7 @@ import { ButtonStyled, ButtonGroupStyled } from '../../components/Button';
 import { updateCurrentEmail } from '../../store/slices/userSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { checkEmailError } from './settingsUtilities';
+import { iconToast } from '../../utils/toasts';
 
 type Props = {
   onClick: (name: 'email' | 'password') => void;
@@ -17,7 +18,9 @@ const UpdateEmail = ({ onClick }: Props) => {
     password: '',
   });
 
-  const { email, password } = useAppSelector((state) => state.user.userData);
+  const { email, password, displayName } = useAppSelector(
+    (state) => state.user.userData
+  );
   const dispatch = useAppDispatch();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,9 +37,12 @@ const UpdateEmail = ({ onClick }: Props) => {
     e: MouseEvent<HTMLButtonElement> | FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    if (email && password) {
-      checkEmailError(userInput, email, password, handler);
-    }
+
+    if (displayName !== 'demo.user') {
+      if (email && password) {
+        checkEmailError(userInput, email, password, handler);
+      }
+    } else iconToast('Cannot change email in demo mode.', '⚙️');
   };
 
   return (

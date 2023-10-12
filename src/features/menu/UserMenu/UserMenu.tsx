@@ -5,7 +5,8 @@ import UserMenuNav from '../UserMenuNav/UserMenuNav';
 import UserMenuLogout from '../UserMenuLogout';
 import Modal from '../../../components/Modal/Modal';
 import { focusModal } from '../../../hooks/focusModal';
-import { useAppSelector } from '../../../hooks/hooks';
+import { clearUserData } from '../../../store/slices/userSlice';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import { signOutUser } from '../../../api/apiAuth';
 import { UserMenuStyled } from './styles';
 
@@ -14,11 +15,14 @@ const UserMenu = () => {
   const [toggleModal, setToggleModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onClick = () => {
     signOutUser();
     navigate('/login');
     localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    dispatch(clearUserData());
   };
 
   const close = () => setToggleModal(false);

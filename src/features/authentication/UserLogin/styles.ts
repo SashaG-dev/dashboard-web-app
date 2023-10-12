@@ -49,7 +49,8 @@ export const UserLoginStyled = styled.div`
     }
   }
 
-  .login-btn {
+  .login-btn,
+  .demo-btn {
     width: 75%;
     margin: 0 auto;
 

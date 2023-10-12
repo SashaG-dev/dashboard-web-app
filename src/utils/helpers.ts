@@ -19,8 +19,13 @@ export const formatDate = (
   return formattedDate;
 };
 
-export const getDate = (): string => {
-  const formattedDate = formatDate(getToday(), 'full');
+export const getDate = (locale: string = 'en-US'): string => {
+  const formattedDate = Intl.DateTimeFormat(locale, {
+    weekday: 'long',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(getToday());
   return formattedDate;
 };
 

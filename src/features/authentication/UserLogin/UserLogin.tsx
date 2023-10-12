@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import {
   useNavigation,
   Form,
   ActionFunction,
   redirect,
   Link,
+  useNavigate,
 } from 'react-router-dom';
 import { BsPersonCircle } from 'react-icons/bs';
 import { FaLock } from 'react-icons/fa6';
@@ -38,6 +40,34 @@ export const loginAction: ActionFunction = async ({
 
 const UserLogin = () => {
   const navigation = useNavigation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const email = import.meta.env.VITE_DEMO_EMAIL;
+    const password = import.meta.env.VITE_DEMO_PASSWORD;
+
+    const demoBtn = document.querySelector('.demo-btn') as HTMLButtonElement;
+
+    const loginDemo = async () => {
+      try {
+        await signInUser(email, password);
+        const user = apiAuth.currentUser as any;
+        if (user) {
+          sessionStorage.setItem('token', user.accessToken);
+          successToast('Now in demo mode.');
+          navigate('/');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    demoBtn.addEventListener('click', loginDemo);
+
+    return () => {
+      demoBtn.removeEventListener('click', loginDemo);
+    };
+  });
 
   return (
     <UserLoginStyled>
@@ -74,6 +104,15 @@ const UserLogin = () => {
             disabled={navigation.state === 'submitting'}
           >
             {navigation.state === 'submitting' ? 'Logging in' : 'Log in'}
+          </ButtonStyled>
+
+          <ButtonStyled
+            $type="accent"
+            title="Log in with a demo account"
+            className="demo-btn"
+            type="button"
+          >
+            Try the Demo
           </ButtonStyled>
 
           <Link to="forgot-password">Forgot Password?</Link>

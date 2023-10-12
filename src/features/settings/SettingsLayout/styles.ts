@@ -4,9 +4,34 @@ import { mediaQueries } from '../../../styles/mediaQueries';
 export const SettingsLayoutStyled = styled.div`
   max-width: 120rem;
   margin: 0 auto;
+  padding: 2.4rem 0;
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+
+    .user-img {
+      height: 8.4rem;
+      width: 8.4rem;
+      border: 2px solid var(--accent);
+      border-radius: var(--radius-round);
+      margin-bottom: 0.8rem;
+
+      @media ${mediaQueries.phoneLandscape} {
+        height: 7.2rem;
+        width: 7.2rem;
+      }
+    }
+
+    .details-text {
+      text-align: center;
+    }
+  }
 
   .settings-heading,
   .settings-h3,

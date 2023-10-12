@@ -2,13 +2,14 @@ import { styled } from 'styled-components';
 import { mediaQueries } from '../../../styles/mediaQueries';
 
 export const StatsLayoutStyled = styled.div`
+  margin-bottom: 1.6rem;
+
   .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 2.4rem;
     justify-content: center;
     justify-items: center;
-    margin-bottom: 2.4rem;
     max-width: calc((30rem * 3) + (2.4rem * 2));
     margin: 0 auto;
 

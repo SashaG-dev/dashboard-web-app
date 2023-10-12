@@ -6,6 +6,7 @@ import { ButtonStyled, ButtonGroupStyled } from '../../components/Button';
 import { updateCurrentPassword } from '../../store/slices/userSlice';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { checkError } from './settingsUtilities';
+import { iconToast } from '../../utils/toasts';
 
 type Props = {
   onClick: (name: 'email' | 'password') => void;
@@ -18,7 +19,9 @@ const UpdatePassword = ({ onClick }: Props) => {
     confirmNew: '',
   });
 
-  const { password } = useAppSelector((state) => state.user.userData);
+  const { password, displayName } = useAppSelector(
+    (state) => state.user.userData
+  );
   const dispatch = useAppDispatch();
 
   const handler = () => {
@@ -30,7 +33,9 @@ const UpdatePassword = ({ onClick }: Props) => {
     e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    if (password) checkError(userInput, password, handler);
+    if (displayName !== 'demo.user') {
+      if (password) checkError(userInput, password, handler);
+    } else iconToast('Cannot change password in demo mode.', '⚙️');
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

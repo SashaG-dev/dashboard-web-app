@@ -10,7 +10,7 @@ const DashboardHeader = () => {
   const displayUserGreeting = useCallback(() => {
     if (name) return getUserGreeting(name);
     else return getUserGreeting();
-  }, []);
+  }, [name]);
 
   return (
     <Header name="dashboard" heading={displayUserGreeting()}>
