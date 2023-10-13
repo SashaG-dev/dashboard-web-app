@@ -28,6 +28,10 @@ export const action: ActionFunction = async ({ request }): Promise<any> => {
       errorToast('Username must be at least 6 characters long.');
     else if (username.trim().length > 10)
       errorToast("Username can't be more than 10 characters.");
+    else if (username.trim() === 'demo.user')
+      errorToast(
+        'This username cannot be used. Please enter a different name.'
+      );
     else {
       await createUser(email.trim(), password.trim(), username.trim());
       const user = apiAuth.currentUser;

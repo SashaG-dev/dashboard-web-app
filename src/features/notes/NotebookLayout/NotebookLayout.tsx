@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { toggleAddNote } from '../../../store/slices/notesSlice';
 import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
@@ -13,7 +12,7 @@ const NotebookLayout = () => {
 
   const dispatch = useAppDispatch();
 
-  const currentDate = useCallback(() => formatDate(new Date(), 'medium'), []);
+  const currentDate = () => formatDate(new Date(), 'medium');
 
   return (
     <NotebookLayoutStyled>

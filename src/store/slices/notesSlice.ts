@@ -59,7 +59,7 @@ const notesSlice = createSlice({
     setRecentNotes: (state, action) => {
       const notes = action.payload as NoteType[];
       state.recentNotes = notes.slice(0, 5);
-      state.currentNote = notes[0];
+      state.currentNote = notes[notes.length - 1];
     },
     toggleAddNote: (state, action) => {
       const { toggle } = action?.payload;

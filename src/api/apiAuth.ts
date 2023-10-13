@@ -14,6 +14,7 @@ import { errorToast, successToast } from '../utils/toasts';
 import { redirect } from 'react-router-dom';
 import { UserType } from '../types/UserType';
 import { UserStatsType } from '../types/UserStatsType';
+import { demoData } from '../data/demoData';
 
 export const apiAuth = getAuth();
 
@@ -108,7 +109,12 @@ export const signInUser = async (email: string, password: string) => {
 };
 
 export const signOutUser = async () => {
+  const user = apiAuth.currentUser;
   try {
+    if (user?.displayName === 'demo.user') {
+      const ref = doc(db, 'users', user.uid);
+      await setDoc(ref, demoData);
+    }
     await signOut(apiAuth);
   } catch (err) {
     console.error(err);

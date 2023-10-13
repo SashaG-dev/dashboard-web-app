@@ -6,6 +6,7 @@ export const NotesContainerStyled = styled.div`
   grid-template-columns: repeat(2, minmax(48rem, 1fr));
   column-gap: 1.6rem;
   row-gap: 3.2rem;
+  padding-bottom: 1.6rem;
 
   @media ${mediaQueries.laptop} {
     grid-template-columns: repeat(2, minmax(42rem, 1fr));
