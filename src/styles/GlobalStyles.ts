@@ -6,7 +6,6 @@ const GlobalStyles = createGlobalStyle<{
   $isDark?: boolean;
 }>`
 :root {
-  /* Colors */
   --accent: #8d72e1;
   --error: ${(props) => (props.$isDark ? '#E84545' : '#CE1212')};
 
@@ -27,7 +26,6 @@ const GlobalStyles = createGlobalStyle<{
   --tertiary-light: #555;
   --tertiary-opacity: rgba(0, 0, 0, .1);
   }
-
 
   /* Borders and Radii */ 
   --radius-sm: .8rem;

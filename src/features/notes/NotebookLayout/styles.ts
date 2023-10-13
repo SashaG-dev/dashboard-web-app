@@ -6,7 +6,7 @@ export const NotebookLayoutStyled = styled.div`
     position: fixed;
     right: 1.6rem;
     bottom: 2.4rem;
-    z-index: 10;
+    z-index: 5;
 
     &.rotate {
       transform: rotate(135deg);

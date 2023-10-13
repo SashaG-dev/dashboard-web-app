@@ -17,7 +17,6 @@ const store = configureStore({
   },
 });
 
-//exporting types so they'll update when slices/state is updated
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

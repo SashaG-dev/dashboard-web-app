@@ -6,6 +6,7 @@ import { ButtonStyled } from '../../../components/Button';
 import { useAppSelector } from '../../../hooks/hooks';
 import { SettingsLayoutStyled } from './styles';
 import { iconToast } from '../../../utils/toasts';
+import placeholder from '../../../assets/placeholder.jpg';
 
 const SettingsLayout = () => {
   const { photoURL, displayName, name } = useAppSelector(
@@ -25,7 +26,7 @@ const SettingsLayout = () => {
     <SettingsLayoutStyled>
       <div className="user-details">
         <img
-          src={`../src/assets/${photoURL}.jpg`}
+          src={photoURL ? `../src/assets/${photoURL}.jpg` : placeholder}
           alt="user avatar"
           className="user-img"
         />
