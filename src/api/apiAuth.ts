@@ -74,7 +74,7 @@ export const createUser = async (
     await updateProfile(apiAuth.currentUser!, { displayName: username });
   } catch (error: any) {
     const errorCode = error.code;
-    const errorMessage = error.message;
+    // const errorMessage = error.message;
     if (
       errorCode === 'auth/invalid-email' ||
       errorCode === 'auth/missing-password'
@@ -94,7 +94,7 @@ export const signInUser = async (email: string, password: string) => {
     await signInWithEmailAndPassword(apiAuth, email, password);
   } catch (error: any) {
     const errorCode = error.code;
-    const errorMessage = error.message;
+    // const errorMessage = error.message;
     if (
       errorCode === 'auth/invalid-email' ||
       errorCode === 'auth/missing-password'

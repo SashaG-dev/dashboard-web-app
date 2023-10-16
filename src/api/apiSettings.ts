@@ -110,7 +110,7 @@ export const updateUserEmail = async (newEmail: string) => {
   } catch (err: any) {
     console.error(err);
     const errorCode = err.code;
-    const errorMessage = err.message;
+    // const errorMessage = err.message;
     if (errorCode === 'auth/requires-recent-login')
       errorToast(
         'Session expired! Please log out and log back in to update email address.'
@@ -138,7 +138,7 @@ export const updateUserPassword = async (newPassword: string) => {
     }
   } catch (err: any) {
     const errorCode = err.code;
-    const errorMessage = err.message;
+    // const errorMessage = err.message;
     console.error(err);
     if (errorCode === 'auth/requires-recent-login')
       errorToast(
