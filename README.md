@@ -42,3 +42,36 @@ Here's the major features:
      - update custom display name
      - toggle between light and dark mode
      - update color theme, which changes the app's main accent color
+
+## User Instructions
+
+1. Go to the Dashboard App website
+2. If you don't have an account, follow the link on the login page to create on, or try things out by logging in with the demo mode on the main log in page.
+3. After logging in, get access to all of the app's features that are previewed in the visual guides above.
+
+## Developer Instructions
+
+1. Fork this repo and create a clone of it via git.
+
+```bash
+
+git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+
+```
+
+2. Or download a zip of the repo via the Code button here on GitHub.
+
+3. Open the files in a directory where a git repo isn't currently initialized and install all dependencies, then run development
+
+```bash
+
+npm install
+npm run dev
+
+```
+
+## Known Issues
+
+- When a user logs out of an account, Firebase's event listeners do not immediately unsubscribe. This can render multiple errors onto the console (the max amount current recorded is ~10-12 errors)
+- On certain routes, when the page is reloaded, user profile data is not fetched and rendered on the DOM. The only current solution to this is clicking on the home or settings page.
+- If they've been logged in for an extended period, users have to log out and log back into their account if they want to change their email or password.

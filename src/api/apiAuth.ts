@@ -37,7 +37,7 @@ const createUserData = async (
       darkMode: true,
     };
 
-    const stats: UserStatsType = {
+    const statistics: UserStatsType = {
       totalFocusTime: 0,
       totalTasksComplete: 0,
       totalTaskItems: 0,
@@ -48,7 +48,7 @@ const createUserData = async (
       details,
       focus: [],
       notes: [],
-      stats,
+      statistics,
       tasks: [],
     });
   } catch (err) {

@@ -8,15 +8,15 @@ type DemoType = {
   details: UserType;
   focus: SavedFocusType[];
   notes: NoteType[];
-  stats: UserStatsType;
+  statistics: UserStatsType;
   tasks: TaskListType[];
 };
 
 export const demoData: DemoType = {
   details: {
-    id: import.meta.env.VITE_DEMO_ID,
-    email: import.meta.env.VITE_DEMO_EMAIL,
-    password: import.meta.env.VITE_DEMO_PASSWORD,
+    id: process.env.DEMO_ID!,
+    email: process.env.DEMO_EMAIL!,
+    password: process.env.DEMO_PASSWORD!,
     displayName: 'demo.user',
     name: 'Taskmaster',
     photoURL: 'avatar5',
@@ -66,7 +66,7 @@ export const demoData: DemoType = {
       main: 'This was a slow week, but a good one! Next week I have plans to visit some family out of state, but first I am making it a goal to finish my current project before leaving.',
     },
   ],
-  stats: {
+  statistics: {
     totalFocusTime: 72020,
     totalNotesTaken: 3,
     totalTaskItems: 24,
