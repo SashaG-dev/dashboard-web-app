@@ -4,6 +4,11 @@ import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import { toggleMenu } from '../../../store/slices/menuSlice';
 import { UserMenuDetailsStyled } from './styles';
 import placeholder from '../../../assets/placeholder.jpg';
+import avatar1 from '../../../../public/avatars/avatar1.jpg';
+import avatar2 from '../../../../public/avatars/avatar2.jpg';
+import avatar3 from '../../../../public/avatars/avatar3.jpg';
+import avatar4 from '../../../../public/avatars/avatar4.jpg';
+import avatar5 from '../../../../public/avatars/avatar5.jpg';
 
 const UserMenuDetails = () => {
   const { displayName, name, photoURL } = useAppSelector(
@@ -17,12 +22,18 @@ const UserMenuDetails = () => {
     if (e.key === 'Enter') dispatch(toggleMenu({}));
   };
 
+  const displayAvatar = () => {
+    return [avatar1, avatar2, avatar3, avatar4, avatar5].find((avatar) =>
+      avatar.includes(photoURL!)
+    );
+  };
+
   return (
     <UserMenuDetailsStyled $navOpen={isOpen ? '' : 'closed'}>
       <img
         role={isOpen ? 'img' : 'button'}
         tabIndex={isOpen ? -1 : 0}
-        src={photoURL ? `/src/assets/${photoURL}.jpg` : placeholder}
+        src={photoURL ? displayAvatar() : placeholder}
         alt="placeholder"
         className="user-img"
         onClick={() => (isOpen ? null : dispatch(toggleMenu({})))}

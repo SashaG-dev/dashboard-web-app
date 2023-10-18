@@ -2,6 +2,10 @@
 
 ## A web app created for helping with planning, note-taking, and focusing, all with a hand-designed, engaging UI.
 
+![alt-text][img]
+
+[img]: https://github.com/SashaG-dev/dashboard-web-app/blob/main/public/readme/main-img.png 'Image of the Dashboard Web App homepage'
+
 The Dashboard Web App is a fully responsive, accessible web app created with TypeScript, React, React Router, React-Redux/Redux Toolkit, and Styled Components, with all data being store and fetched via Firebase. The main focus of this web app is to assist users id developing their skills related to task management and healthy habit-forming.
 
 Here's the major features:

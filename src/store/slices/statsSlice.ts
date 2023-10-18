@@ -37,7 +37,7 @@ export const fetchUserStats = createAsyncThunk(
           const unsubscribe = onSnapshot(ref, (doc) => {
             const data = doc.data();
             if (data) {
-              dispatch(statsSlice.actions.setStats(data.stats));
+              dispatch(statsSlice.actions.setStats(data.statistics));
             }
             if (!user) {
               (getState() as RootState).stats.unsubscribe = unsubscribe;

@@ -2,11 +2,11 @@ import { MouseEvent, KeyboardEvent } from 'react';
 import { FormRowStyled } from '../../components/Form';
 import { updateUserAvatar } from '../../store/slices/userSlice';
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import avatar1 from '../../assets/avatar1.jpg';
-import avatar2 from '../../assets/avatar2.jpg';
-import avatar3 from '../../assets/avatar3.jpg';
-import avatar4 from '../../assets/avatar4.jpg';
-import avatar5 from '../../assets/avatar5.jpg';
+import avatar1 from '../../../public/avatars/avatar1.jpg';
+import avatar2 from '../../../public/avatars/avatar2.jpg';
+import avatar3 from '../../../public/avatars/avatar3.jpg';
+import avatar4 from '../../../public/avatars/avatar4.jpg';
+import avatar5 from '../../../public/avatars/avatar5.jpg';
 
 const UpdateAvatar = () => {
   const { photoURL } = useAppSelector((state) => state.user.userData);
