@@ -51,7 +51,7 @@ Here's the major features:
 
 ![alt text][auth-login]
 
-[auth-login]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-preview.gif 'Preview of the user login page'
+[auth-login]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-login.png 'Preview of the user login page'
 
 #### Create Account
 
