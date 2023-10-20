@@ -48,6 +48,8 @@ Here's the major features:
 
 ## Visual Guides
 
+[View all preview images in the visual guides repo](https://github.com/SashaG-dev/visual-guides/tree/main/dashboard-web-app)
+
 ### Authentication
 
 #### Login
@@ -67,20 +69,6 @@ Here's the major features:
 ![alt text][auth-reset]
 
 [auth-reset]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-reset.png 'Preview of the password reset page'
-
-### User Menu
-
-#### User Menu Opened
-
-![alt text][main]
-
-[main]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-open.png 'Image of the user menu when it's opened on desktop'
-
-#### User Menu Collapsed
-
-![alt text][closed]
-
-[closed]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-closed.png 'Image of the user menu when it's collapsed on desktop'
 
 ### Tasks
 
