@@ -72,15 +72,15 @@ Here's the major features:
 
 #### User Menu Opened
 
-![alt text][main-open]
+![alt text][main]
 
-[main-open]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-open.png 'Image of the user menu when it's opened on desktop'
+[main]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-open.png 'Image of the user menu when it's opened on desktop'
 
 #### User Menu Collapsed
 
-![alt text][main-closed]
+![alt text][closed]
 
-[main-closed]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-closed.png 'Image of the user menu when it's collapsed on desktop'
+[closed]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-closed.png 'Image of the user menu when it's collapsed on desktop'
 
 ### Tasks
 
