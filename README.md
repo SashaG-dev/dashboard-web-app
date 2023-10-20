@@ -6,6 +6,8 @@
 
 [img]: https://github.com/SashaG-dev/dashboard-web-app/blob/main/public/readme/main-img.png 'Image of the Dashboard Web App homepage'
 
+[Go live](https://user-dashboard-web-app.netlify.app)
+
 The Dashboard Web App is a fully responsive, accessible web app created with TypeScript, React, React Router, React-Redux/Redux Toolkit, and Styled Components, with all data being store and fetched via Firebase. The main focus of this web app is to assist users id developing their skills related to task management and healthy habit-forming.
 
 Here's the major features:
@@ -43,9 +45,17 @@ Here's the major features:
      - toggle between light and dark mode
      - update color theme, which changes the app's main accent color
 
+## Visual Guides
+
+### Authentication
+
+![alt text][auth]
+
+[auth]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-preview.gif 'Preview of the user login, create account, and reset password pages'
+
 ## User Instructions
 
-1. Go to the Dashboard App website
+1. Go to the [Dashboard App website](https://user-dashboard-web-app.netlify.app). It's live!
 2. If you don't have an account, follow the link on the login page to create on, or try things out by logging in with the demo mode on the main log in page.
 3. After logging in, get access to all of the app's features that are previewed in the visual guides above.
 
@@ -72,6 +82,6 @@ npm run dev
 
 ## Known Issues
 
-- When a user logs out of an account, Firebase's event listeners do not immediately unsubscribe. This can render multiple errors onto the console (the max amount current recorded is ~10-12 errors)
+- When a user logs out of an account, Firebase's event listeners do not immediately unsubscribe. This can render multiple errors onto the console (the max amount of errors currently recorded is ~10-12 errors)
 - On certain routes, when the page is reloaded, user profile data is not fetched and rendered on the DOM. The only current solution to this is clicking on the home or settings page.
 - If they've been logged in for an extended period, users have to log out and log back into their account if they want to change their email or password.

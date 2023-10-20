@@ -125,7 +125,7 @@ export const signOutUser = async () => {
 export const requestAuth = async () => {
   const accessToken = localStorage?.getItem('token');
   const demoAccessToken = sessionStorage?.getItem('token');
-  if (!accessToken && !demoAccessToken) {
+  if ((!accessToken || accessToken !== undefined) && !demoAccessToken) {
     throw redirect('/login?message=Please log in first');
   }
   return null;
