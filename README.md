@@ -6,8 +6,6 @@
 
 [img]: https://github.com/SashaG-dev/dashboard-web-app/blob/main/public/readme/main-img.png 'Image of the Dashboard Web App homepage'
 
-[Go live](https://user-dashboard-web-app.netlify.app)
-
 The Dashboard Web App is a fully responsive, accessible web app created with TypeScript, React, React Router, React-Redux/Redux Toolkit, and Styled Components, with all data being store and fetched via Firebase. The main focus of this web app is to assist users id developing their skills related to task management and healthy habit-forming.
 
 Here's the major features:
@@ -49,9 +47,23 @@ Here's the major features:
 
 ### Authentication
 
-![alt text][auth]
+#### Login
 
-[auth]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-preview.gif 'Preview of the user login, create account, and reset password pages'
+![alt text][auth-login]
+
+[auth-login]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-preview.gif 'Preview of the user login page'
+
+#### Create Account
+
+![alt text][auth-create]
+
+[auth-create]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-create.png 'Preview of create account page'
+
+#### Reset Password
+
+![alt text][auth-reset]
+
+[auth-reset]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-reset.png 'Preview of the password reset page'
 
 ## User Instructions
 
@@ -70,6 +82,10 @@ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
 ```
 
 2. Or download a zip of the repo via the Code button here on GitHub.
+
+![alt text][developer]
+
+[developer]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/developer-instructions.png 'Developer instructions for cloning and downloading repo'
 
 3. Open the files in a directory where a git repo isn't currently initialized and install all dependencies, then run development
 
