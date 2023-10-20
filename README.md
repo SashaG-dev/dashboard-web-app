@@ -24,7 +24,10 @@ Here's the major features:
    - When all tasks items are complete, the user can mark the entire day as complete; this add points to statistics (more info provided below).
 4. Notebook
    - Each day, a user can log a daily note. Each individual note can be updated and deleted, but multiple notes cannot be added on the same day.
-5. Stats
+5. Focus
+   - On this page, users can use, save, and delete timed focus sessions.
+   - If a user does not wish to use or save a specific session, there is the option to use a unsaved session. The time spent on this session will still be added to user statistics.
+6. Stats
    - On the stats page, a user can view the following statistics
      - Total notes taken
      - Total task lists completed
@@ -32,7 +35,7 @@ Here's the major features:
      - Total days focused
      - Total hours focused
      - Total minutes focused
-6. Settings
+7. Settings
    - On the settings page, user can change account settings related to verification, user settings related to the app's visual presentation, and even delete the current account.
    - All current account settings
      - update email address
@@ -64,6 +67,86 @@ Here's the major features:
 ![alt text][auth-reset]
 
 [auth-reset]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/auth-reset.png 'Preview of the password reset page'
+
+### User Menu
+
+#### User Menu Opened
+
+![alt text][main-open]
+
+[main-open]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-open.png 'Image of the user menu when it's opened on desktop'
+
+#### User Menu Collapsed
+
+![alt text][main-closed]
+
+[main-closed]:https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/main-closed.png 'Image of the user menu when it's collapsed on desktop'
+
+### Tasks
+
+![alt text][tasks]
+
+[tasks]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/tasks.png 'Preview of tasks page'
+
+### Notebook
+
+#### Create a New Note
+
+![alt text][notebook-new]
+
+[notebook-new]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/notebook-new.png 'Creating a new note'
+
+#### Edit a Note
+
+![alt text][notebook-edit]
+
+[notebook-edit]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/notebook-edit.png 'Preview of a note in edit mode'
+
+#### Delete Note
+
+![alt text][notebook-modal]
+
+[notebook-modal]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/notebook-modal.png 'Image of the modal that pops up when a user wants to delete a note'
+
+### Focus
+
+#### Saved Focus Session
+
+![alt text][focus-saved]
+
+[focus-saved]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/focus-saved.png 'Display of all user saved focus sessions'
+
+#### Create a New Session
+
+![alt text][focus-new]
+
+[focus-new]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/focus-new.png 'Preview of form used to create a new session'
+
+#### Focus Session Timer Display
+
+![alt text][focus-current]
+
+[focus-current]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/focus-current.png 'Preview of timer when a user starts a session'
+
+### Statistics
+
+![alt text][stats]
+
+[stats]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/stats.png 'Image of user statistics'
+
+### Settings
+
+#### Account Settings
+
+![alt text][settings-account]
+
+[settings-account]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/settings-account.png 'Preview of all account settings'
+
+#### User Settings
+
+![alt text][settings-user]
+
+[settings-user]: https://github.com/SashaG-dev/visual-guides/blob/main/dashboard-web-app/settings-user.png 'Preview of all user settings'
 
 ## User Instructions
 
